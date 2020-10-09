@@ -74,10 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DBWork\DbWork.cs" />
+    <Compile Include="Data\DBWork\DbWork.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
-    <Compile Include="Models\Type_11.cs" />
+    <Compile Include="Data\Models\Type_11.cs" />
     <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,14 +86,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ApplicationContext.cs" />
-    <Compile Include="Models\ATK_24_200_02_90.cs" />
-    <Compile Include="Models\ATK_26_18_13_96.cs" />
-    <Compile Include="Models\ATK_26_18_5_93.cs" />
-    <Compile Include="Models\Execution_All.cs" />
-    <Compile Include="Models\GOSTs.cs" />
-    <Compile Include="Models\GOST_28759_3_90.cs" />
-    <Compile Include="Models\GOST_28759_4_90.cs" />
+    <Compile Include="Data\Models\ApplicationContext.cs" />
+    <Compile Include="Data\Models\ATK_24_200_02_90.cs" />
+    <Compile Include="Data\Models\ATK_26_18_13_96.cs" />
+    <Compile Include="Data\Models\ATK_26_18_5_93.cs" />
+    <Compile Include="Data\Models\Execution_All.cs" />
+    <Compile Include="Data\Models\GOSTs.cs" />
+    <Compile Include="Data\Models\GOST_28759_3_90.cs" />
+    <Compile Include="Data\Models\GOST_28759_4_90.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
@@ -102,11 +102,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Octagonal_Gasket.cs" />
-    <Compile Include="Models\OST26_2008_83.cs" />
-    <Compile Include="Models\OST26_2042_96.cs" />
-    <Compile Include="Models\OST_26_2041_96.cs" />
-    <Compile Include="Models\Oval_Gasket.cs" />
+    <Compile Include="Data\Models\Octagonal_Gasket.cs" />
+    <Compile Include="Data\Models\OST26_2008_83.cs" />
+    <Compile Include="Data\Models\OST26_2042_96.cs" />
+    <Compile Include="Data\Models\OST_26_2041_96.cs" />
+    <Compile Include="Data\Models\Oval_Gasket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -134,9 +134,7 @@
   <ItemGroup>
     <None Include="Resources\Stud_Calculator.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Views\Windows\Stud_Calculator.ico" />
   </ItemGroup>
