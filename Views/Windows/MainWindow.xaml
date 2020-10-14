@@ -1,219 +1,854 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:cmd="clr-namespace:StudCalculator.Infrastructure.Commands"
-        xmlns:vm="clr-namespace:StudCalculator.ViewModel"
-        xmlns:local="clr-namespace:StudCalculator"
-        xmlns:DBWork="clr-namespace:StudCalculator.DBWork" x:Class="StudCalculator.MainWindow"
-        mc:Ignorable="d"
-        Title="{Binding Title}" Height="570" Width="860" Icon="Stud_Calculator.ico" FontFamily="Calibri" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+    x:Class="StudCalculator.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DBWork="clr-namespace:StudCalculator.DBWork"
+    xmlns:cmd="clr-namespace:StudCalculator.Infrastructure.Commands"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StudCalculator"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:StudCalculator.ViewModel"
+    Title="{Binding Title}"
+    Width="860"
+    Height="580"
+    FontFamily="Calibri"
+    Icon="Stud_Calculator.ico"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Window.DataContext>
     <Grid Background="#FFCFCFCF">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="418*"/>
-            <ColumnDefinition Width="421*"/>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="418*" />
+            <ColumnDefinition Width="421*" />
+            <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="184"/>
-            <RowDefinition Height="298"/>
-            <RowDefinition/>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="184" />
+            <RowDefinition Height="298" />
+            <RowDefinition />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
-        <Label Content="Выберите ГОСТ фланцев" Margin="5,5,0,0" VerticalAlignment="Top" FontFamily="Calibri" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="157" FontSize="14" Padding="6"/>
-        <Label Content="Выберите тип для ГОСТ 33259-2015" Margin="5,40,0,0" VerticalAlignment="Top" FontFamily="Calibri" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="230" FontSize="14" Padding="6"/>
-        <Label Content="Выберите давление" Margin="5,75,0,0" VerticalAlignment="Top" FontFamily="Calibri" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="143" FontSize="14" Padding="6"/>
-        <Label Content="Выберите исполнение" Margin="0,112,0,0" VerticalAlignment="Top" FontFamily="Calibri" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="157" FontSize="14" Padding="6"/>
-        <Label Content="Выберите DN" Margin="5,147,0,0" VerticalAlignment="Top" FontFamily="Calibri" RenderTransformOrigin="0.522,2.703" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="97" FontSize="14" Padding="6"/>
+        <Label
+            Grid.Row="1"
+            Width="157"
+            Height="30"
+            Margin="5,5,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите ГОСТ фланцев"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Width="230"
+            Height="30"
+            Margin="5,40,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите тип для ГОСТ 33259-2015"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Width="143"
+            Height="30"
+            Margin="5,75,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите давление"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Width="157"
+            Height="30"
+            Margin="0,112,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите исполнение"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Width="97"
+            Height="30"
+            Margin="5,147,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите DN"
+            FontFamily="Calibri"
+            FontSize="14"
+            RenderTransformOrigin="0.522,2.703" />
 
-        <ComboBox x:Name="Type_GOST33259_Combo" Margin="230,40,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="178" RenderTransformOrigin="0.705,0.522" FontSize="14" Padding="6">
+        <ComboBox
+            x:Name="Type_GOST33259_Combo"
+            Grid.Row="1"
+            Width="178"
+            Height="30"
+            Margin="230,40,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding ExecutionType33259}"
+            RenderTransformOrigin="0.705,0.522">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <ComboBox x:Name="Execution_PN_Combo" Margin="230,75,0,0"  VerticalAlignment="Top" RenderTransformOrigin="0.458,1.733" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="178" FontSize="14" Padding="6">
+        <ComboBox
+            x:Name="Execution_PN_Combo"
+            Grid.Row="1"
+            Width="178"
+            Height="30"
+            Margin="230,75,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding ExecutionPN33259}"
+            RenderTransformOrigin="0.458,1.733">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <ComboBox x:Name="Exec_GOST33259" Margin="230,112,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="178" FontSize="14" Padding="6">
+        <ComboBox
+            x:Name="Exec_GOST33259"
+            Grid.Row="1"
+            Width="178"
+            Height="30"
+            Margin="230,112,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding ExecGost33259, Mode=TwoWay}">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <ComboBox x:Name="Execution_DN_Combo" Margin="230,147,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="178" FontSize="14" Padding="6">
+        <ComboBox
+            x:Name="Execution_DN_Combo"
+            Grid.Row="1"
+            Width="178"
+            Height="30"
+            Margin="230,147,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding ExecutionDN33259}">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
-        <ComboBox x:Name="GOSTall" ItemsSource="{Binding AllGosts}"  Margin="230,5,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="178" FontSize="14" Padding="6">
+        <ComboBox
+            x:Name="GOSTall"
+            Grid.Row="1"
+            Width="178"
+            Height="30"
+            Margin="230,5,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding AllGost, Mode=TwoWay}"
+            SelectedValue="{Binding SelectionFromCombobox, Mode=TwoWay}">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <TextBlock Margin="107,5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Если фланецы нестандартные" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="17" HorizontalAlignment="Left" Width="180"/>
-        <CheckBox x:Name="NonStandartFl" Content="Нестандартный фланец" HorizontalAlignment="Left" Margin="5,27,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="17" Width="167" Click="NonStandartFl_Click"/>
-        <CheckBox x:Name="NonStandartDablFl" Content="Если разные тарелки" Margin="230,27,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="17" HorizontalAlignment="Left" Width="178" Click="NonStandartDablFl_Click"/>
+        <TextBlock
+            Grid.Row="2"
+            Width="180"
+            Height="17"
+            Margin="107,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Calibri"
+            FontSize="14"
+            Text="Если фланецы нестандартные"
+            TextWrapping="Wrap" />
+        <CheckBox
+            x:Name="NonStandartFl"
+            Grid.Row="2"
+            Width="167"
+            Height="17"
+            Margin="5,27,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding NonStandartSameFlangeCommand, Mode=OneWay}"
+            Content="Нестандартный фланец"
+            FontFamily="Calibri"
+            FontSize="14"
+            IsChecked="{Binding NonStandartSameFlangChecked}" IsEnabled="{Binding NonStandartStandartSameFlangCheckedIsEnabled}" />
+        <CheckBox
+            x:Name="NonStandartDablFl"
+            Grid.Row="2"
+            Width="178"
+            Height="17"
+            Margin="230,27,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding NonStandartDifferentFlangeCommand, Mode=OneWay}"
+            Content="Если разные тарелки"
+            FontFamily="Calibri"
+            FontSize="14"
+            IsChecked="{Binding NonStandartDifferentFlangeChecked}" IsEnabled="{Binding NonStandartStandartDifferentFlangCheckedIsEnabled}" />
 
-        <TextBlock Margin="77,78,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Если используется заглушка поворотная" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="17" HorizontalAlignment="Left" Width="242"/>
-        <CheckBox x:Name="StandardRotaryPlug" Content="Стандартные" Margin="230,100,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="17" HorizontalAlignment="Left" Width="178" Click="StandardRotaryPlug_Click"/>
-        <CheckBox x:Name="NonStandardRotaryPlug" Content="Нестандартные" Margin="5,100,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="17" HorizontalAlignment="Left" Width="153" Click="NonStandardRotaryPlug_Click"/>
+        <TextBlock
+            Grid.Row="2"
+            Width="242"
+            Height="17"
+            Margin="77,78,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Calibri"
+            FontSize="14"
+            Text="Если используется заглушка поворотная"
+            TextWrapping="Wrap" />
+        <CheckBox
+            x:Name="StandardRotaryPlug"
+            Grid.Row="2"
+            Width="178"
+            Height="17"
+            Margin="230,100,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Стандартные"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <CheckBox
+            x:Name="NonStandardRotaryPlug"
+            Grid.Row="2"
+            Width="153"
+            Height="17"
+            Margin="5,100,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Нестандартные"
+            FontFamily="Calibri"
+            FontSize="14" />
 
-        <TextBlock Margin="77,157,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="18" HorizontalAlignment="Left" Width="242"><Run Text="Если используется заглушка "/><Run Text="или крышка"/></TextBlock>
-        <CheckBox x:Name="NonStandardPlug" Content="Нестандартные" Margin="5,180,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="18" HorizontalAlignment="Left" Width="153" Click="NonStandardPlug_Click"/>
-        <CheckBox x:Name="StandardPlug" Content="Стандартные" Margin="230,180,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="18" HorizontalAlignment="Left" Width="178" Click="StandardPlug_Click"/>
+        <TextBlock
+            Grid.Row="2"
+            Width="242"
+            Height="18"
+            Margin="77,157,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Calibri"
+            FontSize="14"
+            TextWrapping="Wrap"><Run Text="Если используется заглушка " /><Run Text="или крышка" /></TextBlock>
+        <CheckBox
+            x:Name="NonStandardPlug"
+            Grid.Row="2"
+            Width="153"
+            Height="18"
+            Margin="5,180,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding NonstandartPlugsCommand, Mode=OneWay}"
+            Content="Нестандартные"
+            FontFamily="Calibri"
+            FontSize="14"
+            IsChecked="{Binding NonStandartPlugsChecked}"
+            IsEnabled="{Binding NonStandartPlugsCheckboxIsEnabled}" />
+        <CheckBox
+            x:Name="StandardPlug"
+            Grid.Row="2"
+            Width="178"
+            Height="18"
+            Margin="230,180,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding StandartPlugsCommand, Mode=OneWay}"
+            Content="Стандартные"
+            FontFamily="Calibri"
+            FontSize="14"
+            IsChecked="{Binding StandartPlugsChecked}"
+            IsEnabled="{Binding StandartPlugsCheckboxIsEnabled}" />
 
-        <ComboBox x:Name="StandardRotaryPlug_Combo" Margin="230,122,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="2" HorizontalAlignment="Left" Width="178" IsEnabled="False">
+        <ComboBox
+            x:Name="StandardRotaryPlug_Combo"
+            Grid.Row="2"
+            Width="178"
+            Height="30"
+            Margin="230,122,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="28,261,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="NumberFlanges_Text"  FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInputWhole"/>
-                <TextBlock Text="шт." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+        <Border
+            Grid.Row="2"
+            Width="80"
+            Height="24"
+            Margin="28,261,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="NumberFlanges_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri" />
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="шт."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <ComboBox x:Name="StandardPlug_Combo" Margin="230,203,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="2" HorizontalAlignment="Left" Width="178" IsEnabled="False">
+        <ComboBox
+            x:Name="StandardPlug_Combo"
+            Grid.Row="2"
+            Width="178"
+            Height="30"
+            Margin="230,203,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            IsEnabled="{Binding StandartPlugsComboboxIsEnabled}">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <ComboBox x:Name="ExecutionStubs_Combo" Margin="230,261,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="2" HorizontalAlignment="Left" Width="178" IsEnabled="False">
+        <ComboBox
+            x:Name="ExecutionStubs_Combo"
+            Grid.Row="2"
+            Width="178"
+            Height="30"
+            Margin="230,261,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman" IsEnabled="{Binding StandartPlugsExecutionComboboxIsEnabled}">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <TextBlock Margin="230,238,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Исполнение загл. и крышек" VerticalAlignment="Top" FontFamily="Calibri" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Width="178" FontSize="14"/>
-        <TextBlock Margin="5,238,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Кол-во фланцев" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Height="18" HorizontalAlignment="Left" Width="113"/>
+        <TextBlock
+            Grid.Row="2"
+            Width="178"
+            Height="18"
+            Margin="230,238,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Calibri"
+            FontSize="14"
+            Text="Исполнение загл. и крышек"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Row="2"
+            Width="113"
+            Height="18"
+            Margin="5,238,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Calibri"
+            FontSize="14"
+            Text="Кол-во фланцев"
+            TextWrapping="Wrap" />
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="28,203,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="NonStandardPlug_Text" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput" IsEnabled="False"/>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+        <Border
+            Grid.Row="2"
+            Width="80"
+            Height="24"
+            Margin="28,203,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="NonStandardPlug_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri"
+                    IsEnabled="{Binding NonStandartPlugsTextboxIsEnabled}" />
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="28,122,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="StandardRotaryPlug_Text" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput" IsEnabled="False"/>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+        <Border
+            Grid.Row="2"
+            Width="80"
+            Height="24"
+            Margin="28,122,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="StandardRotaryPlug_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri" />
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="28,49,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="NonStandartFl_Text" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput" IsEnabled="False">
+        <Border
+            Grid.Row="2"
+            Width="80"
+            Height="24"
+            Margin="28,49,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="NonStandartFl_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri"
+                    IsEnabled="{Binding NonStandartFlTextIsEnabled}"
+                    Text="{Binding NonStandartFlText, Mode=OneWayToSource}">
                     <TextBox.ToolTip>
-                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных"/></TextBlock>
+                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
                 </TextBox>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="230,49,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="NonStandartDablFl_TextFirst" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput" IsEnabled="False">
+        <Border
+            Grid.Row="2"
+            Width="80"
+            Height="24"
+            Margin="230,49,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="NonStandartDablFl_TextFirst"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri"
+                    IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}">
                     <TextBox.ToolTip>
-                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных"/></TextBlock>
+                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
                 </TextBox>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="328,49,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="NonStandartDablFl_TextSec" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput" IsEnabled="False">
+        <Border
+            Grid.Row="2"
+            Width="80"
+            Height="24"
+            Margin="328,49,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1"
+            IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsInabled}">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="NonStandartDablFl_TextSec"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri"
+                    IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}">
                     <TextBox.ToolTip>
-                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных"/></TextBlock>
+                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
                 </TextBox>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Label Content="Выберите ОСТ на гайки и шаг" Margin="10,5,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="203" Grid.Column="1" FontSize="14" Padding="6"/>
-        <Label Content="Выберите резьбу гайки" Margin="10,40,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="203" Grid.Column="1" FontSize="14" Padding="6"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="203"
+            Height="30"
+            Margin="10,5,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите ОСТ на гайки и шаг"
+            FontFamily="Times New Roman"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="203"
+            Height="30"
+            Margin="10,40,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Выберите резьбу гайки"
+            FontFamily="Times New Roman"
+            FontSize="14" />
 
-        <ComboBox x:Name="OSTNuts_Combo" Margin="0,5,5,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="178">
+        <ComboBox
+            x:Name="OSTNuts_Combo"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="178"
+            Height="30"
+            Margin="0,5,5,0"
+            Padding="6"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <ComboBox x:Name="NutThread_Combo" Margin="0,40,5,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="178" IsEnabled="False">
+        <ComboBox
+            x:Name="NutThread_Combo"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="178"
+            Height="30"
+            Margin="0,40,5,0"
+            Padding="6"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman" IsEnabled="{Binding ChoeseNutsThreadComboboxIsEnable}">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <CheckBox x:Name="StandartThicknessWasher" Content="Стандарт" HorizontalAlignment="Left" Margin="103,105,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Calibri" Height="17" Width="78" Grid.Column="1" Checked="StandartThicknessWasher_Checked" Unchecked="StandartThicknessWasher_Unchecked"/>
-        <CheckBox x:Name="StandartThicknessStripOval" Content="Овал." HorizontalAlignment="Left" Margin="244,105,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Calibri" Height="17" Width="74" Grid.Column="1" Checked="StandartThicknessStripOval_Checked" Unchecked="StandartThicknessStripOval_Unchecked"/>
-        <CheckBox x:Name="NonStandartThicknessWasher" Content="Нестандарт" HorizontalAlignment="Left" Margin="10,105,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Calibri" Height="17" Width="88" Grid.Column="1" Checked="NonStandartThicknessWasher_Checked" Unchecked="NonStandartThicknessWasher_Unchecked"/>
-        <CheckBox x:Name="StandartThicknessStripOrtag" Content="Восьмиг." HorizontalAlignment="Left" Margin="325,105,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Calibri" Height="17" Width="89" Grid.Column="1" Checked="StandartThicknessStripOrtag_Checked" Unchecked="StandartThicknessStripOrtag_Unchecked"/>
+        <CheckBox
+            x:Name="StandartThicknessWasher"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="78"
+            Height="17"
+            Margin="103,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Стандарт"
+            FontFamily="Calibri" />
+        <CheckBox
+            x:Name="StandartThicknessStripOval"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="74"
+            Height="17"
+            Margin="244,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Овал."
+            FontFamily="Calibri" />
+        <CheckBox
+            x:Name="NonStandartThicknessWasher"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="88"
+            Height="17"
+            Margin="10,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Нестандарт"
+            FontFamily="Calibri" />
+        <CheckBox
+            x:Name="StandartThicknessStripOrtag"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="89"
+            Height="17"
+            Margin="325,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Восьмиг."
+            FontFamily="Calibri" />
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="43,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" Grid.Column="1">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="Washer_Text" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput" IsEnabled="False"/>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="80"
+            Height="24"
+            Margin="43,127,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="Washer_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri" />
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="284,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" Grid.Column="1">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="Strip_Text" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInput"/>
-                <TextBlock Text="мм." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="80"
+            Height="24"
+            Margin="284,127,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="Strip_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri" />
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="мм."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Label Content="Толщина шайбы" Margin="10,75,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Calibri" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="170" Grid.Column="1" FontSize="14"/>
-        <Label Content="Тлощина прокладки" Margin="244,75,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Calibri" Height="30" Grid.Row="1" HorizontalAlignment="Left" Width="170" Grid.Column="1" FontSize="14"/>
-        <Label Content="Шпильки" Margin="177,154,157,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Times New Roman" Height="30" Grid.Row="1" Grid.Column="1" FontSize="16" Padding="6" FontWeight="Bold" Width="90"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="170"
+            Height="30"
+            Margin="10,75,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Толщина шайбы"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="170"
+            Height="30"
+            Margin="244,75,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Тлощина прокладки"
+            FontFamily="Calibri"
+            FontSize="14" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="90"
+            Height="30"
+            Margin="177,154,157,0"
+            Padding="6"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Шпильки"
+            FontFamily="Times New Roman"
+            FontSize="16"
+            FontWeight="Bold" />
 
-        <Border BorderThickness="1" HorizontalAlignment="Left" Height="24" Margin="43,30,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80" Grid.Column="1">
-            <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="NumberSud_Text" FontFamily="Calibri" Width="56" BorderBrush="{x:Null}" PreviewTextInput="TextBox_PreviewTextInputWhole" IsEnabled="False"/>
-                <TextBlock Text="шт." FontFamily="Calibri" Width="22" TextAlignment="Center" Margin="0,3"/>
+        <Border
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="80"
+            Height="24"
+            Margin="43,30,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="1">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBox
+                    x:Name="NumberSud_Text"
+                    Width="56"
+                    BorderBrush="{x:Null}"
+                    FontFamily="Calibri" />
+                <TextBlock
+                    Width="22"
+                    Margin="0,3"
+                    FontFamily="Calibri"
+                    Text="шт."
+                    TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <ComboBox x:Name="MaterialStud" Margin="0,27,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Width="153" RenderTransformOrigin="0.503,0.033">
+        <ComboBox
+            x:Name="MaterialStud"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="153"
+            Height="30"
+            Margin="0,27,0,0"
+            Padding="6"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman"
+            RenderTransformOrigin="0.503,0.033">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <ComboBox x:Name="ExecutionStud" Margin="192,27,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Padding="6" Grid.Row="2" HorizontalAlignment="Left" Width="60" Grid.Column="1">
+        <ComboBox
+            x:Name="ExecutionStud"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="60"
+            Height="30"
+            Margin="192,27,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Times New Roman">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
         </ComboBox>
 
-        <Label Content="Кол-во шпилек" Margin="26,0,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="2" HorizontalAlignment="Left" Width="106" Grid.Column="1" FontSize="14" Padding="6"/>
-        <Label Content="Исполнение" Margin="177,0,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" Height="30" Grid.Row="2" HorizontalAlignment="Left" Width="85" Grid.Column="1" FontSize="14" Padding="6" RenderTransformOrigin="0.941,0.433"/>
-        <Label Content="Материал" Margin="272,0,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Times New Roman" Height="30" Grid.Row="2" HorizontalAlignment="Left" Width="152" Grid.Column="1" FontSize="14" Padding="6"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="106"
+            Height="30"
+            Margin="26,0,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Кол-во шпилек"
+            FontFamily="Times New Roman"
+            FontSize="14" />
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="85"
+            Height="30"
+            Margin="177,0,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Исполнение"
+            FontFamily="Times New Roman"
+            FontSize="14"
+            RenderTransformOrigin="0.941,0.433" />
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="152"
+            Height="30"
+            Margin="272,0,0,0"
+            Padding="6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Материал"
+            FontFamily="Times New Roman"
+            FontSize="14" />
 
-        <TextBox x:Name="OutputResult" Grid.Column="1" Margin="0,62,0,0" Grid.Row="2" TextWrapping="Wrap" IsReadOnly="True" Background="White" BorderBrush="#FF71DC60" BorderThickness="3" FontFamily="Calibri" FontSize="14" Foreground="Black" />
+        <TextBox
+            x:Name="OutputResult"
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,62,0,0"
+            Background="White"
+            BorderBrush="#FF71DC60"
+            BorderThickness="3"
+            FontFamily="Calibri"
+            FontSize="14"
+            Foreground="Black"
+            IsReadOnly="True"
+            TextWrapping="Wrap" />
 
-        <Button x:Name="Calculate" Content="Расчитать" Margin="276,10,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="14" Height="33" BorderBrush="#FFCF4646" BorderThickness="3" Grid.Column="1"/>
-        <Button x:Name="ClearOutputResult" Content="Очистка поля результаттов" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="178" FontSize="14" Height="35" Click="ClearOutputResult_Click" RenderTransformOrigin="-0.017,0.6"/>
-        <Button x:Name="AboutProgram" Content="О программе" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="123" FontSize="14" Height="33" Margin="5,10,0,0"/>
+        <Button
+            x:Name="Calculate"
+            Grid.Row="3"
+            Grid.Column="1"
+            Height="33"
+            Margin="276,10,0,0"
+            VerticalAlignment="Top"
+            BorderBrush="#FFCF4646"
+            BorderThickness="3"
+            Content="Расчитать"
+            FontSize="14" />
+        <Button
+            x:Name="ClearOutputResult"
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="178"
+            Height="35"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Очистка поля результаттов"
+            FontSize="14"
+            RenderTransformOrigin="-0.017,0.6" />
+        <Button
+            x:Name="AboutProgram"
+            Grid.Row="3"
+            Width="123"
+            Height="33"
+            Margin="5,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="О программе"
+            FontSize="14" />
 
     </Grid>
 </Window>

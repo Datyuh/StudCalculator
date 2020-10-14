@@ -11,7 +11,18 @@ namespace StudCalculator.ViewModel.Base
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
-        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+
+        //Для не ссылочных объектов
+        protected virtual bool Setref<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+        
+        //Для ссылочных побъектов типо Списков
+        protected virtual bool Set<T>(T field, T value, [CallerMemberName] string PropertyName = null)
         {
             if (Equals(field, value)) return false;
             field = value;
