@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using StudCalculator.ViewModel;
 
 namespace StudCalculator
 {
@@ -16,6 +17,7 @@ namespace StudCalculator
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -34,7 +36,7 @@ namespace StudCalculator
         }
 
         //Ввод только цифр десятичных или дробных
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !((Char.IsDigit(e.Text, 0) || ((e.Text == System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0].ToString()) && (DS_Count(((TextBox)sender).Text) < 1))));
         }
@@ -44,7 +46,7 @@ namespace StudCalculator
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
 
-        private void ClearOutputResult_Click(object sender, RoutedEventArgs e)
+        private void ClearOutputResultClick(object sender, RoutedEventArgs e)
         {
             OutputResult.Text = "";
             if (string.IsNullOrEmpty(OutputResult.Text = ""))
@@ -52,6 +54,46 @@ namespace StudCalculator
                 OutputResult.Text = "Вывод результатов...";
 
             }
-        }        
+        }
+
+        private void NonStandartFlText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            NonStandartFlText.BorderBrush = NonStandartFlText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void NonStandartDablFlTextFirst_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            NonStandartDablFlTextFirst.BorderBrush = NonStandartDablFlTextFirst.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void NonStandartDablFlTextSec_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            NonStandartDablFlTextSec.BorderBrush = NonStandartDablFlTextSec.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void NumberSudText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            NumberSudText.BorderBrush = NumberSudText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void NonStandardPlugText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            NonStandardPlugText.BorderBrush = NonStandardPlugText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void StandardRotaryPlugText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            StandardRotaryPlugText.BorderBrush = StandardRotaryPlugText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void WasherText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            WasherText.BorderBrush = WasherText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(78, 238, 53));
+        }
+
+        private void StripText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            StripText.BorderBrush = StripText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(238, 135, 32));
+        }
     }
 }
