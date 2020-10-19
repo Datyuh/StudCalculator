@@ -79,6 +79,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\DBWork\DbCapsATK24_200_02_90.cs" />
+    <Compile Include="Data\DBWork\DbCapsOST26_2008_83.cs" />
+    <Compile Include="Data\DBWork\DbNutsOst26_2041_96.cs" />
+    <Compile Include="Data\DBWork\DbRotarPylugATK_26_18_5_93.cs" />
+    <Compile Include="Data\DBWork\DbStudExtract.cs" />
     <Compile Include="Data\DBWork\DbWorkGost33259.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />

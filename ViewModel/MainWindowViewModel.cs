@@ -1,6 +1,7 @@
 ﻿using StudCalculator.Infrastructure.Commands;
 using StudCalculator.ViewModel.Base;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using StudCalculator.Data.DBWork;
 
@@ -20,12 +21,18 @@ namespace StudCalculator.ViewModel
         private ObservableCollection<string> _allGost;
         public ObservableCollection<string> AllGost { get => _allGost; set => Set(ref _allGost, value); }
 
-        private string _selectionFromCombobox;
-        public string SelectionFromCombobox
+        private string _selectionGost33259FromCombobox;
+        public string SelectionGost33259FromCombobox
         {
-            get => _selectionFromCombobox;
-            set { Set(ref _selectionFromCombobox, value); AddExecutionCombobox(SelectionFromCombobox); }
+            get => _selectionGost33259FromCombobox;
+            set
+            {
+                Set(ref _selectionGost33259FromCombobox, value);
+                AddExecutionCombobox(SelectionGost33259FromCombobox);
+            }
         }
+
+        #region Работа с базой ГОСТ33259
 
         private ObservableCollection<string> _execGost33259 = new ObservableCollection<string>();
         public ObservableCollection<string> ExecGost33259 { get => _execGost33259; set => Set(ref _execGost33259, value); }
@@ -38,6 +45,57 @@ namespace StudCalculator.ViewModel
 
         private ObservableCollection<string> _executionType33259 = new ObservableCollection<string>();
         public ObservableCollection<string> ExecutionType33259 { get => _executionType33259; set => Set(ref _executionType33259, value); }
+
+        #endregion
+
+        #region Работа с базой крышек и заглушек
+        
+        private ObservableCollection<string> _allCaps;
+        public ObservableCollection<string> AllCaps { get => _allCaps; set => Set(ref _allCaps, value); }
+
+        private string _selectionPlugsFromCombobox;
+
+        public string SelectionPlugsFromCombobox
+        {
+            get => _selectionPlugsFromCombobox;
+            set
+            {
+                Set(ref _selectionPlugsFromCombobox, value);
+                AddCapsCombobox(SelectionPlugsFromCombobox);
+            }
+        }
+
+        private ObservableCollection<string> _executePlugsCollection = new ObservableCollection<string>();
+        public ObservableCollection<string> ExecutePlugsCollection { get => _executePlugsCollection; set => Set(ref _executePlugsCollection, value); }
+
+        #endregion
+
+        #region Работа с базой заглушек поворотных
+
+        private ObservableCollection<string> _executeRotaryPlugsCollection;
+        public ObservableCollection<string> ExecuteRotaryPlugsCollection { get => _executeRotaryPlugsCollection; set => Set(ref _executeRotaryPlugsCollection, value); }
+
+        #endregion
+
+        #region Работа с базой гаек
+
+        private ObservableCollection<string> _ostNutsCollection;
+        public ObservableCollection<string> OstNutsCollection { get => _ostNutsCollection; set => Set(ref _ostNutsCollection, value); }
+
+        private ObservableCollection<string> _extractNutsCollection;
+        public ObservableCollection<string> ExtractNutsCollection { get => _extractNutsCollection; set => Set(ref _extractNutsCollection, value); }
+
+        #endregion
+
+        #region Работа с базой Шпилек по материалам и исполнения
+
+        private ObservableCollection<string> _extractMaterialStudCollection;
+        public ObservableCollection<string> ExtractMaterialStud { get => _extractMaterialStudCollection; set => Set(ref _extractMaterialStudCollection, value); }
+
+        private ObservableCollection<string> _extractExecutionStudCollection;
+        public ObservableCollection<string> ExtractExecutionStud { get => _extractExecutionStudCollection; set => Set(ref _extractExecutionStudCollection, value); }
+
+        #endregion
 
         #endregion
 
@@ -156,8 +214,8 @@ namespace StudCalculator.ViewModel
         #region Считывание текста с текст боксов
 
         //Текстбокс для одинаковых нестандартных фланцев
-        private string _nonStandartFlText;
-        public string NonStandartFlText { get => _nonStandartFlText; set => Set(ref _nonStandartFlText, value); }
+        private string _nonStandartFlTextRead;
+        public string NonStandartFlTextRead { get => _nonStandartFlTextRead; set => Set(ref _nonStandartFlTextRead, value); }
 
         #endregion
 
@@ -177,6 +235,8 @@ namespace StudCalculator.ViewModel
               ChoeseNutsThreadComboboxIsEnabled = true;
               NumberOfNutsTextboxIsEnable = true;
               NonStandartDifferentFlangeCheckedIsEnabled = false;
+              ExtractNutsCollection = new DbNutsOst26_2041_96().ExtractOst26_2041_96();
+
           }
           else
           {
@@ -184,6 +244,8 @@ namespace StudCalculator.ViewModel
               NonStandartFlTextIsEnabled = false;
               ChoeseNutsThreadComboboxIsEnabled = false;
               NumberOfNutsTextboxIsEnable = false;
+              ExtractNutsCollection?.Clear();
+
           }
         }
         //Включение работы с нестандартными фланцами разными
@@ -204,8 +266,12 @@ namespace StudCalculator.ViewModel
                 NonStandartPlugsChecked = false;
                 NonStandartPlugsTextboxIsEnabled = false;
                 StandartPlugsComboboxIsEnabled = false;
-                NonStandartRotaryPlugsCheckboxIsEnabled = true;
                 StandartRotaryPlugsCheckboxIsEnabled = true;
+                NonStandartRotaryPlugsCheckboxIsEnabled = true;
+                StandartPlugsExecutionComboboxIsEnabled = false;
+                ExtractNutsCollection = new DbNutsOst26_2041_96().ExtractOst26_2041_96();
+                AllCaps?.Clear();
+                ExecutePlugsCollection?.Clear();
             }
             else
             {
@@ -215,6 +281,7 @@ namespace StudCalculator.ViewModel
                 ChoeseNutsThreadComboboxIsEnabled = false;
                 NumberOfNutsTextboxIsEnable = false;
                 NonStandartDifferentFlangeTexboxIsEnabled = false;
+                ExtractNutsCollection?.Clear();
             }
         }
 
@@ -234,6 +301,10 @@ namespace StudCalculator.ViewModel
                StandartPlugsExecutionComboboxIsEnabled = true;
                StandartRotaryPlugsCheckboxIsEnabled = false;
                NonStandartRotaryPlugsCheckboxIsEnabled = false;
+               StandartRotaryPlugsChecked = false;
+               NonStandartRotaryPlugsChecked = false;
+               NonStandartRotaryPlugsTextboxIsEnabled = false;
+               AllCaps = new DbCapsATK24_200_02_90().DbCapsCollection();
            }
            else
            {
@@ -242,6 +313,8 @@ namespace StudCalculator.ViewModel
                StandartPlugsExecutionComboboxIsEnabled = false;
                StandartRotaryPlugsCheckboxIsEnabled = true;
                NonStandartRotaryPlugsCheckboxIsEnabled = true;
+               AllCaps?.Clear();
+               ExecutePlugsCollection?.Clear();
            }
         }
 
@@ -280,11 +353,14 @@ namespace StudCalculator.ViewModel
                 StandartPlugsCheckboxIsEnabled = false;
                 NonStandartRotaryPlugsCheckboxIsEnabled = false;
                 StandartRotaryPlugsComboboxIsEnabled = true;
+                ExecuteRotaryPlugsCollection = new ObservableCollection<string>(new DbRotarPylugATK_26_18_5_93().ExecuteAtk_26_18_5_93());
             }
             else
             {
                 NonStandartRotaryPlugsCheckboxIsEnabled = true;
                 StandartRotaryPlugsComboboxIsEnabled = false;
+                ExecuteRotaryPlugsCollection?.Clear();
+
                 if (NonStandartDifferentFlangeChecked is true)
                 {
                     StandartPlugsCheckboxIsEnabled = false;
@@ -408,6 +484,9 @@ namespace StudCalculator.ViewModel
         public MainWindowViewModel()
         {
             AllGost = new DbWorkGost33259().DbGost33259();
+            OstNutsCollection = new DbNutsOst26_2041_96().OstNutsCollection();
+            ExtractMaterialStud = new DbStudExtract().ExtractMaterialStud();
+            ExtractExecutionStud = new DbStudExtract().ExecutionStud();
 
             #region Вызов команд
 
@@ -430,18 +509,39 @@ namespace StudCalculator.ViewModel
             #endregion
         }
 
+        #region Добовление данных по АТК 24.200.02-90
+
+        private void AddCapsCombobox(string allCapsSelectionCombobox)
+        {
+            var executeAtk242000290 = new DbCapsATK24_200_02_90().ExecuteAtk24_200_02_90();
+            var executeOst26200883 = new DbCapsOST26_2008_83().ExecuteOst26_2008_83();
+
+            if (allCapsSelectionCombobox == "АТК 24.200.02-90" && StandartPlugsChecked is true)
+            {
+                ExecutePlugsCollection.Clear();
+                foreach (var item in executeAtk242000290)
+                    ExecutePlugsCollection.Add(item);
+            }
+            else if (allCapsSelectionCombobox == "OCT 26-2008-83" && StandartPlugsChecked is true)
+            {
+                ExecutePlugsCollection.Clear();
+                foreach (var item in executeOst26200883)
+                    ExecutePlugsCollection.Add(item);
+            }
+        }
+
+        #endregion
+
+
+        #region Добавление данных по ГОСТ33259 в коллекцию из базы
 
         private void AddExecutionCombobox(string allGosts)
         {
-            #region Добавление данных в коллекцию из базы
-
             ObservableCollection<string> execGost33259Add = new DbWorkGost33259().ExecGost33259();
             ObservableCollection<string> execGost33259PnAdd = new DbWorkGost33259().ExecutionPn33259();
             ObservableCollection<string> execGost33259DnAdd = new DbWorkGost33259().ExecutionDn33259();
             ObservableCollection<string> execGost33259TypeAdd = new DbWorkGost33259().ExecutionType33259();
-
-            #endregion
-
+            
             if (allGosts == "ГОСТ 33259-2015 Ряд 1")
             {
                 foreach (var item in execGost33259Add)
@@ -461,5 +561,7 @@ namespace StudCalculator.ViewModel
                 ExecutionType33259.Clear();
             }
         }
+
+        #endregion
     }
 }

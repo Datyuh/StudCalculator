@@ -181,7 +181,7 @@
             FontFamily="Times New Roman"
             FontSize="14"
             ItemsSource="{Binding AllGost, Mode=TwoWay}"
-            SelectedValue="{Binding SelectionFromCombobox, Mode=TwoWay}">
+            SelectedValue="{Binding SelectionGost33259FromCombobox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -326,7 +326,9 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
-            IsEnabled="{Binding StandartRotaryPlugsComboboxIsEnabled}">
+            FontSize="14"
+            IsEnabled="{Binding StandartRotaryPlugsComboboxIsEnabled}"
+            ItemsSource="{Binding ExecuteRotaryPlugsCollection}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -368,7 +370,10 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
-            IsEnabled="{Binding StandartPlugsComboboxIsEnabled}">
+            FontSize="14"
+            IsEnabled="{Binding StandartPlugsComboboxIsEnabled}"
+            ItemsSource="{Binding AllCaps}"
+            SelectedValue="{Binding SelectionPlugsFromCombobox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -385,7 +390,9 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
-            IsEnabled="{Binding StandartPlugsExecutionComboboxIsEnabled}">
+            FontSize="14"
+            IsEnabled="{Binding StandartPlugsExecutionComboboxIsEnabled}"
+            ItemsSource="{Binding ExecutePlugsCollection}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -489,7 +496,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartFlTextIsEnabled}"
                     IsEnabledChanged="NonStandartFlText_IsEnabledChanged">
-                <TextBox.ToolTip>
+                    <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
                 </TextBox>
@@ -599,7 +606,9 @@
             Padding="6"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            FontFamily="Times New Roman">
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding OstNutsCollection}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -617,7 +626,9 @@
             VerticalAlignment="Top"
             BorderThickness="10"
             FontFamily="Times New Roman"
-            IsEnabled="{Binding ChoeseNutsThreadComboboxIsEnabled}">
+            FontSize="14"
+            IsEnabled="{Binding ChoeseNutsThreadComboboxIsEnabled}"
+            ItemsSource="{Binding ExtractNutsCollection}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -812,6 +823,8 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding ExtractMaterialStud}"
             RenderTransformOrigin="0.503,0.033">
             <ComboBox.Effect>
                 <DropShadowEffect />
@@ -828,7 +841,9 @@
             Padding="6"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontFamily="Times New Roman">
+            FontFamily="Times New Roman"
+            FontSize="14"
+            ItemsSource="{Binding ExtractExecutionStud}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
