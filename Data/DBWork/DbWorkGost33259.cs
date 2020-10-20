@@ -9,11 +9,7 @@ namespace StudCalculator.Data.DBWork
     internal class DbWorkGost33259 : BaseViewModel
     {
         ApplicationContext db = new ApplicationContext();
-        public DbWorkGost33259()
-        {
-                  
-        }
-
+        
         public ObservableCollection<string> DbGost33259()
         {
             var allGosts = new ObservableCollection<string>(db.GOSTs.Where(p => p.GOST != null && p.GOST != "ГОСТ 33259-2015 Ряд 2").Select(p => p.GOST).AsParallel());

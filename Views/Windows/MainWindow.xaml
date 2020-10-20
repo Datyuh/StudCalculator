@@ -107,8 +107,10 @@
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
             FontSize="14"
-            ItemsSource="{Binding ExecutionType33259}"
-            RenderTransformOrigin="0.705,0.522">
+            IsEnabled="{Binding TypeFlangeGostIsEnabled}"
+            ItemsSource="{Binding ExecutionType}"
+            RenderTransformOrigin="0.705,0.522"
+            SelectedValue="{Binding ExecutionType, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -126,8 +128,9 @@
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
             FontSize="14"
-            ItemsSource="{Binding ExecutionPn33259}"
-            RenderTransformOrigin="0.458,1.733">
+            ItemsSource="{Binding ExecutionPn}"
+            RenderTransformOrigin="0.458,1.733"
+            SelectedValue="{Binding PnSelectedFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -145,7 +148,8 @@
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
             FontSize="14"
-            ItemsSource="{Binding ExecGost33259, Mode=TwoWay}">
+            ItemsSource="{Binding ExecGost, Mode=TwoWay}"
+            SelectedValue="{Binding ExecutionFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -163,7 +167,8 @@
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
             FontSize="14"
-            ItemsSource="{Binding ExecutionDn33259}">
+            ItemsSource="{Binding ExecutionDn}"
+            SelectedValue="{Binding DnSelectedFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -181,7 +186,7 @@
             FontFamily="Times New Roman"
             FontSize="14"
             ItemsSource="{Binding AllGost, Mode=TwoWay}"
-            SelectedValue="{Binding SelectionGost33259FromCombobox, Mode=TwoWay}">
+            SelectedValue="{Binding SelectionGostFromCombobox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -328,7 +333,8 @@
             FontFamily="Times New Roman"
             FontSize="14"
             IsEnabled="{Binding StandartRotaryPlugsComboboxIsEnabled}"
-            ItemsSource="{Binding ExecuteRotaryPlugsCollection}">
+            ItemsSource="{Binding ExecuteRotaryPlugsCollection}"
+            SelectedValue="{Binding StandartRotaryPlugFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -349,7 +355,8 @@
                     Width="56"
                     BorderBrush="#FFEE8720"
                     BorderThickness="2"
-                    FontFamily="Calibri" />
+                    FontFamily="Calibri"
+                    Text="{Binding SumFlangeTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
                     Margin="0,3"
@@ -373,7 +380,7 @@
             FontSize="14"
             IsEnabled="{Binding StandartPlugsComboboxIsEnabled}"
             ItemsSource="{Binding AllCaps}"
-            SelectedValue="{Binding SelectionPlugsFromCombobox, Mode=TwoWay}">
+            SelectedValue="{Binding StandartPlugsFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -392,7 +399,8 @@
             FontFamily="Times New Roman"
             FontSize="14"
             IsEnabled="{Binding StandartPlugsExecutionComboboxIsEnabled}"
-            ItemsSource="{Binding ExecutePlugsCollection}">
+            ItemsSource="{Binding ExecutePlugsCollection}"
+            SelectedValue="{Binding StandartPlugsExecutionFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -441,7 +449,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartPlugsTextboxIsEnabled}"
-                    IsEnabledChanged="NonStandardPlugText_IsEnabledChanged" />
+                    IsEnabledChanged="NonStandardPlugText_IsEnabledChanged"
+                    Text="{Binding NonStandartRotaryPlugsTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
                     Margin="0,3"
@@ -468,7 +477,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartRotaryPlugsTextboxIsEnabled}"
-                    IsEnabledChanged="StandardRotaryPlugText_IsEnabledChanged" />
+                    IsEnabledChanged="StandardRotaryPlugText_IsEnabledChanged"
+                    Text="{Binding NonStandartPlugsTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
                     Margin="0,3"
@@ -495,7 +505,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartFlTextIsEnabled}"
-                    IsEnabledChanged="NonStandartFlText_IsEnabledChanged">
+                    IsEnabledChanged="NonStandartFlText_IsEnabledChanged"
+                    Text="{Binding NonStandartFlTextRead, Mode=TwoWay}">
                     <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
@@ -526,7 +537,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
-                    IsEnabledChanged="NonStandartDablFlTextFirst_IsEnabledChanged">
+                    IsEnabledChanged="NonStandartDablFlTextFirst_IsEnabledChanged"
+                    Text="{Binding NonStandartFirstFlangeTextRead, Mode=TwoWay}">
                     <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
@@ -557,7 +569,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
-                    IsEnabledChanged="NonStandartDablFlTextSec_IsEnabledChanged">
+                    IsEnabledChanged="NonStandartDablFlTextSec_IsEnabledChanged"
+                    Text="{Binding NonStandartSecondFlangeTextRead, Mode=TwoWay}">
                     <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                     </TextBox.ToolTip>
@@ -608,7 +621,8 @@
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
             FontSize="14"
-            ItemsSource="{Binding OstNutsCollection}">
+            ItemsSource="{Binding OstNutsCollection}"
+            SelectedValue="{Binding OstNutsFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -628,7 +642,8 @@
             FontFamily="Times New Roman"
             FontSize="14"
             IsEnabled="{Binding ChoeseNutsThreadComboboxIsEnabled}"
-            ItemsSource="{Binding ExtractNutsCollection}">
+            ItemsSource="{Binding ExtractNutsCollection}"
+            SelectedValue="{Binding ThreadNutsFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
@@ -708,7 +723,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonThicknessWasherTextboxIsEnabled, Mode=TwoWay}"
-                    IsEnabledChanged="WasherText_IsEnabledChanged" />
+                    IsEnabledChanged="WasherText_IsEnabledChanged"
+                    Text="{Binding ThicknessWasherTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
                     Margin="0,3"
@@ -735,7 +751,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
-                    IsEnabledChanged="StripText_IsEnabledChanged" />
+                    IsEnabledChanged="StripText_IsEnabledChanged"
+                    Text="{Binding ThicknessGasketTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
                     Margin="0,3"
@@ -802,7 +819,8 @@
                     BorderThickness="2"
                     FontFamily="Calibri"
                     IsEnabled="{Binding NumberOfNutsTextboxIsEnable}"
-                    IsEnabledChanged="NumberSudText_IsEnabledChanged" />
+                    IsEnabledChanged="NumberSudText_IsEnabledChanged"
+                    Text="{Binding SumStudTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
                     Margin="0,3"
@@ -825,6 +843,7 @@
             FontFamily="Times New Roman"
             FontSize="14"
             ItemsSource="{Binding ExtractMaterialStud}"
+            SelectedValue="{Binding MaterialStudFromCombobox}"
             RenderTransformOrigin="0.503,0.033">
             <ComboBox.Effect>
                 <DropShadowEffect />
@@ -843,7 +862,8 @@
             VerticalAlignment="Top"
             FontFamily="Times New Roman"
             FontSize="14"
-            ItemsSource="{Binding ExtractExecutionStud}">
+            ItemsSource="{Binding ExtractExecutionStud}"
+            SelectedValue="{Binding ExecutionStudFromCombobox}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
