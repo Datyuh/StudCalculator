@@ -24,24 +24,40 @@ namespace StudCalculator.Data.DBWork
 
         public ObservableCollection<string> ExecutionPn33259()
         {
-            //var PN = execution_All.Execution_All.GroupBy(p => p.PN).Where(p => p.Count() > 1).Select(p => p.Key).ToList(); 
             var pn = new ObservableCollection<string>(db.Execution_All.Select(p => p.PN).Distinct().AsParallel());
-            var pn1 = new ObservableCollection<string>(pn.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
-            return pn1;
+            var pnSort = new ObservableCollection<string>(pn.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            return pnSort;
         }
 
         public ObservableCollection<string> ExecutionDn33259()
         {
-            //var DN = execution_All.Execution_All.GroupBy(p => p.DN).Where(p => p.Count() > 1).Select(p => p.Key).ToList();
             var dn = new ObservableCollection<string>(db.Execution_All.Select(p => p.DN).Distinct().AsParallel());
-            var dn1 = new ObservableCollection<string>(dn.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
-            return dn1;
+            var dnSort = new ObservableCollection<string>(dn.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            return dnSort;
         }
 
         public ObservableCollection<string> ExecutionType33259()
         {
             var typeGost33259 = new ObservableCollection<string>(db.GOSTs.Select(p => p.Style).Where(p => p == "Тип 11").AsParallel());
             return typeGost33259;
+        }
+
+        public string ExecutionThicknessFlangeTheard1(string pn, string dn)
+        {
+            var executionThicknessFlangeTheard1 = db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.Thread_1).First().ToString();
+            return executionThicknessFlangeTheard1;
+        }
+
+        public double? ExecutionThicknessFlangeb1(string pn, string dn)
+        {
+            var executionThicknessFlangeb1 = db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.b_1).First();
+            return executionThicknessFlangeb1;
+        }
+
+        public double? ExecutionThicknessFlangen_type1(string pn, string dn)
+        {
+            var executionThicknessFlangenType1 = db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.n_type1).First();
+            return executionThicknessFlangenType1;
         }
     }
 }

@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,6 +40,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Stud_Calculator.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -79,15 +84,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\DbModelsFromLotsman\DbModelsFromLotsman.cs" />
     <Compile Include="Data\DBWork\DbAtk26_18_13_96.cs" />
     <Compile Include="Data\DBWork\DbCapsATK24_200_02_90.cs" />
     <Compile Include="Data\DBWork\DbCapsOST26_2008_83.cs" />
+    <Compile Include="Data\DBWork\DbExecutionGost33259.cs" />
     <Compile Include="Data\DBWork\DbGost28759_3_90.cs" />
     <Compile Include="Data\DBWork\DbGost28759_4_90.cs" />
     <Compile Include="Data\DBWork\DbNutsOst26_2041_96.cs" />
+    <Compile Include="Data\DBWork\DbOctagonalGasket.cs" />
+    <Compile Include="Data\DBWork\DbOvalGasket.cs" />
     <Compile Include="Data\DBWork\DbRotarPylugATK_26_18_5_93.cs" />
+    <Compile Include="Data\DBWork\DbStandartWashersOST26204296.cs" />
     <Compile Include="Data\DBWork\DbStudExtract.cs" />
     <Compile Include="Data\DBWork\DbWorkGost33259.cs" />
+    <Compile Include="Data\ModelsFromLotsman\dsAttributes.cs" />
+    <Compile Include="Data\ModelsFromLotsman\ModelsFromLotsman.cs" />
+    <Compile Include="Data\ModelsFromLotsman\rlTypesAndAttributes.cs" />
+    <Compile Include="Data\ModelsFromLotsman\stAttributes.cs" />
+    <Compile Include="Data\ModelsFromLotsman\stMain.cs" />
+    <Compile Include="Data\ModelsFromLotsman\stVersions.cs" />
+    <Compile Include="Infrastructure\Calculations\NonStandartFlangeDifferent.cs" />
+    <Compile Include="Infrastructure\Calculations\NonStandartFlangeSimilar.cs" />
+    <Compile Include="Infrastructure\Calculations\ReceiptAndDistributionData\ReceiptAndDistributionData.cs" />
+    <Compile Include="Infrastructure\Calculations\ResultInViewModel\ResultInViewModel.cs" />
+    <Compile Include="Infrastructure\Calculations\StandartAtk26_18_13_96.cs" />
+    <Compile Include="Infrastructure\Calculations\StandartGost28759_3_90.cs" />
+    <Compile Include="Infrastructure\Calculations\StandartGost28759_4_90.cs" />
+    <Compile Include="Infrastructure\Calculations\StandartGost33259.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
     <Compile Include="Data\Models\Type_11.cs" />
@@ -147,9 +171,7 @@
   <ItemGroup>
     <None Include="Resources\Stud_Calculator.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Calculations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Views\Windows\Stud_Calculator.ico" />
   </ItemGroup>

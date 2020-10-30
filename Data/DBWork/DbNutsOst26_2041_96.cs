@@ -21,5 +21,17 @@ namespace StudCalculator.Data.DBWork
             var ostNutsCollection = new ObservableCollection<string>(db.GOSTs.Select(p => p.Nuts).Where(p=> p != null && p != "ОСТ 26-2038-96").AsParallel());
             return ostNutsCollection;
         }
+
+        public double? ExtractThicknessPLarge(string thread)
+        {
+            var extractThicknessPLarge = db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First();
+            return extractThicknessPLarge;
+        }
+
+        public double? ExtractThicknessHLarge(string thread)
+        {
+            var extractThicknessHLarge = db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First();
+            return extractThicknessHLarge;
+        }
     }
 }

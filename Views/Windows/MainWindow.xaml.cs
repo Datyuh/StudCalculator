@@ -20,11 +20,11 @@ namespace StudCalculator
             DataContext = new MainWindowViewModel();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            OutputResult.Text = "Вывод результатов...";
-            OutputResult.Foreground = Brushes.Gray;  
-        }
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    OutputResult.Text = "Вывод результатов...";
+        //    OutputResult.Foreground = Brushes.Gray;  
+        //}
 
 
         //Подсчёт числа вхождений десятичного разделителя для проверки его

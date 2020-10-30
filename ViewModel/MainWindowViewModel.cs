@@ -1,9 +1,11 @@
-﻿using StudCalculator.Infrastructure.Commands;
+﻿using System.Collections.Generic;
+using StudCalculator.Infrastructure.Commands;
 using StudCalculator.ViewModel.Base;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using StudCalculator.Data.DBWork;
+using StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData;
 
 namespace StudCalculator.ViewModel
 {
@@ -81,6 +83,7 @@ namespace StudCalculator.ViewModel
         #endregion
 
         #region Работа с базой Шпилек по материалам и исполнения
+
         //Выборка из базы материала шпилек
         private ObservableCollection<string> _extractMaterialStudCollection;
         public ObservableCollection<string> ExtractMaterialStud { get => _extractMaterialStudCollection; set => Set(ref _extractMaterialStudCollection, value); }
@@ -91,6 +94,8 @@ namespace StudCalculator.ViewModel
         #endregion
 
         #endregion
+
+        #region Биндинг работы функций контролов
 
         #region Функции проверки установки флага в Чекбоксах
 
@@ -112,6 +117,7 @@ namespace StudCalculator.ViewModel
         //Чекбокс для нестандартных заглушек поворотных
         private bool _nonstandartRotaryPlugsChecked;
         public bool NonStandartRotaryPlugsChecked { get => _nonstandartRotaryPlugsChecked; set => Set(ref _nonstandartRotaryPlugsChecked, value); }
+        //Чекбокс для нестандартных толщина шайб
         private bool _standartThicknessWasherCheckboxChecked;
         public bool StandartThicknessWasherCheckboxChecked { get => _standartThicknessWasherCheckboxChecked; set => Set(ref _standartThicknessWasherCheckboxChecked, value); }
         //Чекбокс для стандартных шайб
@@ -277,6 +283,15 @@ namespace StudCalculator.ViewModel
 
         #endregion
 
+        #region Вставка текста в TextBox
+
+        private string _resultTextEnter; 
+        public string ResultTextEnter { get => _resultTextEnter; set => Set(ref _resultTextEnter, value); }
+
+        #endregion
+
+        #endregion
+
         #region Команды
 
         #region Команды для нестандартных фланцев
@@ -303,7 +318,8 @@ namespace StudCalculator.ViewModel
               ChoeseNutsThreadComboboxIsEnabled = false;
               NumberOfNutsTextboxIsEnable = false;
               ExtractNutsCollection?.Clear();
-
+              NonStandartFlTextRead = "";
+              SumStudTextRead = "";
           }
         }
         //Включение работы с нестандартными фланцами разными
@@ -340,6 +356,9 @@ namespace StudCalculator.ViewModel
                 NumberOfNutsTextboxIsEnable = false;
                 NonStandartDifferentFlangeTexboxIsEnabled = false;
                 ExtractNutsCollection?.Clear();
+                NonStandartFirstFlangeTextRead = "";
+                NonStandartSecondFlangeTextRead = "";
+                SumStudTextRead = "";
             }
         }
 
@@ -394,6 +413,7 @@ namespace StudCalculator.ViewModel
                NonStandartPlugsTextboxIsEnabled = false;
                StandartRotaryPlugsCheckboxIsEnabled = true;
                NonStandartRotaryPlugsCheckboxIsEnabled = true;
+               NonStandartPlugsTextRead = "";
            }
         }
 
@@ -449,6 +469,7 @@ namespace StudCalculator.ViewModel
             {
                 StandartRotaryPlugsCheckboxIsEnabled = true;
                 NonStandartRotaryPlugsTextboxIsEnabled = false;
+                NonStandartRotaryPlugsTextRead = "";
                 if (NonStandartDifferentFlangeChecked is true)
                 {
                     StandartPlugsCheckboxIsEnabled = false;
@@ -494,6 +515,7 @@ namespace StudCalculator.ViewModel
             {
                 StandartThicknessWasherCheckboxIsEnabled = true;
                 NonThicknessWasherTextboxIsEnabled = false;
+                ThicknessWasherTextRead = "";
             }
         }
 
@@ -510,6 +532,7 @@ namespace StudCalculator.ViewModel
             {
                 StandartOctahedralGasketsCheckboxIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = false;
+                ThicknessGasketTextRead = "";
             }
             else
             {
@@ -529,6 +552,7 @@ namespace StudCalculator.ViewModel
             {
                 StandartOvalGasketsCheckboxIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = false;
+                ThicknessGasketTextRead = "";
             }
             else
             {
@@ -537,6 +561,39 @@ namespace StudCalculator.ViewModel
                 if (SelectionGostFromCombobox == "ГОСТ 28759.4-90")
                     NonStandartGasketsTextboxIsEnabled = false;
             }
+        }
+
+        #endregion
+
+        #region Команда на вывод введенных данных с контролов
+
+        public ICommand OutputValuesFromControlCommand { get; }
+        private bool CanOutputValuesFromControlCommandExecute(object p) => true;
+
+        private void OnOutputValuesFromControlCommandExecuted(object p)
+        {
+            var receiptAndDistributionOfDatas = new Dictionary<string, object>
+            {
+                {"SelectionGostFromCombobox", SelectionGostFromCombobox}, {"PnSelectedFromComboBox", PnSelectedFromComboBox}, {"ExecutionFromComboBox", ExecutionFromComboBox},
+                {"DnSelectedFromComboBox", DnSelectedFromComboBox}, {"StandartRotaryPlugFromComboBox", StandartRotaryPlugFromComboBox}, {"StandartPlugsFromComboBox", StandartPlugsFromComboBox},
+                {"StandartPlugsExecutionFromComboBox", StandartPlugsExecutionFromComboBox}, {"ExecutionStudFromCombobox", ExecutionStudFromCombobox}, 
+                {"MaterialStudFromCombobox", MaterialStudFromCombobox}, {"OstNutsFromComboBox", OstNutsFromComboBox}, {"ThreadNutsFromComboBox", ThreadNutsFromComboBox},
+                {"NonStandartFlTextRead", NonStandartFlTextRead}, {"NonStandartFirstFlangeTextRead", NonStandartFirstFlangeTextRead},
+                {"NonStandartSecondFlangeTextRead", NonStandartSecondFlangeTextRead}, {"NonStandartPlugsTextRead", NonStandartPlugsTextRead}, 
+                {"NonStandartRotaryPlugsTextRead", NonStandartRotaryPlugsTextRead}, {"SumFlangeTextRead", SumFlangeTextRead}, {"ThicknessWasherTextRead", ThicknessWasherTextRead}, 
+                {"ThicknessGasketTextRead", ThicknessGasketTextRead}, {"SumStudTextRead", SumStudTextRead},
+            };
+
+            var receiptAndDistributionOfDataCheckBox = new Dictionary<string, bool>
+            {
+                {"NonStandartSameFlangeChecked", NonStandartSameFlangeChecked}, {"NonStandartDifferentFlangeChecked", NonStandartDifferentFlangeChecked},
+                {"StandartPlugsChecked", StandartPlugsChecked}, {"NonStandartPlugsChecked", NonStandartPlugsChecked},
+                {"StandartRotaryPlugsChecked", StandartRotaryPlugsChecked}, {"NonStandartRotaryPlugsChecked", NonStandartRotaryPlugsChecked},
+                {"StandartThicknessWasherCheckboxChecked", StandartThicknessWasherCheckboxChecked}, {"NonStandartThicknessWasherCheckboxChecked", NonStandartThicknessWasherCheckboxChecked},
+                {"StandartOvalGasketsCheckboxChecked", StandartOvalGasketsCheckboxChecked}, {"StandartOctahedralGasketsCheckboxChecked", StandartOctahedralGasketsCheckboxChecked},
+            };
+
+            new ReceiptAndDistributionData(receiptAndDistributionOfDatas, receiptAndDistributionOfDataCheckBox);
         }
 
         #endregion
@@ -567,8 +624,15 @@ namespace StudCalculator.ViewModel
             //Прокладки овальные и восьмигранные
             StandartOvalGasketsCommand = new LambdaCommand(OnStandartOvalGasketsCommandExecuted, CanStandartOvalGasketsCommandExecute);
             StandartOctahedralGasketsCommand = new LambdaCommand(OnStandartOctahedralGasketsCommandExecuted, CanStandartOctahedralGasketsCommandExecute);
+            //Вызов команды для проведения расчетов
+            OutputValuesFromControlCommand = new LambdaCommand(OnOutputValuesFromControlCommandExecuted, CanOutputValuesFromControlCommandExecute);
 
             #endregion
+        }
+
+        public void ResultEnterInTextBox(string resultEnterInTextBox)
+        {
+            ResultTextEnter = resultEnterInTextBox;
         }
 
         #region Добовление данных по АТК 24.200.02-90
@@ -606,25 +670,24 @@ namespace StudCalculator.ViewModel
                 ExecGost.Clear();
                 ExecutionPn.Clear();
                 ExecutionDn.Clear();
-                ExecutionType.Clear();
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
                 TypeFlangeGostIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = true;
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
-                var execGostAdd = new DbWorkGost33259().ExecGost33259().AsParallel();
-                var execGostPnAdd = new DbWorkGost33259().ExecutionPn33259().AsParallel();
-                var execGostDnAdd = new DbWorkGost33259().ExecutionDn33259().AsParallel();
-                var execGostType33259Add = new DbWorkGost33259().ExecutionType33259().AsParallel();
-                foreach (var item in execGostAdd)
-                    ExecGost.Add(item);
-                foreach (var item in execGostPnAdd)
-                    ExecutionPn.Add(item);
-                foreach (var item in execGostDnAdd)
-                    ExecutionDn.Add(item);
-                foreach (var item in execGostType33259Add)
-                    ExecutionType.Add(item);
+                ExecGost = new ObservableCollection<string>(new DbWorkGost33259().ExecGost33259().AsParallel());
+                ExecutionPn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionPn33259().AsParallel());
+                ExecutionDn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionDn33259().AsParallel());
+                ExecutionType = new ObservableCollection<string>(new DbWorkGost33259().ExecutionType33259());
+                //foreach (var item in execGostAdd)
+                //    ExecGost.Add(item);
+                //foreach (var item in execGostPnAdd)
+                //    ExecutionPn.Add(item);
+                //foreach (var item in execGostDnAdd)
+                //    ExecutionDn.Add(item);
+                //foreach (var item in execGostType33259Add)
+                //    ExecutionType.Add(item);
             }
 
             #endregion
@@ -636,22 +699,22 @@ namespace StudCalculator.ViewModel
                 ExecGost.Clear();
                 ExecutionPn.Clear();
                 ExecutionDn.Clear();
-                ExecutionType.Clear();
+                ExecutionType?.Clear();
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
                 TypeFlangeGostIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = true;
                 StandartOvalGasketsCheckboxIsEnabled = false;
                 StandartOctahedralGasketsCheckboxIsEnabled = false;
-                var execGostAdd = new DbGost28759_3_90().ExecuteExecutionsCollection().AsParallel();
-                var execGostPnAdd = new DbGost28759_3_90().ExecutePnCollection().AsParallel();
-                var execGostDnAdd = new DbGost28759_3_90().ExecuteDnCollection().AsParallel();
-                foreach (var item in execGostAdd)
-                    ExecGost.Add(item);
-                foreach (var item in execGostPnAdd)
-                    ExecutionPn.Add(item);
-                foreach (var item in execGostDnAdd)
-                    ExecutionDn.Add(item);
+                ExecGost = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteExecutionsCollection().AsParallel());
+                ExecutionPn = new ObservableCollection<string>(new DbGost28759_3_90().ExecutePnCollection().AsParallel());
+                ExecutionDn = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteDnCollection().AsParallel());
+                //foreach (var item in execGostAdd)
+                //    ExecGost.Add(item);
+                //foreach (var item in execGostPnAdd)
+                //    ExecutionPn.Add(item);
+                //foreach (var item in execGostDnAdd)
+                //    ExecutionDn.Add(item);
             }
 
             #endregion
@@ -663,22 +726,23 @@ namespace StudCalculator.ViewModel
                 ExecGost.Clear();
                 ExecutionPn.Clear();
                 ExecutionDn.Clear();
-                ExecutionType.Clear();
+                ExecutionType?.Clear();
+                ThicknessGasketTextRead = "";
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
                 TypeFlangeGostIsEnabled = false;
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = false;
-                var execGostAdd = new DbGost28759_4_90().ExecuteExecutionsCollection().AsParallel();
-                var execGostPnAdd = new DbGost28759_4_90().ExecutePnCollection().AsParallel();
-                var execGostDnAdd = new DbGost28759_4_90().ExecuteDnCollection().AsParallel();
-                foreach (var item in execGostAdd)
-                    ExecGost.Add(item);
-                foreach (var item in execGostPnAdd)
-                    ExecutionPn.Add(item);
-                foreach (var item in execGostDnAdd)
-                    ExecutionDn.Add(item);
+                ExecGost = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteExecutionsCollection().AsParallel());
+                ExecutionPn = new ObservableCollection<string>(new DbGost28759_4_90().ExecutePnCollection().AsParallel());
+                ExecutionDn = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteDnCollection().AsParallel());
+                //foreach (var item in execGostAdd)
+                //    ExecGost.Add(item);
+                //foreach (var item in execGostPnAdd)
+                //    ExecutionPn.Add(item);
+                //foreach (var item in execGostDnAdd)
+                //    ExecutionDn.Add(item);
             }
 
             #endregion
@@ -690,22 +754,22 @@ namespace StudCalculator.ViewModel
                 ExecGost.Clear();
                 ExecutionPn.Clear();
                 ExecutionDn.Clear();
-                ExecutionType.Clear();
+                ExecutionType?.Clear();
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
                 TypeFlangeGostIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = true;
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
-                var execGostAdd = new DbAtk26_18_13_96().ExecuteExecutionsCollection().AsParallel();
-                var execGostPnAdd = new DbAtk26_18_13_96().ExecutePnCollection().AsParallel();
-                var execGostDnAdd = new DbAtk26_18_13_96().ExecuteDnCollection().AsParallel();
-                foreach (var item in execGostAdd)
-                    ExecGost.Add(item);
-                foreach (var item in execGostPnAdd)
-                    ExecutionPn.Add(item);
-                foreach (var item in execGostDnAdd)
-                    ExecutionDn.Add(item);
+                ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection().AsParallel());
+                ExecutionPn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecutePnCollection().AsParallel());
+                ExecutionDn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteDnCollection().AsParallel());
+                //foreach (var item in execGostAdd)
+                //    ExecGost.Add(item);
+                //foreach (var item in execGostPnAdd)
+                //    ExecutionPn.Add(item);
+                //foreach (var item in execGostDnAdd)
+                //    ExecutionDn.Add(item);
             }
 
             #endregion
