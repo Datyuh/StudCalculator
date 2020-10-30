@@ -7,7 +7,6 @@ namespace StudCalculator.Data.DbModelsFromLotsman
 {
     public class DbModelsFromLotsman
     {
-        MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
         ModelsFromLotsman.ModelsFromLotsman dbLotsman = new ModelsFromLotsman.ModelsFromLotsman();
         public string ResultFromGosts;
 
@@ -29,7 +28,7 @@ namespace StudCalculator.Data.DbModelsFromLotsman
             var resultTextEnter =
                 $"{inResultInViewModel.Select(p => p.Обозначение).First()} {inResultInViewModel.Select(s => s.Наименование).First()}";
 
-           mainWindowViewModel.ResultEnterInTextBox(resultTextEnter);
+            new MainWindowViewModel().ResultEnterInTextBox(resultTextEnter);
         }
     }
 }

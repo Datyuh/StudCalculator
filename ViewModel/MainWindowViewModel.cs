@@ -285,7 +285,7 @@ namespace StudCalculator.ViewModel
 
         #region Вставка текста в TextBox
 
-        private string _resultTextEnter; 
+        private string _resultTextEnter = "Вывод результатов..."; 
         public string ResultTextEnter { get => _resultTextEnter; set => Set(ref _resultTextEnter, value); }
 
         #endregion
@@ -629,12 +629,7 @@ namespace StudCalculator.ViewModel
 
             #endregion
         }
-
-        public void ResultEnterInTextBox(string resultEnterInTextBox)
-        {
-            ResultTextEnter = resultEnterInTextBox;
-        }
-
+        
         #region Добовление данных по АТК 24.200.02-90
 
         private void AddCapsCombobox(string allCapsSelectionCombobox)
