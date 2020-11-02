@@ -917,7 +917,7 @@
             BorderThickness="2"
             FontFamily="Calibri"
             FontSize="14"
-            Foreground="Black"
+            Foreground="{Binding ColorTextBoxResult, Mode=TwoWay}"
             IsReadOnly="True"
             Text="{Binding ResultTextEnter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TextWrapping="Wrap" />
@@ -946,7 +946,8 @@
             VerticalAlignment="Top"
             Content="Очистка поля результаттов"
             FontSize="14"
-            RenderTransformOrigin="-0.017,0.6" />
+            RenderTransformOrigin="-0.017,0.6" 
+            Command="{Binding ClearTextBoxResultCommand}"/>
 
         <Button
             x:Name="AboutProgram"

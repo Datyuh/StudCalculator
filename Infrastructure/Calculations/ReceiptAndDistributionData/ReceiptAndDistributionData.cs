@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using StudCalculator.Data.DbModelsFromLotsman;
 using StudCalculator.Data.DBWork;
 
 namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 {
-    public class ReceiptAndDistributionData
+    internal class ReceiptAndDistributionData
     {
         //Получение всех переменных который ввел пользователь
         public Dictionary<string, object> ReceiptAndDistributionOfDatas;
@@ -155,6 +154,10 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
             #endregion
 
+        }
+
+        public string ResultOutBaseAllGosts()
+        {
             #region Сбор данных для расчета по ГОСТ 33259
 
             if (ReceiptAndDistributionOfDatas["SelectionGostFromCombobox"].ToString() == "ГОСТ 33259-2015 Ряд 1")
@@ -171,20 +174,22 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                 var fromReceiptAndDistribution = new Dictionary<string, object>
                 {
                     {"inResultb1", inResultb1}, {"inResultPNuts", InResultPNuts(SelectedTheard)}, {"inResultHNuts", InResultHNuts(SelectedTheard)}, {"ExrcuteAtk2618593b", ExrcuteAtk2618593B},
-                    {"ExrcuteAtk2618593bNonStandart", ExrcuteAtk2618593BNonStandart}, {"ExecuteAtk242000290b", ExecuteAtk242000290B}, 
+                    {"ExrcuteAtk2618593bNonStandart", ExrcuteAtk2618593BNonStandart}, {"ExecuteAtk242000290b", ExecuteAtk242000290B},
                     {"ExecuteAtk242000290bNonStandart", ExecuteAtk242000290BNonStandart}, {"ExecuteNonStandartWashers", ExecuteNonStandartWashers},
-                    {"ExecuteStandartWashers", ExecuteStandartWashers}, {"ExecuteOvalGasket", ExecuteOvalGasket}, {"inResulth1", inResulth1}, {"inResulth2", inResulth2}, 
+                    {"ExecuteStandartWashers", ExecuteStandartWashers}, {"ExecuteOvalGasket", ExecuteOvalGasket}, {"inResulth1", inResulth1}, {"inResulth2", inResulth2},
                     {"inResulth4", inResulth4}, {"inResulth5", inResulth5}, {"ExecuteOctagonalGasket", ExecuteOctagonalGasket}, {"ExecuteNonStandartGasket", ExecuteNonStandartGasket},
                     {"SelectedExecutionFlange", SelectedExecutionFlange}, {"StandartPlugsChecked", StandartPlugsChecked}, {"NonStandartPlugsChecked", NonStandartPlugsChecked},
                     {"MaterialStudFromCombobox", ReceiptAndDistributionOfDatas["MaterialStudFromCombobox"]}, {"ExecutionStudFromCombobox", ReceiptAndDistributionOfDatas["ExecutionStudFromCombobox"]},
                     {"SelectedTheard", SelectedTheard},
 
                 };
-                new StandartGost33259(fromReceiptAndDistribution);
+                string resultInMainWindow = new StandartGost33259().StandartGosts33259(fromReceiptAndDistribution);
+                return resultInMainWindow;
             }
 
-            #endregion
+            return string.Empty;
 
+            #endregion
         }
     }
 }

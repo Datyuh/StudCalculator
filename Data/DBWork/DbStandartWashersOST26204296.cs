@@ -9,7 +9,7 @@ namespace StudCalculator.Data.DBWork
 
         public double StandartWashers(string tread)
         {
-            var executeStandartWashers = Convert.ToDouble(db.OST26_2042_96.Where(p => p.Thread == tread).Select(p => p.S).AsParallel());
+            var executeStandartWashers = Convert.ToDouble(db.OST26_2042_96.Where(p => p.Thread == tread).Select(p => p.S).First());
             return executeStandartWashers;
         }
     }

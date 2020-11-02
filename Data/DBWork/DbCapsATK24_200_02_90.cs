@@ -25,7 +25,7 @@ namespace StudCalculator.Data.DBWork
         public double Executedb(string pn, string dn, string style)
         {
             var executeAtk242000290b = Convert.ToDouble(db.ATK_24_200_02_90.Where(p => p.PN == pn && p.DN == dn && p.Style == style)
-                .Select(p => p.b).AsParallel());
+                .Select(p => p.b).First());
             return executeAtk242000290b;
         }
     }

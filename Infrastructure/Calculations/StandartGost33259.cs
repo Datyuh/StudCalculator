@@ -11,7 +11,7 @@ namespace StudCalculator.Infrastructure.Calculations
         public string SelectedExecutionFlange;
 
 
-        public StandartGost33259(Dictionary<string, object> fromReceiptAndDistribution)
+        public string StandartGosts33259(Dictionary<string, object> fromReceiptAndDistribution)
         {
             FromReceiptAndDistribution = fromReceiptAndDistribution;
             //Получение исполнений ГОСТов и тд. введенных пользователем
@@ -64,7 +64,8 @@ namespace StudCalculator.Infrastructure.Calculations
                 {"ExecutionStudFromCombobox", FromReceiptAndDistribution["ExecutionStudFromCombobox"]}, {"SelectedTheard", FromReceiptAndDistribution["SelectedTheard"]}
             };
 
-            new ResultInViewModel.ResultInViewModel(resultToResultInViewModels);
+            string resultInMainWindow = new ResultInViewModel.ResultInViewModel().ReturnFromLotsman(resultToResultInViewModels);
+            return resultInMainWindow;
         }
     }
 }

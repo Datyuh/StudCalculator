@@ -12,22 +12,31 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
         public Dictionary<string, object> FromViewModel;
         public double FromResultGosts;
 
-        //Result_Choese = ("Шпилька " + Style_Stud + "-" + "[M, М]" + self.Threads_non_st[1:3] + (
-        //"%[x, х]" + str(Result_Fl) + "." + Material_Stud) + " ОСТ 26-2040-96")
 
-        public ResultInViewModel(Dictionary<string, object> resultFromReceipt)
+        public string ReturnFromLotsman(Dictionary<string, object> resultFromReceipt)
         {
             FromViewModel = resultFromReceipt;
             FromResultGosts = Convert.ToDouble(FromViewModel["result"]);
             string diametricStud = FromViewModel["SelectedTheard"].ToString();
 
-            ResultFromGosts = Math.Round(FromResultGosts);
+            ResultFromGosts = (Math.Round(Math.Round(FromResultGosts) / 10)) * 10;
 
             var resultChoese =
-                $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-[M, М]{diametricStud.Substring(1)}%[x, х]{FromResultGosts}.{FromViewModel["MaterialStudFromCombobox"]}% ОСТ 26-2040-96";
-            new DbModelsFromLotsman(resultChoese);
-            
+                $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-[M, М]{diametricStud.Substring(1)}%[x, х]{ResultFromGosts}." +
+                $"{FromViewModel["MaterialStudFromCombobox"]}% ОСТ 26-2040-96";
 
+            string resultInMainWindow = new DbModelsFromLotsman().ReturnFromLotsman(resultChoese);
+            if (resultInMainWindow != string.Empty)
+            {
+                return resultInMainWindow;
+            }
+            else
+            {
+                string resultInMainWindows =
+                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-М{diametricStud.Substring(1)}х{ResultFromGosts}." +
+                    $"{FromViewModel["MaterialStudFromCombobox"]} ОСТ 26-2040-96";
+                return resultInMainWindows;
+            }
         }
     }
 }
