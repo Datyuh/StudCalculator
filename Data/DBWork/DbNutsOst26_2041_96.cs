@@ -22,15 +22,15 @@ namespace StudCalculator.Data.DBWork
             return ostNutsCollection;
         }
 
-        public double? ExtractThicknessPLarge(string thread)
+        public double ExtractThicknessPLarge(string thread)
         {
-            var extractThicknessPLarge = db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First();
+            var extractThicknessPLarge = Convert.ToDouble(db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First());
             return extractThicknessPLarge;
         }
 
-        public double? ExtractThicknessHLarge(string thread)
+        public double ExtractThicknessHLarge(string thread)
         {
-            var extractThicknessHLarge = db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First();
+            var extractThicknessHLarge = Convert.ToDouble(db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First());
             return extractThicknessHLarge;
         }
     }

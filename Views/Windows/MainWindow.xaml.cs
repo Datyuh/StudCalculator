@@ -1,10 +1,8 @@
 ﻿using System;
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using StudCalculator.ViewModel;
 
 namespace StudCalculator
 {
@@ -18,13 +16,6 @@ namespace StudCalculator
         {
             InitializeComponent();
         }
-
-        //private void Window_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    OutputResult.Text = "Вывод результатов...";
-        //    OutputResult.Foreground = Brushes.Gray;  
-        //}
-
 
         //Подсчёт числа вхождений десятичного разделителя для проверки его
         public int DS_Count(string s)
@@ -45,15 +36,6 @@ namespace StudCalculator
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
 
-        private void ClearOutputResultClick(object sender, RoutedEventArgs e)
-        {
-            OutputResult.Text = "";
-            if (string.IsNullOrEmpty(OutputResult.Text = ""))
-            {
-                OutputResult.Text = "Вывод результатов...";
-
-            }
-        }
 
         private void NonStandartFlText_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -94,5 +76,6 @@ namespace StudCalculator
         {
             StripText.BorderBrush = StripText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(238, 135, 32));
         }
+
     }
 }

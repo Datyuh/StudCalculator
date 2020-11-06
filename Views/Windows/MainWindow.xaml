@@ -14,7 +14,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Window.DataContext>
     <Grid Background="#FFCFCFCF">
         <Grid.ColumnDefinitions>
@@ -353,6 +353,7 @@
                     BorderBrush="#FFEE8720"
                     BorderThickness="2"
                     FontFamily="Calibri"
+                    PreviewTextInput="TextBox_PreviewTextInputWhole"
                     Text="{Binding SumFlangeTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
@@ -447,6 +448,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartPlugsTextboxIsEnabled}"
                     IsEnabledChanged="NonStandardPlugText_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding NonStandartPlugsTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
@@ -475,6 +477,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartRotaryPlugsTextboxIsEnabled}"
                     IsEnabledChanged="StandardRotaryPlugText_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding NonStandartRotaryPlugsTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
@@ -503,6 +506,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartFlTextIsEnabled}"
                     IsEnabledChanged="NonStandartFlText_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding NonStandartFlTextRead, Mode=TwoWay}">
                     <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
@@ -535,6 +539,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
                     IsEnabledChanged="NonStandartDablFlTextFirst_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding NonStandartFirstFlangeTextRead, Mode=TwoWay}">
                     <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
@@ -567,6 +572,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
                     IsEnabledChanged="NonStandartDablFlTextSec_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding NonStandartSecondFlangeTextRead, Mode=TwoWay}">
                     <TextBox.ToolTip>
                         <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
@@ -721,6 +727,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonThicknessWasherTextboxIsEnabled, Mode=TwoWay}"
                     IsEnabledChanged="WasherText_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding ThicknessWasherTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
@@ -749,6 +756,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
                     IsEnabledChanged="StripText_IsEnabledChanged"
+                    PreviewTextInput="TextBoxPreviewTextInput"
                     Text="{Binding ThicknessGasketTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
@@ -817,6 +825,7 @@
                     FontFamily="Calibri"
                     IsEnabled="{Binding NumberOfNutsTextboxIsEnable}"
                     IsEnabledChanged="NumberSudText_IsEnabledChanged"
+                    PreviewTextInput="TextBox_PreviewTextInputWhole"
                     Text="{Binding SumStudTextRead, Mode=TwoWay}" />
                 <TextBlock
                     Width="22"
@@ -944,10 +953,10 @@
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Command="{Binding ClearTextBoxResultCommand}"
             Content="Очистка поля результаттов"
             FontSize="14"
-            RenderTransformOrigin="-0.017,0.6" 
-            Command="{Binding ClearTextBoxResultCommand}"/>
+            RenderTransformOrigin="-0.017,0.6" />
 
         <Button
             x:Name="AboutProgram"

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using NaturalSort.Extension;
 using StudCalculator.ViewModel.Base;
 
@@ -48,15 +49,15 @@ namespace StudCalculator.Data.DBWork
             return executionThicknessFlangeTheard1;
         }
 
-        public double? ExecutionThicknessFlangeb1(string pn, string dn)
+        public double ExecutionThicknessFlangeb1(string pn, string dn)
         {
-            var executionThicknessFlangeb1 = db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.b_1).First();
+            var executionThicknessFlangeb1 = Convert.ToDouble(db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.b_1).First());
             return executionThicknessFlangeb1;
         }
 
-        public double? ExecutionThicknessFlangen_type1(string pn, string dn)
+        public double ExecutionThicknessFlangen_type1(string pn, string dn)
         {
-            var executionThicknessFlangenType1 = db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.n_type1).First();
+            var executionThicknessFlangenType1 = Convert.ToDouble(db.Type_11.Where(p => p.PN == pn && p.DN == dn).Select(p => p.n_type1).First());
             return executionThicknessFlangenType1;
         }
     }

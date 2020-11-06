@@ -31,7 +31,7 @@ namespace StudCalculator.Data.DbModelsFromLotsman
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Проверте првильно ли введены данные", "Ошибка", MessageBoxButton.OK,
+                MessageBox.Show("Проверьте правильно ли введены данные", "Ошибка", MessageBoxButton.OK,
                     MessageBoxImage.Information);
                 return string.Empty;
             }
