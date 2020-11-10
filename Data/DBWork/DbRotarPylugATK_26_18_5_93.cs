@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using NaturalSort.Extension;
 
 namespace StudCalculator.Data.DBWork
@@ -18,9 +19,18 @@ namespace StudCalculator.Data.DBWork
 
         public double Executeb(string pn, string dn, string style)
         {
-            var executedb = Convert.ToDouble(db.ATK_26_18_5_93.Where(p => p.PN == pn && p.DN == dn && p.Style == style).Select(p => p.b)
-                .First());
-            return executedb;
+            try
+            {
+                var executedb = Convert.ToDouble(db.ATK_26_18_5_93.Where(p => p.PN == pn && p.DN == dn && p.Style == style).Select(p => p.b)
+                    .First());
+                return executedb;
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Вы ввели неверные данные", "Упс!!!", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return 0;
+            }
         }
     }
 }

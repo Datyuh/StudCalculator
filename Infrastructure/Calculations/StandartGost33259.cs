@@ -7,7 +7,7 @@ namespace StudCalculator.Infrastructure.Calculations
     {
         public Dictionary<string, object> FromReceiptAndDistribution;
 
-        public double B;
+ 
         public string SelectedExecutionFlange;
 
 
@@ -20,32 +20,35 @@ namespace StudCalculator.Infrastructure.Calculations
             if (SelectedExecutionFlange == "Исполнение A" || SelectedExecutionFlange == "Исполнение B" || 
                 SelectedExecutionFlange == "Исполнение J" || SelectedExecutionFlange == "Исполнение K")
             {
-                B = FromReceiptAndDistribution["StandartPlugsChecked"] is true || 
+                double b = FromReceiptAndDistribution["StandartPlugsChecked"] is true || 
                     FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
                     ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"])
                     : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) * 2;
+                return b;
             }
-            else if (SelectedExecutionFlange == "Исполнение C и D" || SelectedExecutionFlange == "Исполнение E и F")
+            if (SelectedExecutionFlange == "Исполнение C и D" || SelectedExecutionFlange == "Исполнение E и F")
             {
-                B = FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
-                    FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+                double b = FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+                          FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
                     ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
                       Convert.ToDouble(FromReceiptAndDistribution["inResulth2"])
                     : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) +
                       (Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
                        Convert.ToDouble(FromReceiptAndDistribution["inResulth2"]));
+                return b;
             }
-            else if (SelectedExecutionFlange == "Исполнение L и M")
+            if (SelectedExecutionFlange == "Исполнение L и M")
             {
-                B = FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
-                    FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+                double b = FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+                          FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
                     ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
                       Convert.ToDouble(FromReceiptAndDistribution["inResulth5"])
                     : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) +
                       (Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
                        Convert.ToDouble(FromReceiptAndDistribution["inResulth5"]));
+                return b;
             }
-            return B;
+            return 0;
         }
     }
 }

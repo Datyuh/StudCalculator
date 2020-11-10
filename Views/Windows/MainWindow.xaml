@@ -107,7 +107,7 @@
             IsEnabled="{Binding TypeFlangeGostIsEnabled}"
             ItemsSource="{Binding ExecutionType}"
             RenderTransformOrigin="0.705,0.522"
-            SelectedValue="{Binding ExecutionType, Mode=TwoWay}">
+            SelectedValue="{Binding TypeSelectedFromComboBox, Mode=TwoWay}">
             <ComboBox.Effect>
                 <DropShadowEffect />
             </ComboBox.Effect>
