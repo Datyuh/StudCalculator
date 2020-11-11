@@ -11,29 +11,29 @@ namespace StudCalculator.Data.DBWork
 
         public ObservableCollection<string> ExecutePnCollection()
         {
-            var executePnCollection = new ObservableCollection<string>(db.ATK_26_18_13_96.Select(p => p.PN).Distinct().AsParallel());
-            var executeSortPnCollection = new ObservableCollection<string>(executePnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executePnCollection = new ObservableCollection<string>(db.ATK_26_18_13_96.Select(p => p.PN).Distinct());
+            var executeSortPnCollection = new ObservableCollection<string>(executePnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortPnCollection;
+        }
+
+        public ObservableCollection<string> ExecuteExecutionsCollectionForPlug()
+        {
+            var executeExecutionsCollection = new ObservableCollection<string>(db.ATK_26_18_13_96.Select(p => p.Execution_Caps).Where(p => p != null).Distinct());
+            var executeSortExecutionsCollection = new ObservableCollection<string>(executeExecutionsCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
+            return executeSortExecutionsCollection;
         }
 
         public ObservableCollection<string> ExecuteExecutionsCollection()
         {
-            var executeExecutionsCollection = new ObservableCollection<string>(db.GOSTs.Select(p => p.Exec_ATK_26_18_13_96).Where(p => p != null)).AsParallel();
-            var executeSortExecutionsCollection = new ObservableCollection<string>(executeExecutionsCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executeExecutionsCollection = new ObservableCollection<string>(db.GOSTs.Select(p => p.Exec_ATK_26_18_13_96).Where(p => p != null));
+            var executeSortExecutionsCollection = new ObservableCollection<string>(executeExecutionsCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortExecutionsCollection;
-        }
-
-        public ObservableCollection<string> ExecuteExecutionsForCapsCollection()
-        {
-            var executeExecutionsForCapsCollection = new ObservableCollection<string>(db.GOSTs.Select(p => p.Exec_ATK_26_18_13_96_Caps).Where(p => p != null)).AsParallel();
-            var executeSortExecutionsForCapsCollection = new ObservableCollection<string>(executeExecutionsForCapsCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
-            return executeSortExecutionsForCapsCollection;
         }
 
         public ObservableCollection<string> ExecuteDnCollection()
         {
-            var executeDnCollection = new ObservableCollection<string>(db.ATK_26_18_13_96.Select(p => p.DN)).Distinct().AsParallel();
-            var executeSortDnCollection = new ObservableCollection<string>(executeDnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executeDnCollection = new ObservableCollection<string>(db.ATK_26_18_13_96.Select(p => p.DN)).Distinct();
+            var executeSortDnCollection = new ObservableCollection<string>(executeDnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortDnCollection;
         }
     }

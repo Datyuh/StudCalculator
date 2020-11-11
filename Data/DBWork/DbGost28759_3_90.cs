@@ -11,22 +11,22 @@ namespace StudCalculator.Data.DBWork
 
         public ObservableCollection<string> ExecutePnCollection()
         {
-            var executePnCollection = new ObservableCollection<string>(db.GOST_28759_3_90.Select(p => p.PN).Distinct().AsParallel());
-            var executeSortPnCollection = new ObservableCollection<string>(executePnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executePnCollection = new ObservableCollection<string>(db.GOST_28759_3_90.Select(p => p.PN).Where(p => p != null).Distinct());
+            var executeSortPnCollection = new ObservableCollection<string>(executePnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortPnCollection;
         }
 
         public ObservableCollection<string> ExecuteExecutionsCollection()
         {
-            var executeExecutionsCollection = new ObservableCollection<string>(db.GOSTs.Select(p => p.Exec_GOST28759_3).Where(p => p != null)).AsParallel();
-            var executeSortExecutionsCollection = new ObservableCollection<string>(executeExecutionsCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executeExecutionsCollection = new ObservableCollection<string>(db.GOSTs.Select(p => p.Exec_GOST28759_3).Where(p => p != null));
+            var executeSortExecutionsCollection = new ObservableCollection<string>(executeExecutionsCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortExecutionsCollection;
         }
 
         public ObservableCollection<string> ExecuteDnCollection()
         {
-            var executeDnCollection = new ObservableCollection<string>(db.GOST_28759_3_90.Select(p => p.DN)).Distinct().AsParallel();
-            var executeSortDnCollection = new ObservableCollection<string>(executeDnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executeDnCollection = new ObservableCollection<string>(db.GOST_28759_3_90.Select(p => p.DN).Where(p => p != null).Distinct());
+            var executeSortDnCollection = new ObservableCollection<string>(executeDnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortDnCollection;
         }
     }

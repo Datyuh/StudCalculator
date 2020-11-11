@@ -391,7 +391,7 @@ namespace StudCalculator.ViewModel
                 ExtractNutsCollection = new DbNutsOst26_2041_96().ExtractOst26_2041_96();
                 NonStandartFlTextRead = 0;
                 SumStudTextRead = 0;
-                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).FirstOrDefault();
+                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).FirstOrDefault()!;
 
             }
             else
@@ -433,7 +433,7 @@ namespace StudCalculator.ViewModel
                 NonStandartFirstFlangeTextRead = 0;
                 NonStandartSecondFlangeTextRead = 0;
                 SumStudTextRead = 0;
-                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).FirstOrDefault();
+                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).FirstOrDefault()!;
                 switch (StandartRotaryPlugsChecked)
                 {
                     case true:
@@ -498,9 +498,15 @@ namespace StudCalculator.ViewModel
                 NonStandartRotaryPlugsTextboxIsEnabled = false;
                 ExecuteRotaryPlugsCollection?.Clear();
                 StandartRotaryPlugsComboboxIsEnabled = false;
-                AllCaps = new DbCapsATK24_200_02_90().DbCapsCollection();
-                StandartPlugsFromComboBox = AllCaps.Select(s => s).FirstOrDefault();
-                StandartPlugsExecutionFromComboBox = ExecutePlugsCollection.Select(s => s).FirstOrDefault();
+                AllCaps = new DbCapsAtk242000290().DbCapsCollection();
+                StandartPlugsFromComboBox = AllCaps.Select(s => s).FirstOrDefault()!;
+                StandartPlugsExecutionFromComboBox = ExecutePlugsCollection.Select(s => s).FirstOrDefault()!;
+                if (SelectionGostFromCombobox == "АТК-26-18-13-96")
+                {
+                    ExecGost.Clear();
+                    ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollectionForPlug());
+                    ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
+                }
             }
             else
             {
@@ -511,6 +517,12 @@ namespace StudCalculator.ViewModel
                 NonStandartRotaryPlugsCheckboxIsEnabled = true;
                 AllCaps?.Clear();
                 ExecutePlugsCollection?.Clear();
+                if (SelectionGostFromCombobox == "АТК-26-18-13-96")
+                {
+                    ExecGost.Clear();
+                    ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection());
+                    ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
+                }
             }
         }
 
@@ -529,6 +541,10 @@ namespace StudCalculator.ViewModel
                 ExecuteRotaryPlugsCollection?.Clear();
                 StandartRotaryPlugsChecked = false;
                 StandartRotaryPlugsComboboxIsEnabled = false;
+                if (SelectionGostFromCombobox != "АТК-26-18-13-96") return;
+                ExecGost.Clear();
+                ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollectionForPlug());
+                ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
             }
             else
             {
@@ -537,6 +553,10 @@ namespace StudCalculator.ViewModel
                 StandartRotaryPlugsCheckboxIsEnabled = true;
                 NonStandartRotaryPlugsCheckboxIsEnabled = true;
                 NonStandartPlugsTextRead = null;
+                if (SelectionGostFromCombobox != "АТК-26-18-13-96") return;
+                ExecGost.Clear();
+                ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection());
+                ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
             }
         }
 
@@ -557,7 +577,7 @@ namespace StudCalculator.ViewModel
                 StandartRotaryPlugsComboboxIsEnabled = true;
                 ExecuteRotaryPlugsCollection =
                     new ObservableCollection<string>(new DbRotarPylugATK_26_18_5_93().ExecuteAtk_26_18_5_93());
-                StandartRotaryPlugFromComboBox = ExecuteRotaryPlugsCollection.Select(s => s).FirstOrDefault();
+                StandartRotaryPlugFromComboBox = ExecuteRotaryPlugsCollection.Select(s => s).FirstOrDefault()!;
             }
 
             else
@@ -567,11 +587,9 @@ namespace StudCalculator.ViewModel
                 StandartPlugsCheckboxIsEnabled = true;
                 NonStandartPlugsCheckboxIsEnabled = true;
                 ExecuteRotaryPlugsCollection?.Clear();
-                if (NonStandartDifferentFlangeChecked is true)
-                {
-                    StandartPlugsCheckboxIsEnabled = false;
-                    NonStandartPlugsCheckboxIsEnabled = false;
-                }
+                if (!(NonStandartDifferentFlangeChecked is true)) return;
+                StandartPlugsCheckboxIsEnabled = false;
+                NonStandartPlugsCheckboxIsEnabled = false;
             }
         }
 
@@ -613,12 +631,7 @@ namespace StudCalculator.ViewModel
 
         private void OnStandartThicknessWasherCommandExecuted(object p)
         {
-            if (StandartThicknessWasherCheckboxChecked is true)
-                NonStandartThicknessWasherCheckboxIsEnabled = false;
-            else
-            {
-                NonStandartThicknessWasherCheckboxIsEnabled = true;
-            }
+            NonStandartThicknessWasherCheckboxIsEnabled = !(StandartThicknessWasherCheckboxChecked is true);
         }
 
         public ICommand NonStandartThicknessWasherCommand { get; }
@@ -660,8 +673,10 @@ namespace StudCalculator.ViewModel
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = true;
                 ThicknessGasketTextRead = 0;
-                if (SelectionGostFromCombobox == "ГОСТ 28759.4-90" || ExecutionFromComboBox == "Исполнение J")
-                    NonStandartGasketsTextboxIsEnabled = false;
+                if (SelectionGostFromCombobox != "ГОСТ 28759.4-90" && ExecutionFromComboBox != "Исполнение J") return;
+                NonStandartGasketsTextboxIsEnabled = false;
+                ThicknessGasketTextRead = null;
+
             }
         }
 
@@ -681,8 +696,9 @@ namespace StudCalculator.ViewModel
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = true;
                 ThicknessGasketTextRead = 0;
-                if (SelectionGostFromCombobox == "ГОСТ 28759.4-90" || ExecutionFromComboBox == "Исполнение J")
-                    NonStandartGasketsTextboxIsEnabled = false;
+                if (SelectionGostFromCombobox != "ГОСТ 28759.4-90" && ExecutionFromComboBox != "Исполнение J") return;
+                NonStandartGasketsTextboxIsEnabled = false;
+                ThicknessGasketTextRead = null;
             }
         }
 
@@ -774,14 +790,14 @@ namespace StudCalculator.ViewModel
 
             #region Чтобы не были пустые комбобоксы
 
-            SelectionGostFromCombobox = AllGost.Select(p => p).FirstOrDefault();
-            TypeSelectedFromComboBox = ExecutionType.Select(p => p).FirstOrDefault();
-            PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault();
-            ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault();
-            DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault();
-            OstNutsFromComboBox = OstNutsCollection.Select(p => p).FirstOrDefault();
-            ExecutionStudFromCombobox = ExtractExecutionStud.Select(p => p).FirstOrDefault();
-            MaterialStudFromCombobox = ExtractMaterialStud.Select(p => p).FirstOrDefault();
+            SelectionGostFromCombobox = AllGost.Select(p => p).FirstOrDefault()!;
+            TypeSelectedFromComboBox = ExecutionType.Select(p => p).FirstOrDefault()!;
+            PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
+            ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
+            DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
+            OstNutsFromComboBox = OstNutsCollection.Select(p => p).FirstOrDefault()!;
+            ExecutionStudFromCombobox = ExtractExecutionStud.Select(p => p).FirstOrDefault()!;
+            MaterialStudFromCombobox = ExtractMaterialStud.Select(p => p).FirstOrDefault()!;
 
             #endregion
 
@@ -814,7 +830,7 @@ namespace StudCalculator.ViewModel
 
         private void AddCapsCombobox(string allCapsSelectionCombobox)
         {
-            var executeAtk242000290 = new DbCapsATK24_200_02_90().ExecuteAtk24_200_02_90();
+            var executeAtk242000290 = new DbCapsAtk242000290().ExecuteAtk24_200_02_90();
             var executeOst26200883 = new DbCapsOST26_2008_83().ExecuteOst26_2008_83();
 
             if (allCapsSelectionCombobox == "АТК 24.200.02-90" && StandartPlugsChecked is true)
@@ -837,93 +853,108 @@ namespace StudCalculator.ViewModel
 
         private void AddExecutionCombobox(string allGosts)
         {
-            #region Работа с ГОСТом 33259 добовление и изменение параметров контролов
-
-            if (allGosts == "ГОСТ 33259-2015 Ряд 1")
+           
+            switch (allGosts)
             {
-                ExecGost.Clear();
-                ExecutionPn.Clear();
-                ExecutionDn.Clear();
-                ThicknessGasketTextRead = 0;
-                StandartOvalGasketsCheckboxChecked = false;
-                StandartOctahedralGasketsCheckboxChecked = false;
-                TypeFlangeGostIsEnabled = true;
-                NonStandartGasketsTextboxIsEnabled = true;
-                StandartOvalGasketsCheckboxIsEnabled = true;
-                StandartOctahedralGasketsCheckboxIsEnabled = true;
-                ExecGost = new ObservableCollection<string>(new DbWorkGost33259().ExecGost33259());
-                ExecutionPn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionPn33259());
-                ExecutionDn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionDn33259());
-                ExecutionType = new ObservableCollection<string>(new DbWorkGost33259().ExecutionType33259());
+                #region Работа с ГОСТом 33259 добовление и изменение параметров контролов
+
+                case "ГОСТ 33259-2015 Ряд 1":
+                    ExecGost.Clear();
+                    ExecutionPn.Clear();
+                    ExecutionDn.Clear();
+                    ExecGost = new ObservableCollection<string>(new DbWorkGost33259().ExecGost33259());
+                    ExecutionPn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionPn33259());
+                    ExecutionDn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionDn33259());
+                    ExecutionType = new ObservableCollection<string>(new DbWorkGost33259().ExecutionType33259());
+                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
+                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
+                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
+                    TypeSelectedFromComboBox = ExecutionType.Select(p => p).FirstOrDefault()!;
+                    ThicknessGasketTextRead = 0;
+                    StandartOvalGasketsCheckboxChecked = false;
+                    StandartOctahedralGasketsCheckboxChecked = false;
+                    TypeFlangeGostIsEnabled = true;
+                    NonStandartGasketsTextboxIsEnabled = true;
+                    StandartOvalGasketsCheckboxIsEnabled = true;
+                    StandartOctahedralGasketsCheckboxIsEnabled = true;
+                    break;
+                
+                #endregion
+
+                #region Работа с ГОСТом 287593.3-90 добовление и изменение параметров контролов
+
+                case "ГОСТ 28759.3-90":
+                    ExecGost.Clear();
+                    ExecutionPn.Clear();
+                    ExecutionDn.Clear();
+                    ExecutionType?.Clear();
+                    ExecGost = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteExecutionsCollection());
+                    ExecutionPn = new ObservableCollection<string>(new DbGost28759_3_90().ExecutePnCollection());
+                    ExecutionDn = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteDnCollection());
+                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
+                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
+                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
+                    ThicknessGasketTextRead = 0;
+                    StandartOvalGasketsCheckboxChecked = false;
+                    StandartOctahedralGasketsCheckboxChecked = false;
+                    TypeFlangeGostIsEnabled = false;
+                    NonStandartGasketsTextboxIsEnabled = true;
+                    StandartOvalGasketsCheckboxIsEnabled = false;
+                    StandartOctahedralGasketsCheckboxIsEnabled = false;
+                    break;
+               
+                #endregion
+
+                #region Работа с ГОСТом 287593.4-90 добовление и изменение параметров контролов
+
+                case "ГОСТ 28759.4-90":
+                    ExecGost.Clear();
+                    ExecutionPn.Clear();
+                    ExecutionDn.Clear();
+                    ExecutionType?.Clear();
+                    ExecGost = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteExecutionsCollection());
+                    ExecutionPn = new ObservableCollection<string>(new DbGost28759_4_90().ExecutePnCollection());
+                    ExecutionDn = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteDnCollection());
+                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
+                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
+                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
+                    ThicknessGasketTextRead = null;
+                    StandartOvalGasketsCheckboxChecked = false;
+                    StandartOctahedralGasketsCheckboxChecked = false;
+                    TypeFlangeGostIsEnabled = false;
+                    StandartOvalGasketsCheckboxIsEnabled = true;
+                    StandartOctahedralGasketsCheckboxIsEnabled = true;
+                    NonStandartGasketsTextboxIsEnabled = false;
+                    break;
+
+                #endregion
+
+                #region Работа с АТК 26-18-13-96 добовление и изменение параметров контролов
+
+                case "АТК-26-18-13-96":
+                    ExecGost.Clear();
+                    ExecutionPn.Clear();
+                    ExecutionDn.Clear();
+                    ExecutionType?.Clear();
+                    ExecutionPn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecutePnCollection());
+                    ExecutionDn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteDnCollection());
+                    ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection());
+                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
+                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
+                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
+                    ThicknessGasketTextRead = 0;
+                    StandartOvalGasketsCheckboxChecked = false;
+                    StandartOctahedralGasketsCheckboxChecked = false;
+                    TypeFlangeGostIsEnabled = false;
+                    NonStandartGasketsTextboxIsEnabled = true;
+                    StandartOvalGasketsCheckboxIsEnabled = true;
+                    StandartOctahedralGasketsCheckboxIsEnabled = true;
+                    break;
+                #endregion
             }
 
-            #endregion
 
-            #region Работа с ГОСТом 287593.3-90 добовление и изменение параметров контролов
 
-            else if (allGosts == "ГОСТ 28759.3-90")
-            {
-                ExecGost.Clear();
-                ExecutionPn.Clear();
-                ExecutionDn.Clear();
-                ExecutionType?.Clear();
-                ThicknessGasketTextRead = 0;
-                StandartOvalGasketsCheckboxChecked = false;
-                StandartOctahedralGasketsCheckboxChecked = false;
-                TypeFlangeGostIsEnabled = false;
-                NonStandartGasketsTextboxIsEnabled = true;
-                StandartOvalGasketsCheckboxIsEnabled = false;
-                StandartOctahedralGasketsCheckboxIsEnabled = false;
-                ExecGost = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteExecutionsCollection().AsParallel());
-                ExecutionPn = new ObservableCollection<string>(new DbGost28759_3_90().ExecutePnCollection().AsParallel());
-                ExecutionDn = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteDnCollection().AsParallel());
-            }
-
-            #endregion
-
-            #region Работа с ГОСТом 287593.4-90 добовление и изменение параметров контролов
-
-            else if (allGosts == "ГОСТ 28759.4-90")
-            {
-                ExecGost.Clear();
-                ExecutionPn.Clear();
-                ExecutionDn.Clear();
-                ExecutionType?.Clear();
-                ThicknessGasketTextRead = null;
-                StandartOvalGasketsCheckboxChecked = false;
-                StandartOctahedralGasketsCheckboxChecked = false;
-                TypeFlangeGostIsEnabled = false;
-                StandartOvalGasketsCheckboxIsEnabled = true;
-                StandartOctahedralGasketsCheckboxIsEnabled = true;
-                NonStandartGasketsTextboxIsEnabled = false;
-                ExecGost = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteExecutionsCollection().AsParallel());
-                ExecutionPn = new ObservableCollection<string>(new DbGost28759_4_90().ExecutePnCollection().AsParallel());
-                ExecutionDn = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteDnCollection().AsParallel());
-            }
-
-            #endregion
-
-            #region Работа с АТК 26-18-13-96 добовление и изменение параметров контролов
-
-            else if (allGosts == "АТК-26-18-13-96")
-            {
-                ExecGost.Clear();
-                ExecutionPn.Clear();
-                ExecutionDn.Clear();
-                ExecutionType?.Clear();
-                ThicknessGasketTextRead = 0;
-                StandartOvalGasketsCheckboxChecked = false;
-                StandartOctahedralGasketsCheckboxChecked = false;
-                TypeFlangeGostIsEnabled = false;
-                NonStandartGasketsTextboxIsEnabled = true;
-                StandartOvalGasketsCheckboxIsEnabled = true;
-                StandartOctahedralGasketsCheckboxIsEnabled = true;
-                ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection().AsParallel());
-                ExecutionPn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecutePnCollection().AsParallel());
-                ExecutionDn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteDnCollection().AsParallel());
-            }
-
-            #endregion
         }
 
         #endregion
@@ -937,7 +968,6 @@ namespace StudCalculator.ViewModel
                 ThicknessGasketTextRead = null;
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
-                TypeFlangeGostIsEnabled = false;
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = false;
@@ -946,7 +976,6 @@ namespace StudCalculator.ViewModel
             {
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
-                TypeFlangeGostIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = true;
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 StandartOctahedralGasketsCheckboxIsEnabled = true;

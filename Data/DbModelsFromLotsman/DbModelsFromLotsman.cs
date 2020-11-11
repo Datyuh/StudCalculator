@@ -33,7 +33,7 @@ namespace StudCalculator.Data.DbModelsFromLotsman
             {
                 MessageBox.Show("Проверьте правильно ли введены данные", "Ошибка", MessageBoxButton.OK,
                     MessageBoxImage.Information);
-                return string.Empty;
+                return "Вывод результатов...";
             }
         }
     }

@@ -5,28 +5,35 @@ using NaturalSort.Extension;
 
 namespace StudCalculator.Data.DBWork
 {
-    public class DbCapsATK24_200_02_90
+    public class DbCapsAtk242000290
     {
         ApplicationContext db = new ApplicationContext();
 
         public ObservableCollection<string> DbCapsCollection()
         {
-            var allCaps = new ObservableCollection<string>(db.GOSTs.Where(p => p.Caps != null).Select(p => p.Caps).AsParallel());
+            var allCaps = new ObservableCollection<string>(db.GOSTs.Where(p => true).Select(p => p.Caps));
             return allCaps;
         }
 
         public ObservableCollection<string> ExecuteAtk24_200_02_90()
         {
-            var executeAtk242000290 = new ObservableCollection<string>(db.ATK_24_200_02_90.Select(p=>p.Style)).Distinct().AsParallel();
-            var executeSortAtk242000290 = new ObservableCollection<string>(executeAtk242000290.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
+            var executeAtk242000290 = new ObservableCollection<string>(db.ATK_24_200_02_90.Select(p => p.Style)).Distinct();
+            var executeSortAtk242000290 = new ObservableCollection<string>(executeAtk242000290.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortAtk242000290;
         }
 
         public double Executedb(string pn, string dn, string style)
         {
-            var executeAtk242000290b = Convert.ToDouble(db.ATK_24_200_02_90.Where(p => p.PN == pn && p.DN == dn && p.Style == style)
-                .Select(p => p.b).First());
-            return executeAtk242000290b;
+            try
+            {
+                var executeAtk242000290B = Convert.ToDouble(db.ATK_24_200_02_90.Where(p => p.PN == pn && p.DN == dn && p.Style == style)
+                    .Select(p => p.b).First());
+                return executeAtk242000290B;
+            }
+            catch (InvalidOperationException)
+            {
+                return double.NaN;
+            }
         }
     }
 }

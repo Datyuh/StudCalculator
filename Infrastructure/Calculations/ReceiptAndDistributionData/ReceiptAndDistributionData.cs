@@ -8,20 +8,20 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
     internal class ReceiptAndDistributionData
     {
         //Получение всех переменных который ввел пользователь
-        private Dictionary<string, object> ReceiptAndDistributionOfDatas;
+        private Dictionary<string, object> _receiptAndDistributionOfDatas;
         //Получение всех данных о дополнительных условиях для расчета
-        private Dictionary<string, bool> ReceiptAndDistributionOfDataCheckBox;
+        private Dictionary<string, bool> _receiptAndDistributionOfDataCheckBox;
 
         #region Объявление переменных которые используются во всех гостах
 
-        private string SelectedPn; //Выборка давления пользователем
-        private string SelectedDn; //Выборка диаметра фланцев пользователем
+        private string _selectedPn; //Выборка давления пользователем
+        private string _selectedDn; //Выборка диаметра фланцев пользователем
         private string _selectedTheard; //Выборка диаметра шпилек по ГОСТу
 
-        private string SelectedExecutionFlange;
+        private string _selectedExecutionFlange;
 
-        private bool StandartPlugsChecked;
-        private bool NonStandartPlugsChecked;
+        private bool _standartPlugsChecked;
+        private bool _nonStandartPlugsChecked;
 
         private string _resultSumFlange;
 
@@ -44,20 +44,20 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         public ReceiptAndDistributionData(Dictionary<string, object> data, Dictionary<string, bool> dataCheckBox)
         {
-            ReceiptAndDistributionOfDatas = data;
-            ReceiptAndDistributionOfDataCheckBox = dataCheckBox;
+            _receiptAndDistributionOfDatas = data;
+            _receiptAndDistributionOfDataCheckBox = dataCheckBox;
 
             #region Получения значений для всех ГОСТов
 
             //Получения значения PN
-            SelectedPn = ReceiptAndDistributionOfDatas["PnSelectedFromComboBox"].ToString();
+            _selectedPn = _receiptAndDistributionOfDatas["PnSelectedFromComboBox"].ToString();
             //Получение значения DN
-            SelectedDn = ReceiptAndDistributionOfDatas["DnSelectedFromComboBox"].ToString();
+            _selectedDn = _receiptAndDistributionOfDatas["DnSelectedFromComboBox"].ToString();
             //Получение исполнений ГОСТов и тд. введенных пользователем
-            SelectedExecutionFlange = ReceiptAndDistributionOfDatas["ExecutionFromComboBox"].ToString();
+            _selectedExecutionFlange = _receiptAndDistributionOfDatas["ExecutionFromComboBox"].ToString();
 
-            StandartPlugsChecked = ReceiptAndDistributionOfDataCheckBox["StandartPlugsChecked"];
-            NonStandartPlugsChecked = ReceiptAndDistributionOfDataCheckBox["NonStandartPlugsChecked"];
+            _standartPlugsChecked = _receiptAndDistributionOfDataCheckBox["StandartPlugsChecked"];
+            _nonStandartPlugsChecked = _receiptAndDistributionOfDataCheckBox["NonStandartPlugsChecked"];
 
             #endregion
         }
@@ -69,14 +69,14 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
             //Формула расчета кол-ва шпилек
             _resultSumFlange =
                 Convert.ToString(
-                    InResultnSumStud(SelectedPn, SelectedDn) *
-                    Convert.ToDouble(ReceiptAndDistributionOfDatas["SumFlangeTextRead"]), CultureInfo.InvariantCulture);
+                    InResultnSumStud(_selectedPn, _selectedDn) *
+                    Convert.ToDouble(_receiptAndDistributionOfDatas["SumFlangeTextRead"]), CultureInfo.InvariantCulture);
 
             var resultToResultInViewModels = new Dictionary<string, object>
             {
                 {"B", ResultInMainWindow},
-                {"MaterialStudFromCombobox", ReceiptAndDistributionOfDatas["MaterialStudFromCombobox"]},
-                {"ExecutionStudFromCombobox", ReceiptAndDistributionOfDatas["ExecutionStudFromCombobox"]},
+                {"MaterialStudFromCombobox", _receiptAndDistributionOfDatas["MaterialStudFromCombobox"]},
+                {"ExecutionStudFromCombobox", _receiptAndDistributionOfDatas["ExecutionStudFromCombobox"]},
                 {"SelectedTheard", _selectedTheard},
                 {"ExrcuteAtk2618593b", ExrcuteAtkStandartOrNot2618593B[0]},
                 {"ExrcuteAtk2618593bNonStandart", ExrcuteAtkStandartOrNot2618593B[1]},
@@ -102,17 +102,17 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         private double[] StandartOrNotRotaryPlugsChecked()
         {
-            if (ReceiptAndDistributionOfDataCheckBox["StandartRotaryPlugsChecked"] is true)
+            if (_receiptAndDistributionOfDataCheckBox["StandartRotaryPlugsChecked"] is true)
             {
-                double exrcuteAtk2618593B = new DbRotarPylugATK_26_18_5_93().Executeb(SelectedPn, SelectedDn,
-                    ReceiptAndDistributionOfDatas["StandartRotaryPlugFromComboBox"].ToString());
+                double exrcuteAtk2618593B = new DbRotarPylugATK_26_18_5_93().Executeb(_selectedPn, _selectedDn,
+                    _receiptAndDistributionOfDatas["StandartRotaryPlugFromComboBox"].ToString());
                 double exrcuteAtk2618593BNonStandart = 0;
                 return new[] {exrcuteAtk2618593B, exrcuteAtk2618593BNonStandart};
             }
 
-            if (ReceiptAndDistributionOfDataCheckBox["NonStandartRotaryPlugsChecked"] is true)
+            if (_receiptAndDistributionOfDataCheckBox["NonStandartRotaryPlugsChecked"] is true)
             {
-                double exrcuteAtk2618593BNonStandart = Convert.ToDouble(ReceiptAndDistributionOfDatas["NonStandartRotaryPlugsTextRead"]);
+                double exrcuteAtk2618593BNonStandart = Convert.ToDouble(_receiptAndDistributionOfDatas["NonStandartRotaryPlugsTextRead"]);
                 double exrcuteAtk2618593B = 0;
                 return new[] {exrcuteAtk2618593B, exrcuteAtk2618593BNonStandart };
             }
@@ -131,18 +131,18 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         private double[] StandartOrNotPlugsChecked()
         {
-            if (StandartPlugsChecked is true)
+            if (_standartPlugsChecked is true)
             {
-                double executeAtk242000290B = new DbCapsATK24_200_02_90().Executedb(SelectedPn, SelectedDn,
-                    ReceiptAndDistributionOfDatas["StandartPlugsFromComboBox"].ToString());
+                double executeAtk242000290B = new DbCapsAtk242000290().Executedb(_selectedPn, _selectedDn,
+                    _receiptAndDistributionOfDatas["StandartPlugsFromComboBox"].ToString());
                 double executeAtk242000290BNonStandart = 0;
 
                 return new[] {executeAtk242000290B, executeAtk242000290BNonStandart};
             }
-            if (NonStandartPlugsChecked is true)
+            if (_nonStandartPlugsChecked is true)
             {
                 double executeAtk242000290BNonStandart =
-                    Convert.ToDouble(ReceiptAndDistributionOfDatas["NonStandartPlugsTextRead"]);
+                    Convert.ToDouble(_receiptAndDistributionOfDatas["NonStandartPlugsTextRead"]);
                 double executeAtk242000290B = 0;
                 return new[] { executeAtk242000290B, executeAtk242000290BNonStandart };
             }
@@ -160,15 +160,15 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         private double[] ExecuteStandartOrNotWashers()
         {
-            if (ReceiptAndDistributionOfDataCheckBox["StandartThicknessWasherCheckboxChecked"] is true)
+            if (_receiptAndDistributionOfDataCheckBox["StandartThicknessWasherCheckboxChecked"] is true)
             {
                 double executeStandartWashers = new DbStandartWashersOST26204296().StandartWashers(_selectedTheard);
                 double executeNonStandartWashers = 0;
                 return new[] {executeStandartWashers, executeNonStandartWashers};
             }
-            if (ReceiptAndDistributionOfDataCheckBox["NonStandartThicknessWasherCheckboxChecked"] is true)
+            if (_receiptAndDistributionOfDataCheckBox["NonStandartThicknessWasherCheckboxChecked"] is true)
             {
-                double executeNonStandartWashers = Convert.ToDouble(ReceiptAndDistributionOfDatas["ThicknessWasherTextRead"]);
+                double executeNonStandartWashers = Convert.ToDouble(_receiptAndDistributionOfDatas["ThicknessWasherTextRead"]);
                 double executeStandartWashers = 0;
                 return new[] { executeStandartWashers, executeNonStandartWashers };
             }
@@ -186,23 +186,23 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         private double[] ExecuteOvalAndOctagonalOrNonStandartGasket()
         {
-            if (ReceiptAndDistributionOfDataCheckBox["StandartOvalGasketsCheckboxChecked"] is true)
+            if (_receiptAndDistributionOfDataCheckBox["StandartOvalGasketsCheckboxChecked"] is true)
             {
-                double executeOvalGasket = new DbOvalGasket().ExecutedOvalGasket(SelectedPn, SelectedDn);
+                double executeOvalGasket = new DbOvalGasket().ExecutedOvalGasket(_selectedPn, _selectedDn);
                 double executeNonStandartGasket = 0;
                 double executeOctagonalGasket = 0;
                 return new[] {executeOvalGasket, executeNonStandartGasket, executeOctagonalGasket};
             }
-            if (ReceiptAndDistributionOfDataCheckBox["StandartOctahedralGasketsCheckboxChecked"] is true)
+            if (_receiptAndDistributionOfDataCheckBox["StandartOctahedralGasketsCheckboxChecked"] is true)
             {
-                double executeOctagonalGasket = new DbOctagonalGasket().ExecutedOctogonalGasket(SelectedPn, SelectedDn);
+                double executeOctagonalGasket = new DbOctagonalGasket().ExecutedOctogonalGasket(_selectedPn, _selectedDn);
                 double executeNonStandartGasket = 0;
                 double executeOvalGasket = 0;
                 return new[] { executeOvalGasket, executeNonStandartGasket, executeOctagonalGasket };
             }
             else
             {
-                double executeNonStandartGasket = Convert.ToDouble(ReceiptAndDistributionOfDatas["ThicknessGasketTextRead"]);
+                double executeNonStandartGasket = Convert.ToDouble(_receiptAndDistributionOfDatas["ThicknessGasketTextRead"]);
                 double executeOvalGasket = 0;
                 double executeOctagonalGasket = 0;
                 return new[] { executeOvalGasket, executeNonStandartGasket, executeOctagonalGasket };
@@ -217,24 +217,24 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
         {
             #region Сбор данных для расчета по ГОСТ 33259
 
-            if (ReceiptAndDistributionOfDatas["SelectionGostFromCombobox"].ToString() == "ГОСТ 33259-2015 Ряд 1")
+            if (_receiptAndDistributionOfDatas["SelectionGostFromCombobox"].ToString() == "ГОСТ 33259-2015 Ряд 1")
             {
-                var inResultb1 = new DbWorkGost33259().ExecutionThicknessFlangeb1(SelectedPn, SelectedDn); //Получение из базы толщины тарелки Тип 11
-                var inResulth1 = new DbExecutionGost33259().ExecutionGost33259DF(SelectedPn, SelectedDn);
-                var inResulth2 = new DbExecutionGost33259().ExecutionGost33259CE(SelectedPn, SelectedDn);
-                var inResulth4 = new DbExecutionGost33259().ExecutionGost33259L(SelectedPn, SelectedDn);
-                var inResulth5 = new DbExecutionGost33259().ExecutionGost33259M(SelectedPn, SelectedDn);
+                var inResultb1 = new DbWorkGost33259().ExecutionThicknessFlangeb1(_selectedPn, _selectedDn); //Получение из базы толщины тарелки Тип 11
+                var inResulth1 = new DbExecutionGost33259().ExecutionGost33259DF(_selectedPn, _selectedDn);
+                var inResulth2 = new DbExecutionGost33259().ExecutionGost33259CE(_selectedPn, _selectedDn);
+                var inResulth4 = new DbExecutionGost33259().ExecutionGost33259L(_selectedPn, _selectedDn);
+                var inResulth5 = new DbExecutionGost33259().ExecutionGost33259M(_selectedPn, _selectedDn);
                 //Выборка размера гайки для фланцев
-                _selectedTheard = new DbWorkGost33259().ExecutionThicknessFlangeTheard1(SelectedPn, SelectedDn);
+                _selectedTheard = new DbWorkGost33259().ExecutionThicknessFlangeTheard1(_selectedPn, _selectedDn);
 
                 var fromReceiptAndDistribution = new Dictionary<string, object>
                 {
                     {"inResultb1", inResultb1},
                     {"inResulth1", inResulth1}, {"inResulth2", inResulth2},
                     {"inResulth4", inResulth4}, {"inResulth5", inResulth5},
-                    {"StandartPlugsChecked", StandartPlugsChecked}, 
-                    {"NonStandartPlugsChecked", NonStandartPlugsChecked},
-                    {"SelectedExecutionFlange", SelectedExecutionFlange},
+                    {"StandartPlugsChecked", _standartPlugsChecked}, 
+                    {"NonStandartPlugsChecked", _nonStandartPlugsChecked},
+                    {"SelectedExecutionFlange", _selectedExecutionFlange},
 
                 };
 

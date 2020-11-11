@@ -24,14 +24,31 @@ namespace StudCalculator.Data.DBWork
 
         public double ExtractThicknessPLarge(string thread)
         {
-            var extractThicknessPLarge = Convert.ToDouble(db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First());
-            return extractThicknessPLarge;
+            switch (thread)
+            {
+                case null:
+                    return double.NaN;
+                default:
+                {
+                    var extractThicknessPLarge = Convert.ToDouble(db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First());
+                    return extractThicknessPLarge;
+                }
+            }
         }
 
         public double ExtractThicknessHLarge(string thread)
         {
-            var extractThicknessHLarge = Convert.ToDouble(db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First());
-            return extractThicknessHLarge;
+            switch (thread)
+            {
+                case null:
+                    return double.NaN;
+                default:
+                {
+                    var extractThicknessHLarge =
+                        Convert.ToDouble(db.OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First());
+                    return extractThicknessHLarge;
+                }
+            }
         }
     }
 }
