@@ -7,11 +7,11 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbStudExtract
     {
-        ApplicationContext db = new ApplicationContext();
+        readonly ApplicationContext db = new ApplicationContext();
 
         public ObservableCollection<string> ExtractMaterialStud()
         {
-            var extractMaterialStud = new ObservableCollection<string>(db.GOSTs.Select(p => p.Material_Stud)).Distinct();
+            var extractMaterialStud = new ObservableCollection<string>(db.GOSTs.Select(p => p.Material_Stud).Where(p => p != null).Distinct());
             var extractSortMaterialStud = new ObservableCollection<string>(extractMaterialStud.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return extractSortMaterialStud;
         }

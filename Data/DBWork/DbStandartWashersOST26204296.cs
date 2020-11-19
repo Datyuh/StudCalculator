@@ -5,7 +5,7 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbStandartWashersOST26204296
     {
-        ApplicationContext db = new ApplicationContext();
+        readonly ApplicationContext db = new ApplicationContext();
 
         public double StandartWashers(string tread)
         {

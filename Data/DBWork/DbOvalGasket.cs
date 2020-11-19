@@ -5,7 +5,7 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbOvalGasket
     {
-        ApplicationContext db = new ApplicationContext();
+        readonly ApplicationContext db = new ApplicationContext();
 
         public double ExecutedOvalGasket(string pn, string dn)
         {

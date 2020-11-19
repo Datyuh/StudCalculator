@@ -753,7 +753,7 @@
                     Width="56"
                     BorderBrush="#FFEE8720"
                     BorderThickness="2"
-                    FontFamily="Calibri"
+                    FontFamily="Calibri"                    
                     IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
                     IsEnabledChanged="StripText_IsEnabledChanged"
                     PreviewTextInput="TextBoxPreviewTextInput"
@@ -929,7 +929,8 @@
             Foreground="{Binding ColorTextBoxResult, Mode=TwoWay}"
             IsReadOnly="True"
             Text="{Binding ResultTextEnter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
         <Button
             x:Name="Calculate"

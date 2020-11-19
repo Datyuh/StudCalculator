@@ -5,7 +5,7 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbExecutionGost33259
     {
-        ApplicationContext db = new ApplicationContext();
+        readonly ApplicationContext db = new ApplicationContext();
 
         public double? ExecutionGost33259CE(string pn, string dn)
         {

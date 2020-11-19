@@ -753,12 +753,12 @@ namespace StudCalculator.ViewModel
             {
                 ResultTextEnter =
                     new ReceiptAndDistributionData(receiptAndDistributionOfDatas, receiptAndDistributionOfDataCheckBox)
-                        .ResultAllGostAndNonGost();
+                        .ResultAllGostAndNonGosts;
                 ColorTextBoxResult = ResultTextEnter == "Вывод результатов..." ? Brushes.Gray : Brushes.Black;
             }
             else
             {
-                ResultTextEnter += "\r\n" + new ReceiptAndDistributionData(receiptAndDistributionOfDatas, receiptAndDistributionOfDataCheckBox).ResultAllGostAndNonGost();
+                ResultTextEnter += "\r\n" + new ReceiptAndDistributionData(receiptAndDistributionOfDatas, receiptAndDistributionOfDataCheckBox).ResultAllGostAndNonGosts;
             }
 
 
@@ -777,7 +777,7 @@ namespace StudCalculator.ViewModel
             ResultTextEnter = "Вывод результатов...";
         }
 
-        #endregion
+        #endregion        
 
         #endregion
 

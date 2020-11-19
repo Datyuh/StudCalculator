@@ -5,49 +5,78 @@ namespace StudCalculator.Infrastructure.Calculations
 {
     public class StandartGost33259
     {
-        private Dictionary<string, object> _fromReceiptAndDistribution;
+        private Dictionary<string, object> FromReceiptAndDistribution { get; }
+        private string SelectedExecutionFlange { get; }
+        public double B => StandartGosts33259();
 
-        private string _selectedExecutionFlange;
-
-
-        public double StandartGosts33259(Dictionary<string, object> fromReceiptAndDistribution)
+        public StandartGost33259(Dictionary<string, object> fromReceiptAndDistribution)
         {
-            _fromReceiptAndDistribution = fromReceiptAndDistribution;
+            FromReceiptAndDistribution = fromReceiptAndDistribution;
             //Получение исполнений ГОСТов и тд. введенных пользователем
-            _selectedExecutionFlange = _fromReceiptAndDistribution["SelectedExecutionFlange"].ToString();
+            SelectedExecutionFlange = fromReceiptAndDistribution["SelectedExecutionFlange"].ToString();
+        }
 
-            if (_selectedExecutionFlange == "Исполнение A" || _selectedExecutionFlange == "Исполнение B" || 
-                _selectedExecutionFlange == "Исполнение J" || _selectedExecutionFlange == "Исполнение K")
+        private double StandartGosts33259()
+        {   
+            return SelectedExecutionFlange switch
             {
-                double b = _fromReceiptAndDistribution["StandartPlugsChecked"] is true || 
-                    _fromReceiptAndDistribution["NonStandartPlugsChecked"] is true
-                    ? Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"])
-                    : Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) * 2;
-                return b;
-            }
-            if (_selectedExecutionFlange == "Исполнение C и D" || _selectedExecutionFlange == "Исполнение E и F")
-            {
-                double b = _fromReceiptAndDistribution["StandartPlugsChecked"] is true ||
-                          _fromReceiptAndDistribution["NonStandartPlugsChecked"] is true
-                    ? Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) -
-                      Convert.ToDouble(_fromReceiptAndDistribution["inResulth2"])
-                    : Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) +
-                      (Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) -
-                       Convert.ToDouble(_fromReceiptAndDistribution["inResulth2"]));
-                return b;
-            }
-            if (_selectedExecutionFlange == "Исполнение L и M")
-            {
-                double b = _fromReceiptAndDistribution["StandartPlugsChecked"] is true ||
-                          _fromReceiptAndDistribution["NonStandartPlugsChecked"] is true
-                    ? Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) -
-                      Convert.ToDouble(_fromReceiptAndDistribution["inResulth5"])
-                    : Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) +
-                      (Convert.ToDouble(_fromReceiptAndDistribution["inResultb1"]) -
-                       Convert.ToDouble(_fromReceiptAndDistribution["inResulth5"]));
-                return b;
-            }
-            return 0;
+                "Исполнение A" or "Исполнение B" or "Исполнение J" or "Исполнение K" => 
+                FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+                FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+                ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"])
+                : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) * 2,
+
+                "Исполнение C и D" or "Исполнение E и F" => FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+                FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+                ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+                Convert.ToDouble(FromReceiptAndDistribution["inResulth2"])
+                : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) +
+                (Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+                Convert.ToDouble(FromReceiptAndDistribution["inResulth2"])),
+
+                "Исполнение L и M" => FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+                FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+                ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+                Convert.ToDouble(FromReceiptAndDistribution["inResulth5"])
+                : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) +
+                (Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+                Convert.ToDouble(FromReceiptAndDistribution["inResulth5"])),
+                _ => double.NaN,
+            };
+            #region Старый код
+            //if (SelectedExecutionFlange == "Исполнение A" || SelectedExecutionFlange == "Исполнение B" || 
+            //    SelectedExecutionFlange == "Исполнение J" || SelectedExecutionFlange == "Исполнение K")
+            //{
+            //    double b = FromReceiptAndDistribution["StandartPlugsChecked"] is true || 
+            //        FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+            //        ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"])
+            //        : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) * 2;
+            //    return b;
+            //}
+            //if (SelectedExecutionFlange == "Исполнение C и D" || SelectedExecutionFlange == "Исполнение E и F")
+            //{
+            //    double b = FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+            //              FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+            //        ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+            //          Convert.ToDouble(FromReceiptAndDistribution["inResulth2"])
+            //        : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) +
+            //          (Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+            //           Convert.ToDouble(FromReceiptAndDistribution["inResulth2"]));
+            //    return b;
+            //}
+            //if (SelectedExecutionFlange == "Исполнение L и M")
+            //{
+            //    double b = FromReceiptAndDistribution["StandartPlugsChecked"] is true ||
+            //              FromReceiptAndDistribution["NonStandartPlugsChecked"] is true
+            //        ? Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+            //          Convert.ToDouble(FromReceiptAndDistribution["inResulth5"])
+            //        : Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) +
+            //          (Convert.ToDouble(FromReceiptAndDistribution["inResultb1"]) -
+            //           Convert.ToDouble(FromReceiptAndDistribution["inResulth5"]));
+            //    return b;
+            //}
+            //return double.NaN;
+            #endregion
         }
     }
 }

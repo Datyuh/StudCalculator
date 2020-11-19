@@ -7,7 +7,7 @@ namespace StudCalculator.Data.DBWork
 {
     class DbAtk26_18_13_96
     {
-        ApplicationContext db = new ApplicationContext();
+        readonly ApplicationContext db = new ApplicationContext();
 
         public ObservableCollection<string> ExecutePnCollection()
         {
@@ -35,6 +35,36 @@ namespace StudCalculator.Data.DBWork
             var executeDnCollection = new ObservableCollection<string>(db.ATK_26_18_13_96.Select(p => p.DN)).Distinct();
             var executeSortDnCollection = new ObservableCollection<string>(executeDnCollection.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()));
             return executeSortDnCollection;
+        }
+
+        public double ExecutionThicknessFlangeB(string pn, string dn)
+        {
+            var executionThicknessFlangeB = Convert.ToDouble(db.ATK_26_18_13_96.Where(p => p.PN == pn && p.DN == dn).Select(p => p.b));
+            return executionThicknessFlangeB;
+        }
+
+        public double ExecutionGost26181396H1(string pn, string dn)
+        {
+            var executionThicknessFlangeB = Convert.ToDouble(db.ATK_26_18_13_96.Where(p => p.PN == pn && p.DN == dn).Select(p => p.h1));
+            return executionThicknessFlangeB;
+        }
+
+        public double ExecutionGost26181396H2(string pn, string dn)
+        {
+            var executionThicknessFlangeB = Convert.ToDouble(db.ATK_26_18_13_96.Where(p => p.PN == pn && p.DN == dn).Select(p => p.h2));
+            return executionThicknessFlangeB;
+        }
+
+        public double ExecutionThicknessFlangeN(string pn, string dn)
+        {
+            var executionThicknessFlangeB = Convert.ToDouble(db.ATK_26_18_13_96.Where(p => p.PN == pn && p.DN == dn).Select(p => p.n));
+            return executionThicknessFlangeB;
+        }
+
+        public string ExecutionThicknessFlangeTheard(string pn, string dn)
+        {
+            var executionThicknessFlangeB = db.ATK_26_18_13_96.Where(p => p.PN == pn && p.DN == dn).Select(p => p.Thread).First();
+            return executionThicknessFlangeB;
         }
     }
 }
