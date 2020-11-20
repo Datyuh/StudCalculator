@@ -86,6 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\DbModelFromVnmData\DbModelFromVnmData.cs" />
     <Compile Include="Data\DbModelsFromLotsman\DbModelsFromLotsman.cs" />
     <Compile Include="Data\DBWork\DbAtk26_18_13_96.cs" />
     <Compile Include="Data\DBWork\DbCapsATK24_200_02_90.cs" />
@@ -106,6 +107,19 @@
     <Compile Include="Data\ModelsFromLotsman\stAttributes.cs" />
     <Compile Include="Data\ModelsFromLotsman\stMain.cs" />
     <Compile Include="Data\ModelsFromLotsman\stVersions.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_ATK_24_200_02_90.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_ATK_26_18_13_96.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_ATK_26_18_5_93.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_Execution_All.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_GOSTs.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_GOST_28759_3_90.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_GOST_28759_4_90.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_Octagonal_Gasket.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_OST26_2008_83.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_OST26_2042_96.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_OST_26_2041_96.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_Oval_Gasket.cs" />
+    <Compile Include="Data\DbModelFromVnmData\OGK_StudCalculator_Type_11.cs" />
     <Compile Include="Infrastructure\Calculations\NonStandartFlangeDifferent.cs" />
     <Compile Include="Infrastructure\Calculations\NonStandartFlangeSimilar.cs" />
     <Compile Include="Infrastructure\Calculations\ReceiptAndDistributionData\ReceiptAndDistributionData.cs" />

@@ -23,9 +23,9 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
         private string ResultSumFlange { get; set; }  //Формула расчета кол-ва шпилек
         private string SelectedFromCombobox { get; }
 
-        private double InResultPNuts(string getPNuts) => new DbNutsOst26_2041_96().ExtractThicknessPLarge(getPNuts); //Выборка из ОСТа шага резьбы гаек
+        private double InResultPNuts(string getPNuts) => ExtractThicknessP(getPNuts); //Выборка из ОСТа шага резьбы гаек
         private double InResultHNuts(string getHNuts) => new DbNutsOst26_2041_96().ExtractThicknessHLarge(getHNuts); //Выборка из ОСТа высоты гаек
-        private double ResultInMainWindow => ResultOutBaseAllGosts();  //Получение расчета толщины тарелки фланцев разных гостов
+        private double ResultInMainWindow { get => StandartOrNonStandartFlange(); }  //Получение расчета толщины тарелки фланцев разных гостов
         private double[] ExrcuteAtkStandartOrNot2618593B => StandartOrNotRotaryPlugsChecked();  //Выборка толщины заглушек в зависимости от условий        
         private double[] ExecuteAtkStandartOrNot242000290B => StandartOrNotPlugsChecked();  //Выборка заглушек и крышек в зависимости от условий        
         private double[] ExecutedStandartOrNotWashers => ExecuteStandartOrNotWashers();  //Выборка шайб в зависимости от условий        
@@ -72,14 +72,23 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                 {"ExecuteOctagonalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[1]},
                 {"ExecuteNonStandartGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[2]},
                 {"inResultPNuts", InResultPNuts(SelectedTheard)},
-                {"inResultHNuts", InResultHNuts(SelectedTheard)},
+                {"inResultHNuts", InResultHNuts(SelectedTheard)},                                
             };
-
-            //Формула расчета кол-ва шпилек            
-            ResultSumFlange =
-                Convert.ToString(
-                    SelectedFlangeN *
-                    Convert.ToDouble(ReceiptAndDistributionOfDatas["SumFlangeTextRead"]), CultureInfo.InvariantCulture);
+            //Формула расчета кол-ва шпилек 
+            if (ReceiptAndDistributionOfDataCheckBox["NonStandartSameFlangeChecked"] is true ||
+                ReceiptAndDistributionOfDataCheckBox["NonStandartDifferentFlangeChecked"] is true)
+            {
+                ResultSumFlange = Convert.ToString(Convert.ToDouble(ReceiptAndDistributionOfDatas["SumStudTextRead"]) *
+                        Convert.ToDouble(ReceiptAndDistributionOfDatas["SumFlangeTextRead"]), CultureInfo.InvariantCulture);
+            }
+            else
+            {                           
+                ResultSumFlange =
+                    Convert.ToString(
+                        SelectedFlangeN *
+                        Convert.ToDouble(ReceiptAndDistributionOfDatas["SumFlangeTextRead"]), CultureInfo.InvariantCulture);
+            }
+            
 
             string resultInMainWindow = new ResultInViewModel.ResultInViewModel(resultToResultInViewModels).ReturnResultFromLotsman;
             string resultInMainWindowPlusSumFlange = $"{resultInMainWindow} - кол-во шпилек {ResultSumFlange}шт.";
@@ -206,10 +215,10 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         private double ResultOutBaseAllGosts()
         {
-            #region Сбор данных для расчета по ГОСТ 33259
 
             switch (SelectedFromCombobox)
             {
+                #region Сбор данных для расчета по ГОСТ 33259
                 case "ГОСТ 33259-2015 Ряд 1":
                     {
                         var inResultb1 = new DbWorkGost33259().ExecutionThicknessFlangeb1(SelectedPn, SelectedDn); //Получение из базы толщины тарелки Тип 11
@@ -229,12 +238,14 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                             {"NonStandartPlugsChecked", NonStandartPlugsChecked},
                             {"SelectedExecutionFlange", SelectedExecutionFlange},
                         };
-                        
+
                         double resultInMainWindow = new StandartGost33259(fromReceiptAndDistribution).B;
 
                         return resultInMainWindow;
                     }
+                #endregion
 
+                #region Сбор данных для расчета по ГОСТ 28759.3-90
                 case "ГОСТ 28759.3-90":
                     {
                         var inResultB = new DbGost28759_3_90().ExecutedBFromGost28759390(SelectedPn, SelectedDn);  //Получение из базы толщины тарелки
@@ -252,7 +263,9 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                         double resultInMainWindow = new StandartGost28759_3_90(fromReceiptAndDistribution).B;
                         return resultInMainWindow;
                     }
+                #endregion
 
+                #region Сбор данных для расчета по ГОСТ 28759.4-90
                 case "ГОСТ 28759.4-90":
                     {
                         var inResultB = new DbGost28759_4_90().ExecutedBFromGost28759490(SelectedPn, SelectedDn);  //Получение из базы толщины тарелки
@@ -270,7 +283,9 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                         double resultInMainWindow = new StandartGost28759_4_90(fromReceiptAndDistribution).B;
                         return resultInMainWindow;
                     }
+                #endregion
 
+                #region Сбор данных для расчета по АТК-26-18-13-96
                 case "АТК-26-18-13-96":
                     {
                         var inResultB = new DbAtk26_18_13_96().ExecutionThicknessFlangeB(SelectedPn, SelectedDn); //Получение из базы толщины тарелки Тип 11
@@ -281,8 +296,8 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
                         var fromReceiptAndDistribution = new Dictionary<string, object>
                         {
-                            {"inResultb1", inResultB},
-                            {"inResulth1", inResultH1}, {"inResulth2", inResultH2},                           
+                            {"inResultB", inResultB},
+                            {"inResultH1", inResultH1}, {"inResultH2", inResultH2},
                             {"StandartPlugsChecked", StandartPlugsChecked},
                             {"NonStandartPlugsChecked", NonStandartPlugsChecked},
                             {"SelectedExecutionFlange", SelectedExecutionFlange},
@@ -292,16 +307,83 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
                         return resultInMainWindow;
                     }
+                #endregion
 
                 default:
                     return double.NaN;
             }
+        }
+        #endregion
 
-            #endregion
+        #region Если фланцы нестандартные
+
+        private double NonStandartFlanges()
+        {
+            if (ReceiptAndDistributionOfDataCheckBox["NonStandartSameFlangeChecked"] is true)
+            {
+                SelectedTheard = ReceiptAndDistributionOfDatas["ThreadNutsFromComboBox"].ToString();  //Выборка размера гайки для фланцев
+                var nonStandartSameFalange = new Dictionary<string, object>
+                {
+                    { "NonStandartFlTextRead", ReceiptAndDistributionOfDatas["NonStandartFlTextRead"] },
+                    { "StandartPlugsChecked", StandartPlugsChecked},
+                    { "NonStandartPlugsChecked", NonStandartPlugsChecked},
+                };
+
+                double resultInMainWindow = new NonStandartFlangeSimilar(nonStandartSameFalange).B;
+
+                return resultInMainWindow;
+            }
+            if (ReceiptAndDistributionOfDataCheckBox["NonStandartDifferentFlangeChecked"] is true)
+            {
+                SelectedTheard = ReceiptAndDistributionOfDatas["ThreadNutsFromComboBox"].ToString();
+                var nonStandartSameFalange = new Dictionary<string, object>
+                {
+                    { "NonStandartFirstFlangeTextRead", ReceiptAndDistributionOfDatas["NonStandartFirstFlangeTextRead"] },
+                    { "NonStandartSecondFlangeTextRead", ReceiptAndDistributionOfDatas["NonStandartSecondFlangeTextRead"] },
+                    { "StandartPlugsChecked", StandartPlugsChecked},
+                    { "NonStandartPlugsChecked", NonStandartPlugsChecked},
+                };
+
+                double resultInMainWindow = new NonStandartFlangeDifferent(nonStandartSameFalange).B;
+
+                return resultInMainWindow;
+            }
+            return double.NaN;
         }
 
         #endregion
 
+        private double StandartOrNonStandartFlange()
+        {
+            return ReceiptAndDistributionOfDataCheckBox["NonStandartSameFlangeChecked"] is true ||
+                ReceiptAndDistributionOfDataCheckBox["NonStandartDifferentFlangeChecked"] is true
+                ? NonStandartFlanges() : ResultOutBaseAllGosts();
+        }
 
+        private double ExtractThicknessP(string getPNuts)
+        {
+            return ReceiptAndDistributionOfDatas["OstNutsFromComboBox"].ToString() switch
+            {
+                "ОСТ 26-2041-96 Крупный" =>
+                new DbNutsOst26_2041_96().ExtractThicknessPLarge(getPNuts),
+
+                "ОСТ 26-2041-96 Мелкий" =>
+                new DbNutsOst26_2041_96().ExtractThicknessPSmall(getPNuts),
+
+                _ => double.NaN,
+            };
+
+            //if (ReceiptAndDistributionOfDatas["OstNutsFromComboBox"].ToString() == "ОСТ 26-2041-96 Крупный")
+            //{
+            //    var pNuts = new DbNutsOst26_2041_96().ExtractThicknessPLarge(getPNuts);
+            //    return pNuts;
+            //}
+            //if (ReceiptAndDistributionOfDatas["OstNutsFromComboBox"].ToString() == "ОСТ 26-2041-96 Мелкий")
+            //{
+            //    var pNuts = new DbNutsOst26_2041_96().ExtractThicknessPSmall(getPNuts);
+            //    return pNuts;
+            //}
+
+        }
     }
 }

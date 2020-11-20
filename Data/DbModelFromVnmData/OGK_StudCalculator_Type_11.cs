@@ -1,9 +1,14 @@
-namespace StudCalculator
+namespace StudCalculator.Data
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
-    public partial class Type_11
+    public partial class OGK_StudCalculator_Type_11
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(255)]

@@ -11,6 +11,7 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
         private Dictionary<string, object> FromViewModel { get; set; }
         private double FromResultGosts { get; set; }
         public string ReturnResultFromLotsman => ReturnFromLotsman();  
+        private string DiametricStud { get; set; }
 
         public ResultInViewModel(Dictionary<string, object> resultFromReceipt)
         {
@@ -22,7 +23,6 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
         {
             try
             {  
-
                 double result = FromResultGosts + Convert.ToDouble(FromViewModel["inResultPNuts"]) * 2 * 2 +
                                 Convert.ToDouble(FromViewModel["inResultHNuts"]) * 2 + 4 +
                                 Convert.ToDouble(FromViewModel["ExecuteNonStandartGasket"]) +
@@ -34,17 +34,18 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
                                 Convert.ToDouble(FromViewModel["ExecuteStandartWashers"]) +
                                 Convert.ToDouble(FromViewModel["ExecuteAtk242000290b"]) +
                                 Convert.ToDouble(FromViewModel["ExrcuteAtk2618593bNonStandart"]);
-
-                string diametricStud = FromViewModel["SelectedTheard"].ToString();
+                
+                DiametricStud = FromViewModel["SelectedTheard"].ToString();
+                
 
                 ResultFromGosts = (Math.Round(Math.Round(result) / 10)) * 10;
 
                 string resultChoese =
-                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-[M, М]{diametricStud.Substring(1)}%[x, х]{ResultFromGosts}." +
+                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-[M, М]{DiametricStud.Substring(1)}%[x, х]{ResultFromGosts}." +
                     $"{FromViewModel["MaterialStudFromCombobox"]}% ОСТ 26-2040-96";
 
                 string resultInMainWindows =
-                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-М{diametricStud.Substring(1)}х{ResultFromGosts}." +
+                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-М{DiametricStud.Substring(1)}х{ResultFromGosts}." +
                     $"{FromViewModel["MaterialStudFromCombobox"]} ОСТ 26-2040-96";
 
 

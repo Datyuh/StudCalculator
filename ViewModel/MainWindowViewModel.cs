@@ -365,8 +365,8 @@ namespace StudCalculator.ViewModel
 
         #region Цвет вывода результатов
 
-        private SolidColorBrush _colorTextBoxResult = Brushes.Gray;
-        public SolidColorBrush ColorTextBoxResult { get => _colorTextBoxResult; set => Set(ref _colorTextBoxResult, value); }
+        private Brush _colorTextBoxResult = Brushes.Gray;
+        public Brush ColorTextBoxResult { get => _colorTextBoxResult; set => Set(ref _colorTextBoxResult, value); }
 
         #endregion
 
