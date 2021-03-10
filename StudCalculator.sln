@@ -7,10 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudCalculator", "StudCalcu
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44CF44D0-A6D3-4A06-BF71-91109C9E8C25}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{44CF44D0-A6D3-4A06-BF71-91109C9E8C25}.All|Any CPU.Build.0 = Release|Any CPU
 		{44CF44D0-A6D3-4A06-BF71-91109C9E8C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44CF44D0-A6D3-4A06-BF71-91109C9E8C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44CF44D0-A6D3-4A06-BF71-91109C9E8C25}.Release|Any CPU.ActiveCfg = Release|Any CPU

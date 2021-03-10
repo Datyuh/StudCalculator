@@ -10,9 +10,8 @@
     Height="580"
     FontFamily="Calibri"
     Icon="Stud_Calculator.ico"
-    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" ResizeMode="CanMinimize">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
@@ -616,7 +615,7 @@
             x:Name="OstNutsCombo"
             Grid.Row="1"
             Grid.Column="1"
-            Width="178"
+            Width="185"
             Height="30"
             Margin="0,5,5,0"
             Padding="6"
@@ -635,7 +634,7 @@
             x:Name="NutThreadCombo"
             Grid.Row="1"
             Grid.Column="1"
-            Width="178"
+            Width="185"
             Height="30"
             Margin="0,40,5,0"
             Padding="6"
@@ -969,6 +968,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="О программе"
-            FontSize="14" />
+            FontSize="14" 
+            Command="{Binding ShowWindowAboutProgram}"/>
     </Grid>
 </Window>

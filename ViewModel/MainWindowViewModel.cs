@@ -7,11 +7,13 @@ using System.Windows.Input;
 using StudCalculator.Data.DBWork;
 using StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData;
 using System.Windows.Media;
+using StudCalculator.Views.Windows;
 
 namespace StudCalculator.ViewModel
 {
     internal class MainWindowViewModel : BaseViewModel
-    {
+    {        
+
         #region Заголовок
 
         private string _title = "Калькулятор шпилек";
@@ -32,7 +34,10 @@ namespace StudCalculator.ViewModel
         public ObservableCollection<string> AllGost { get => _allGost; set => Set(ref _allGost, value); }
 
         private string _selectionGostFromCombobox;
-        public string SelectionGostFromCombobox { get => _selectionGostFromCombobox;
+
+        public string SelectionGostFromCombobox
+        {
+            get => _selectionGostFromCombobox;
             set
             {
                 Set(ref _selectionGostFromCombobox, value);
@@ -704,6 +709,18 @@ namespace StudCalculator.ViewModel
 
         #endregion
 
+        #region Вызов окна "О программе"
+
+        public ICommand ShowWindowAboutProgram { get; }
+        private bool CanShowWindowAboutProgramExecute(object p) => true;
+        private void OnShowWindowAboutProgramExecuted(object p)
+        {
+            var aboutProgram = new AboutProgram();
+            aboutProgram.ShowDialog();
+        }
+
+        #endregion
+
         #region Команда на вывод введенных данных с контролов
 
         public ICommand OutputValuesFromControlCommand { get; }
@@ -822,11 +839,13 @@ namespace StudCalculator.ViewModel
             OutputValuesFromControlCommand = new LambdaCommand(OnOutputValuesFromControlCommandExecuted, CanOutputValuesFromControlCommandExecute);
             //
             ClearTextBoxResultCommand = new LambdaCommand(OnClearTextBoxResultCommandExecuted, CanClearTextBoxResultCommandExecute);
+            //
+            ShowWindowAboutProgram = new LambdaCommand(OnShowWindowAboutProgramExecuted, CanShowWindowAboutProgramExecute);
 
             #endregion
         }
         
-        #region Добовление данных по АТК 24.200.02-90
+        #region Добавление данных по АТК 24.200.02-90
 
         private void AddCapsCombobox(string allCapsSelectionCombobox)
         {

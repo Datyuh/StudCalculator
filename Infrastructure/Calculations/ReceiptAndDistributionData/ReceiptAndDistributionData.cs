@@ -26,10 +26,10 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
         private double InResultPNuts(string getPNuts) => ExtractThicknessP(getPNuts); //Выборка из ОСТа шага резьбы гаек
         private double InResultHNuts(string getHNuts) => new DbNutsOst26_2041_96().ExtractThicknessHLarge(getHNuts); //Выборка из ОСТа высоты гаек
         private double ResultInMainWindow { get => StandartOrNonStandartFlange(); }  //Получение расчета толщины тарелки фланцев разных гостов
-        private double[] ExrcuteAtkStandartOrNot2618593B => StandartOrNotRotaryPlugsChecked();  //Выборка толщины заглушек в зависимости от условий        
-        private double[] ExecuteAtkStandartOrNot242000290B => StandartOrNotPlugsChecked();  //Выборка заглушек и крышек в зависимости от условий        
-        private double[] ExecutedStandartOrNotWashers => ExecuteStandartOrNotWashers();  //Выборка шайб в зависимости от условий        
-        private double[] ExecutedOvalAndOctagonalOrNonStandartGasket => ExecuteOvalAndOctagonalOrNonStandartGasket();  //Выборка прокладок в зависимости от условий
+        private double ExrcuteAtkStandartOrNot2618593B => StandartOrNotRotaryPlugsChecked();  //Выборка толщины заглушек в зависимости от условий        
+        private double ExecuteAtkStandartOrNot242000290B => StandartOrNotPlugsChecked();  //Выборка заглушек и крышек в зависимости от условий        
+        private double ExecutedStandartOrNotWashers => ExecuteStandartOrNotWashers();  //Выборка шайб в зависимости от условий        
+        private double ExecutedOvalAndOctagonalOrNonStandartGasket => ExecuteOvalAndOctagonalOrNonStandartGasket();  //Выборка прокладок в зависимости от условий
         public string ResultAllGostAndNonGosts { get => ResultAllGostAndNonGost(); }  //Получение результатов расчета
 
         #endregion
@@ -62,15 +62,15 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                 {"MaterialStudFromCombobox", ReceiptAndDistributionOfDatas["MaterialStudFromCombobox"]},
                 {"ExecutionStudFromCombobox", ReceiptAndDistributionOfDatas["ExecutionStudFromCombobox"]},
                 {"SelectedTheard", SelectedTheard},
-                {"ExrcuteAtk2618593b", ExrcuteAtkStandartOrNot2618593B[0]},
-                {"ExrcuteAtk2618593bNonStandart", ExrcuteAtkStandartOrNot2618593B[1]},
-                {"ExecuteAtk242000290b", ExecuteAtkStandartOrNot242000290B[0]},
-                {"ExecuteAtk242000290bNonStandart", ExecuteAtkStandartOrNot242000290B[1]},
-                {"ExecuteStandartWashers", ExecutedStandartOrNotWashers[0]},
-                {"ExecuteNonStandartWashers", ExecutedStandartOrNotWashers[1]},
-                {"ExecuteOvalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[0]},
-                {"ExecuteOctagonalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[1]},
-                {"ExecuteNonStandartGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[2]},
+                {"ExrcuteAtk2618593b", ExrcuteAtkStandartOrNot2618593B},
+                //{"ExrcuteAtk2618593bNonStandart", ExrcuteAtkStandartOrNot2618593B[1]},
+                {"ExecuteAtk242000290b", ExecuteAtkStandartOrNot242000290B},
+                //{"ExecuteAtk242000290bNonStandart", ExecuteAtkStandartOrNot242000290B[1]},
+                {"ExecuteStandartWashers", ExecutedStandartOrNotWashers},
+                //{"ExecuteNonStandartWashers", ExecutedStandartOrNotWashers[1]},
+                {"ExecuteOvalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket},
+                //{"ExecuteOctagonalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[1]},
+                //{"ExecuteNonStandartGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[2]},
                 {"inResultPNuts", InResultPNuts(SelectedTheard)},
                 {"inResultHNuts", InResultHNuts(SelectedTheard)},                                
             };
@@ -100,113 +100,85 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
         #region Если используются заглушки поворотные
 
-        private double[] StandartOrNotRotaryPlugsChecked()
+        private double StandartOrNotRotaryPlugsChecked()
         {
             if (ReceiptAndDistributionOfDataCheckBox["StandartRotaryPlugsChecked"] is true)
             {
                 double exrcuteAtk2618593B = new DbRotarPylugATK_26_18_5_93().Executeb(SelectedPn, SelectedDn,
                     ReceiptAndDistributionOfDatas["StandartRotaryPlugFromComboBox"].ToString());
-                double exrcuteAtk2618593BNonStandart = 0;
-                return new[] { exrcuteAtk2618593B, exrcuteAtk2618593BNonStandart };
+                return exrcuteAtk2618593B;
             }
 
             if (ReceiptAndDistributionOfDataCheckBox["NonStandartRotaryPlugsChecked"] is true)
             {
                 double exrcuteAtk2618593BNonStandart = Convert.ToDouble(ReceiptAndDistributionOfDatas["NonStandartRotaryPlugsTextRead"]);
-                double exrcuteAtk2618593B = 0;
-                return new[] { exrcuteAtk2618593B, exrcuteAtk2618593BNonStandart };
+                return exrcuteAtk2618593BNonStandart;
             }
 
-            else
-            {
-                double exrcuteAtk2618593B = 0;
-                double exrcuteAtk2618593BNonStandart = 0;
-                return new[] { exrcuteAtk2618593B, exrcuteAtk2618593BNonStandart };
-            }
+            return 0;
         }
 
         #endregion
 
         #region Если используются заглушки или крышки
 
-        private double[] StandartOrNotPlugsChecked()
+        private double StandartOrNotPlugsChecked()
         {
             if (StandartPlugsChecked is true)
             {
                 double executeAtk242000290B = new DbCapsAtk242000290().Executedb(SelectedPn, SelectedDn,
                     ReceiptAndDistributionOfDatas["StandartPlugsFromComboBox"].ToString());
-                double executeAtk242000290BNonStandart = 0;
-
-                return new[] { executeAtk242000290B, executeAtk242000290BNonStandart };
+                return executeAtk242000290B;
             }
             if (NonStandartPlugsChecked is true)
             {
                 double executeAtk242000290BNonStandart =
                     Convert.ToDouble(ReceiptAndDistributionOfDatas["NonStandartPlugsTextRead"]);
-                double executeAtk242000290B = 0;
-                return new[] { executeAtk242000290B, executeAtk242000290BNonStandart };
+                return executeAtk242000290BNonStandart;
             }
-            else
-            {
-                double executeAtk242000290B = 0;
-                double executeAtk242000290BNonStandart = 0;
-                return new[] { executeAtk242000290B, executeAtk242000290BNonStandart };
-            }
+
+            return 0;
         }
 
         #endregion
 
         #region Если используются шайбы
 
-        private double[] ExecuteStandartOrNotWashers()
+        private double ExecuteStandartOrNotWashers()
         {
             if (ReceiptAndDistributionOfDataCheckBox["StandartThicknessWasherCheckboxChecked"] is true)
             {
                 double executeStandartWashers = new DbStandartWashersOST26204296().StandartWashers(SelectedTheard);
-                double executeNonStandartWashers = 0;
-                return new[] { executeStandartWashers, executeNonStandartWashers };
+                return executeStandartWashers;
             }
             if (ReceiptAndDistributionOfDataCheckBox["NonStandartThicknessWasherCheckboxChecked"] is true)
             {
                 double executeNonStandartWashers = Convert.ToDouble(ReceiptAndDistributionOfDatas["ThicknessWasherTextRead"]);
-                double executeStandartWashers = 0;
-                return new[] { executeStandartWashers, executeNonStandartWashers };
+                return executeNonStandartWashers;
             }
-            else
-            {
-                double executeStandartWashers = 0;
-                double executeNonStandartWashers = 0;
-                return new[] { executeStandartWashers, executeNonStandartWashers };
-            }
+
+            return 0;
         }
 
         #endregion
 
         #region Использование прокладок в зависимости от выбранных пользователем
 
-        private double[] ExecuteOvalAndOctagonalOrNonStandartGasket()
+        private double ExecuteOvalAndOctagonalOrNonStandartGasket()
         {
             if (ReceiptAndDistributionOfDataCheckBox["StandartOvalGasketsCheckboxChecked"] is true)
             {
                 double executeOvalGasket = new DbOvalGasket().ExecutedOvalGasket(SelectedPn, SelectedDn);
-                double executeNonStandartGasket = 0;
-                double executeOctagonalGasket = 0;
-                return new[] { executeOvalGasket, executeNonStandartGasket, executeOctagonalGasket };
+                return executeOvalGasket;
             }
             if (ReceiptAndDistributionOfDataCheckBox["StandartOctahedralGasketsCheckboxChecked"] is true)
             {
                 double executeOctagonalGasket = new DbOctagonalGasket().ExecutedOctogonalGasket(SelectedPn, SelectedDn);
-                double executeNonStandartGasket = 0;
-                double executeOvalGasket = 0;
-                return new[] { executeOvalGasket, executeNonStandartGasket, executeOctagonalGasket };
+                return executeOctagonalGasket;
             }
-            else
-            {
-                double executeNonStandartGasket = Convert.ToDouble(ReceiptAndDistributionOfDatas["ThicknessGasketTextRead"]);
-                double executeOvalGasket = 0;
-                double executeOctagonalGasket = 0;
-                return new[] { executeOvalGasket, executeNonStandartGasket, executeOctagonalGasket };
-            }
+
+            double executeNonStandartGasket = Convert.ToDouble(ReceiptAndDistributionOfDatas["ThicknessGasketTextRead"]);
+            return executeNonStandartGasket;
         }
 
         #endregion
@@ -222,8 +194,8 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                 case "ГОСТ 33259-2015 Ряд 1":
                     {
                         var inResultb1 = new DbWorkGost33259().ExecutionThicknessFlangeb1(SelectedPn, SelectedDn); //Получение из базы толщины тарелки Тип 11
-                        var inResulth1 = new DbExecutionGost33259().ExecutionGost33259DF(SelectedPn, SelectedDn);  //Получение из базы толщины в зависимости от исполнения
-                        var inResulth2 = new DbExecutionGost33259().ExecutionGost33259CE(SelectedPn, SelectedDn);  //Получение из базы толщины в зависимости от исполнения
+                        var inResulth1 = new DbExecutionGost33259().ExecutionGost33259CE(SelectedPn, SelectedDn);  //Получение из базы толщины в зависимости от исполнения
+                        var inResulth2 = new DbExecutionGost33259().ExecutionGost33259DF(SelectedPn, SelectedDn);  //Получение из базы толщины в зависимости от исполнения
                         var inResulth4 = new DbExecutionGost33259().ExecutionGost33259L(SelectedPn, SelectedDn);  //Получение из базы толщины в зависимости от исполнения
                         var inResulth5 = new DbExecutionGost33259().ExecutionGost33259M(SelectedPn, SelectedDn);  //Получение из базы толщины в зависимости от исполнения
                         SelectedFlangeN = new DbWorkGost33259().ExecutionThicknessFlangen_type1(SelectedPn, SelectedDn); //Получение из базы кол-во отверстий под шпильки               
