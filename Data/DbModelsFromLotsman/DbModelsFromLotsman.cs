@@ -8,7 +8,7 @@ namespace StudCalculator.Data.DbModelsFromLotsman
     internal class DbModelsFromLotsman
 
     {
-        readonly ModelsFromLotsman.ModelsFromLotsman  dbLotsman = new ModelsFromLotsman.ModelsFromLotsman();
+        readonly ModelsFromLotsman.ModelsFromLotsman  dbLotsman = new();
         private string ResultFromGosts { get; }
         public string ResultFromGost => ReturnFromLotsman(); 
         public DbModelsFromLotsman(string resultFromGosts)
@@ -37,8 +37,6 @@ namespace StudCalculator.Data.DbModelsFromLotsman
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Проверьте правильно ли введены данные", "Ошибка", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
                 return "Вывод результатов...";
             }
         }

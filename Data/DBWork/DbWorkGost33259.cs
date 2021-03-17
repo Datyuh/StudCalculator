@@ -8,17 +8,17 @@ namespace StudCalculator.Data.DBWork
 {
     internal class DbWorkGost33259 : BaseViewModel
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
         
         public ObservableCollection<string> DbGost33259()
         {
-            var allGosts = new ObservableCollection<string>(db.OGK_StudCalculator_GOSTs.Where(p => p.GOST != null && p.GOST != "ГОСТ 33259-2015 Ряд 2").Select(p => p.GOST));
+            var allGosts = new ObservableCollection<string>(db.OGK_StudCalculator_GOSTs.Where(p => p.GOST != "ГОСТ 33259-2015 Ряд 2").Select(p => p.GOST));
             return allGosts;
         }
 
         public ObservableCollection<string> ExecGost33259()
         {
-            var execution33259 = new ObservableCollection<string>(db.OGK_StudCalculator_GOSTs.Where(p => p.Exec_GOST33259 != null).Select(p => p.Exec_GOST33259)); ;
+            var execution33259 = new ObservableCollection<string>(db.OGK_StudCalculator_GOSTs.Where(p => true).Select(p => p.Exec_GOST33259)); ;
             return execution33259;
         }
 

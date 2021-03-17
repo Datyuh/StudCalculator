@@ -5,13 +5,20 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbOvalGasket
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData _db = new();
 
         public double ExecutedOvalGasket(string pn, string dn)
         {
-            var executedOvalGasket =
-                Convert.ToDouble(db.OGK_StudCalculator_Oval_Gasket.Where(p => p.PN == pn && p.DN == dn).Select(p => p.c).First());
-            return executedOvalGasket;
+            try
+            {
+                var executedOvalGasket =
+                    Convert.ToDouble(_db.OGK_StudCalculator_Oval_Gasket.Where(p => p.PN == pn && p.DN == dn).Select(p => p.c).First());
+                return executedOvalGasket;
+            }
+            catch (Exception)
+            {
+                return double.NaN;
+            }
         }
     }
 }

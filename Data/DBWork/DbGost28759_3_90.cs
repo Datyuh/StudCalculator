@@ -7,7 +7,7 @@ namespace StudCalculator.Data.DBWork
 {
     class DbGost28759_3_90
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
 
         public ObservableCollection<string> ExecutePnCollection()
         {

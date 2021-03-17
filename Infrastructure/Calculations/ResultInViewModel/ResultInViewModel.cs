@@ -7,7 +7,6 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
 {
     public class ResultInViewModel
     {
-        private double ResultFromGosts { get; set; }
         private Dictionary<string, object> FromViewModel { get; }
         private double FromResultGosts { get; set; }
         public string ReturnResultFromLotsman => ReturnFromLotsman();  
@@ -38,14 +37,14 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
                 DiametricStud = FromViewModel["SelectedTheard"].ToString();
                 
 
-                ResultFromGosts = (Math.Round(Math.Round(result) / 10)) * 10;
+                var resultFromGosts = (Math.Round(Math.Round(result) / 10)) * 10;
 
                 string resultChoese =
-                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-[M, М]{DiametricStud.Substring(1)}%[x, х]{ResultFromGosts}%" +
+                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-[M, М]{DiametricStud.Substring(1)}%[x, х]{resultFromGosts}%" +
                     $"{FromViewModel["MaterialStudFromCombobox"]}%[ОСТ, OCT] 26-2040-96";
 
                 string resultInMainWindows =
-                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-М{DiametricStud.Substring(1)}х{ResultFromGosts}." +
+                    $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-М{DiametricStud.Substring(1)}х{resultFromGosts}." +
                     $"{FromViewModel["MaterialStudFromCombobox"]}ОСТ 26-2040-96";
 
 
@@ -56,13 +55,11 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
 
                     return resultInMainWindow == string.Empty ? resultInMainWindows : resultInMainWindow;
                 }
-                else
-                {
-                    MessageBox.Show("Не все данные были введены", "Упс! Ошибочка", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
 
-                    return "Вывод результатов...";
-                }
+                MessageBox.Show("Не все данные были введены", "Упс! Ошибочка", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
+                return "Вывод результатов...";
             }
             catch (NullReferenceException)
             {

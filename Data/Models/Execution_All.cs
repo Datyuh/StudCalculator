@@ -2,7 +2,7 @@ namespace StudCalculator
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Execution_All
+    public class Execution_All
     {
         public int id { get; set; }
 

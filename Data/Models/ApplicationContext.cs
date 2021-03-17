@@ -2,7 +2,7 @@ namespace StudCalculator
 {
     using System.Data.Entity;
 
-    public partial class ApplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public ApplicationContext()
             : base("name=ApplicationContext")

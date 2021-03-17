@@ -2,7 +2,7 @@ namespace StudCalculator
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class OST26_2008_83
+    public class OST26_2008_83
     {
         public int id { get; set; }
 

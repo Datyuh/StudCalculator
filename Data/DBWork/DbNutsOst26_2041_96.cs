@@ -7,18 +7,18 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbNutsOst26_2041_96
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData _db = new();
 
         public ObservableCollection<string> ExtractOst26_2041_96()
         {
-            var extractOst26204196 = new ObservableCollection<string>(db.OGK_StudCalculator_OST_26_2041_96.Select(p => p.Thread)).Distinct().AsParallel();
+            var extractOst26204196 = new ObservableCollection<string>(_db.OGK_StudCalculator_OST_26_2041_96.Select(p => p.Thread)).Distinct().AsParallel();
             var extractSortOst26204196 = new ObservableCollection<string>(extractOst26204196.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
             return extractSortOst26204196;
         }
 
         public ObservableCollection<string> OstNutsCollection()
         {
-            var ostNutsCollection = new ObservableCollection<string>(db.OGK_StudCalculator_GOSTs.Select(p => p.Nuts).Where(p=> p != null && p != "ОСТ 26-2038-96").AsParallel());
+            var ostNutsCollection = new ObservableCollection<string>(_db.OGK_StudCalculator_GOSTs.Select(p => p.Nuts).Where(p=> p != null && p != "ОСТ 26-2038-96").AsParallel());
             return ostNutsCollection;
         }
 
@@ -30,7 +30,7 @@ namespace StudCalculator.Data.DBWork
                     return double.NaN;
                 default:
                 {
-                    var extractThicknessPLarge = Convert.ToDouble(db.OGK_StudCalculator_OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First());
+                    var extractThicknessPLarge = Convert.ToDouble(_db.OGK_StudCalculator_OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.Р_Large).First());
                     return extractThicknessPLarge;
                 }
             }
@@ -44,7 +44,7 @@ namespace StudCalculator.Data.DBWork
                     return double.NaN;
                 default:
                     {
-                        var extractThicknessPLarge = Convert.ToDouble(db.OGK_StudCalculator_OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.P_Small).First());
+                        var extractThicknessPLarge = Convert.ToDouble(_db.OGK_StudCalculator_OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.P_Small).First());
                         return extractThicknessPLarge;
                     }
             }
@@ -59,7 +59,7 @@ namespace StudCalculator.Data.DBWork
                 default:
                 {
                     var extractThicknessHLarge =
-                        Convert.ToDouble(db.OGK_StudCalculator_OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First());
+                        Convert.ToDouble(_db.OGK_StudCalculator_OST_26_2041_96.Where(p => p.Thread == thread).Select(p => p.H).First());
                     return extractThicknessHLarge;
                 }
             }

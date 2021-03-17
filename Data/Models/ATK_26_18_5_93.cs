@@ -2,7 +2,7 @@ namespace StudCalculator
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class ATK_26_18_5_93
+    public class ATK_26_18_5_93
     {
         public int id { get; set; }
 

@@ -8,11 +8,11 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbRotarPylugATK_26_18_5_93
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData _db = new();
 
         public ObservableCollection<string> ExecuteAtk_26_18_5_93()
         {
-            var executeAtk2618593 = new ObservableCollection<string>(db.OGK_StudCalculator_ATK_26_18_5_93.Select(p => p.Style)).Distinct().AsParallel();
+            var executeAtk2618593 = new ObservableCollection<string>(_db.OGK_StudCalculator_ATK_26_18_5_93.Select(p => p.Style)).Distinct().AsParallel();
             var executeSortAtk2618593 = new ObservableCollection<string>(executeAtk2618593.OrderBy(p => p, StringComparison.OrdinalIgnoreCase.WithNaturalSort()).AsParallel());
             return executeSortAtk2618593;
         }
@@ -21,15 +21,13 @@ namespace StudCalculator.Data.DBWork
         {
             try
             {
-                var executedb = Convert.ToDouble(db.OGK_StudCalculator_ATK_26_18_5_93.Where(p => p.PN == pn && p.DN == dn && p.Style == style).Select(p => p.b)
+                var executedb = Convert.ToDouble(_db.OGK_StudCalculator_ATK_26_18_5_93.Where(p => p.PN == pn && p.DN == dn && p.Style == style).Select(p => p.b)
                     .First());
                 return executedb;
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Вы ввели неверные данные", "Упс!!!", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-                return 0;
+                return double.NaN;
             }
         }
     }

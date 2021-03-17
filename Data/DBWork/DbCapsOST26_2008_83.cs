@@ -7,7 +7,7 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbCapsOST26_2008_83
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
 
         public ObservableCollection<string> ExecuteOst26_2008_83()
         {

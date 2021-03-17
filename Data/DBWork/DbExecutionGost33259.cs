@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace StudCalculator.Data.DBWork
 {
     public class DbExecutionGost33259
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
 
         public double? ExecutionGost33259CE(string pn, string dn)
         {

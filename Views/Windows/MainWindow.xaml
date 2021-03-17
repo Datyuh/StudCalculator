@@ -10,11 +10,9 @@
     Height="580"
     FontFamily="Calibri"
     Icon="Stud_Calculator.ico"
+    ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" ResizeMode="CanMinimize">
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
+    mc:Ignorable="d">
     <Grid Background="#FFCFCFCF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="418*" />
@@ -752,7 +750,7 @@
                     Width="56"
                     BorderBrush="#FFEE8720"
                     BorderThickness="2"
-                    FontFamily="Calibri"                    
+                    FontFamily="Calibri"
                     IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
                     IsEnabledChanged="StripText_IsEnabledChanged"
                     PreviewTextInput="TextBoxPreviewTextInput"
@@ -927,9 +925,9 @@
             FontSize="14"
             Foreground="{Binding ColorTextBoxResult, Mode=TwoWay}"
             IsReadOnly="True"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             Text="{Binding ResultTextEnter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="Wrap" 
-            ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            TextWrapping="Wrap" />
 
         <Button
             x:Name="Calculate"
@@ -967,8 +965,8 @@
             Margin="5,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Command="{Binding ShowWindowAboutProgram}"
             Content="О программе"
-            FontSize="14" 
-            Command="{Binding ShowWindowAboutProgram}"/>
+            FontSize="14" />
     </Grid>
 </Window>

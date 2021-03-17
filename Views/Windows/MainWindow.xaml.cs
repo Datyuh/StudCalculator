@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using StudCalculator.ViewModel;
 
 namespace StudCalculator
 {
@@ -15,6 +16,7 @@ namespace StudCalculator
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
 
         //Подсчёт числа вхождений десятичного разделителя для проверки его

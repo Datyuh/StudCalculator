@@ -1,11 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
 
-namespace StudCalculator.Data
+namespace StudCalculator.Data.DbModelFromVnmData
 {
-    public partial class DbModelFromVnmData : DbContext
+    public class DbModelFromVnmData : DbContext
     {
         public DbModelFromVnmData()
             : base("name=DbModelFromVnmData")

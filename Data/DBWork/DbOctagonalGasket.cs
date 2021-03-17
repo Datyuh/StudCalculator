@@ -5,7 +5,7 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbOctagonalGasket
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
 
         public double ExecutedOctogonalGasket(string pn, string dn)
         {

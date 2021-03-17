@@ -63,14 +63,9 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                 {"ExecutionStudFromCombobox", ReceiptAndDistributionOfDatas["ExecutionStudFromCombobox"]},
                 {"SelectedTheard", SelectedTheard},
                 {"ExrcuteAtk2618593b", ExrcuteAtkStandartOrNot2618593B},
-                //{"ExrcuteAtk2618593bNonStandart", ExrcuteAtkStandartOrNot2618593B[1]},
                 {"ExecuteAtk242000290b", ExecuteAtkStandartOrNot242000290B},
-                //{"ExecuteAtk242000290bNonStandart", ExecuteAtkStandartOrNot242000290B[1]},
                 {"ExecuteStandartWashers", ExecutedStandartOrNotWashers},
-                //{"ExecuteNonStandartWashers", ExecutedStandartOrNotWashers[1]},
                 {"ExecuteOvalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket},
-                //{"ExecuteOctagonalGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[1]},
-                //{"ExecuteNonStandartGasket", ExecutedOvalAndOctagonalOrNonStandartGasket[2]},
                 {"inResultPNuts", InResultPNuts(SelectedTheard)},
                 {"inResultHNuts", InResultHNuts(SelectedTheard)},                                
             };
@@ -148,7 +143,7 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
         {
             if (ReceiptAndDistributionOfDataCheckBox["StandartThicknessWasherCheckboxChecked"] is true)
             {
-                double executeStandartWashers = new DbStandartWashersOST26204296().StandartWashers(SelectedTheard);
+                double executeStandartWashers = new DbStandartWashersOst26204296().StandartWashers(SelectedTheard);
                 return executeStandartWashers;
             }
             if (ReceiptAndDistributionOfDataCheckBox["NonStandartThicknessWasherCheckboxChecked"] is true)

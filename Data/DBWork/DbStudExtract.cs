@@ -7,7 +7,7 @@ namespace StudCalculator.Data.DBWork
 {
     public class DbStudExtract
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
 
         public ObservableCollection<string> ExtractMaterialStud()
         {

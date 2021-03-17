@@ -197,6 +197,7 @@
     <Compile Include="Data\Models\GOSTs.cs" />
     <Compile Include="Data\Models\GOST_28759_3_90.cs" />
     <Compile Include="Data\Models\GOST_28759_4_90.cs" />
+    <Compile Include="Model\InitializationData.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\GostsWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -347,6 +348,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

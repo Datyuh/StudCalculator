@@ -2,7 +2,7 @@ namespace StudCalculator
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class GOSTs
+    public class GOSTs
     {
         public int id { get; set; }
 

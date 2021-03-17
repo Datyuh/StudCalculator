@@ -4,7 +4,7 @@ namespace StudCalculator.Data.ModelsFromLotsman
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class dsAttributes
+    public class dsAttributes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public dsAttributes()

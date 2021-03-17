@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace StudCalculator.Data.DBWork
 {
-    public class DbStandartWashersOST26204296
+    public class DbStandartWashersOst26204296
     {
-        readonly DbModelFromVnmData db = new DbModelFromVnmData();
+        readonly DbModelFromVnmData.DbModelFromVnmData db = new();
 
         public double StandartWashers(string tread)
         {

@@ -2,7 +2,7 @@ namespace StudCalculator
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Type_11
+    public class Type_11
     {
         public int id { get; set; }
 
