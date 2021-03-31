@@ -15,909 +15,25 @@
     mc:Ignorable="d">
     <Grid Background="#FFCFCFCF">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="418*" />
-            <ColumnDefinition Width="421*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="207*" />
+            <ColumnDefinition Width="212*" />
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="5" />
             <RowDefinition Height="184" />
-            <RowDefinition Height="298" />
+            <RowDefinition Height="300" />
             <RowDefinition />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
-        <Label
-            Grid.Row="1"
-            Width="157"
-            Height="30"
-            Margin="5,5,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите ГОСТ фланцев"
-            FontFamily="Calibri"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="230"
-            Height="30"
-            Margin="5,40,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите тип для ГОСТ 33259-2015"
-            FontFamily="Calibri"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="143"
-            Height="30"
-            Margin="5,75,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите давление"
-            FontFamily="Calibri"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="157"
-            Height="30"
-            Margin="5,112,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите исполнение"
-            FontFamily="Calibri"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="97"
-            Height="30"
-            Margin="5,147,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите DN"
-            FontFamily="Calibri"
-            FontSize="14"
-            RenderTransformOrigin="0.522,2.703" />
-
-        <ComboBox
-            x:Name="TypeGost33259Combo"
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,40,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            IsEnabled="{Binding TypeFlangeGostIsEnabled}"
-            ItemsSource="{Binding ExecutionType}"
-            RenderTransformOrigin="0.705,0.522"
-            SelectedValue="{Binding TypeSelectedFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <ComboBox
-            x:Name="ExecutionPnCombo"
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,75,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding ExecutionPn}"
-            RenderTransformOrigin="0.458,1.733"
-            SelectedValue="{Binding PnSelectedFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <ComboBox
-            x:Name="ExecGost33259"
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,112,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding ExecGost, Mode=TwoWay}"
-            SelectedValue="{Binding ExecutionFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <ComboBox
-            x:Name="ExecutionDnCombo"
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,147,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding ExecutionDn}"
-            SelectedValue="{Binding DnSelectedFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-        <ComboBox
-            x:Name="GosTall"
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,5,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding AllGost, Mode=TwoWay}"
-            SelectedValue="{Binding SelectionGostFromCombobox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="180"
-            Height="17"
-            Margin="107,5,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Calibri"
-            FontSize="14"
-            Text="Если фланецы нестандартные"
-            TextWrapping="Wrap" />
-        <CheckBox
-            x:Name="NonStandartFl"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="167"
-            Height="17"
-            Margin="5,27,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding NonStandartSameFlangeCommand, Mode=OneWay}"
-            Content="Нестандартный фланец"
-            FontFamily="Calibri"
-            FontSize="14"
-            IsChecked="{Binding NonStandartSameFlangeChecked}"
-            IsEnabled="{Binding NonStandartStandartSameFlangeCheckedIsEnabled}" />
-        <CheckBox
-            x:Name="NonStandartDablFl"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="17"
-            Margin="230,27,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding NonStandartDifferentFlangeCommand, Mode=OneWay}"
-            Content="Если разные тарелки"
-            FontFamily="Calibri"
-            FontSize="14"
-            IsChecked="{Binding NonStandartDifferentFlangeChecked}"
-            IsEnabled="{Binding NonStandartDifferentFlangeCheckedIsEnabled}" />
-
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="242"
-            Height="17"
-            Margin="77,78,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Calibri"
-            FontSize="14"
-            Text="Если используется заглушка поворотная"
-            TextWrapping="Wrap" />
-        <CheckBox
-            x:Name="StandardRotaryPlug"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="17"
-            Margin="230,100,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding StandartRotaryPlugsCommand}"
-            Content="Стандартные"
-            FontFamily="Calibri"
-            FontSize="14"
-            IsChecked="{Binding StandartRotaryPlugsChecked}"
-            IsEnabled="{Binding StandartRotaryPlugsCheckboxIsEnabled}" />
-        <CheckBox
-            x:Name="NonStandardRotaryPlug"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="153"
-            Height="17"
-            Margin="5,100,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding NonStandartRotaryPlugsCommand}"
-            Content="Нестандартные"
-            FontFamily="Calibri"
-            FontSize="14"
-            IsChecked="{Binding NonStandartRotaryPlugsChecked}"
-            IsEnabled="{Binding NonStandartRotaryPlugsCheckboxIsEnabled}" />
-
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="242"
-            Height="18"
-            Margin="77,157,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Calibri"
-            FontSize="14"
-            TextWrapping="Wrap"><Run Text="Если используется заглушка " /><Run Text="или крышка" /></TextBlock>
-        <CheckBox
-            x:Name="NonStandardPlug"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="153"
-            Height="18"
-            Margin="5,180,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding NonstandartPlugsCommand, Mode=OneWay}"
-            Content="Нестандартные"
-            FontFamily="Calibri"
-            FontSize="14"
-            IsChecked="{Binding NonStandartPlugsChecked}"
-            IsEnabled="{Binding NonStandartPlugsCheckboxIsEnabled}" />
-        <CheckBox
-            x:Name="StandardPlug"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="18"
-            Margin="230,180,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding StandartPlugsCommand, Mode=OneWay}"
-            Content="Стандартные"
-            FontFamily="Calibri"
-            FontSize="14"
-            IsChecked="{Binding StandartPlugsChecked}"
-            IsEnabled="{Binding StandartPlugsCheckboxIsEnabled}" />
-
-        <ComboBox
-            x:Name="StandardRotaryPlugCombo"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,122,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            IsEnabled="{Binding StandartRotaryPlugsComboboxIsEnabled}"
-            ItemsSource="{Binding ExecuteRotaryPlugsCollection}"
-            SelectedValue="{Binding StandartRotaryPlugFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="80"
-            Height="24"
-            Margin="28,261,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="NumberFlangesText"
-                    Width="56"
-                    BorderBrush="#FFEE8720"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    PreviewTextInput="TextBox_PreviewTextInputWhole"
-                    Text="{Binding SumFlangeTextRead, Mode=TwoWay}" />
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="шт."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <ComboBox
-            x:Name="StandardPlugCombo"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,203,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            IsEnabled="{Binding StandartPlugsComboboxIsEnabled}"
-            ItemsSource="{Binding AllCaps}"
-            SelectedValue="{Binding StandartPlugsFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <ComboBox
-            x:Name="ExecutionStubsCombo"
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="30"
-            Margin="230,261,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            IsEnabled="{Binding StandartPlugsExecutionComboboxIsEnabled}"
-            ItemsSource="{Binding ExecutePlugsCollection}"
-            SelectedValue="{Binding StandartPlugsExecutionFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="178"
-            Height="18"
-            Margin="230,238,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Calibri"
-            FontSize="14"
-            Text="Исполнение загл. и крышек"
-            TextAlignment="Center"
-            TextWrapping="Wrap" />
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="113"
-            Height="18"
-            Margin="5,238,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Calibri"
-            FontSize="14"
-            Text="Кол-во фланцев"
-            TextWrapping="Wrap" />
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="80"
-            Height="24"
-            Margin="28,203,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="NonStandardPlugText"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonStandartPlugsTextboxIsEnabled}"
-                    IsEnabledChanged="NonStandardPlugText_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding NonStandartPlugsTextRead, Mode=TwoWay}" />
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="80"
-            Height="24"
-            Margin="28,122,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="StandardRotaryPlugText"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonStandartRotaryPlugsTextboxIsEnabled}"
-                    IsEnabledChanged="StandardRotaryPlugText_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding NonStandartRotaryPlugsTextRead, Mode=TwoWay}" />
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="80"
-            Height="24"
-            Margin="28,49,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="NonStandartFlText"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonStandartFlTextIsEnabled}"
-                    IsEnabledChanged="NonStandartFlText_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding NonStandartFlTextRead, Mode=TwoWay}">
-                    <TextBox.ToolTip>
-                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
-                    </TextBox.ToolTip>
-                </TextBox>
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="80"
-            Height="24"
-            Margin="230,49,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="NonStandartDablFlTextFirst"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
-                    IsEnabledChanged="NonStandartDablFlTextFirst_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding NonStandartFirstFlangeTextRead, Mode=TwoWay}">
-                    <TextBox.ToolTip>
-                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
-                    </TextBox.ToolTip>
-                </TextBox>
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="80"
-            Height="24"
-            Margin="328,49,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="NonStandartDablFlTextSec"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
-                    IsEnabledChanged="NonStandartDablFlTextSec_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding NonStandartSecondFlangeTextRead, Mode=TwoWay}">
-                    <TextBox.ToolTip>
-                        <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
-                    </TextBox.ToolTip>
-                </TextBox>
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Label
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="203"
-            Height="30"
-            Margin="10,5,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите ОСТ на гайки и шаг"
-            FontFamily="Times New Roman"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="203"
-            Height="30"
-            Margin="10,40,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Выберите резьбу гайки"
-            FontFamily="Times New Roman"
-            FontSize="14" />
-
-        <ComboBox
-            x:Name="OstNutsCombo"
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="185"
-            Height="30"
-            Margin="0,5,5,0"
-            Padding="6"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding OstNutsCollection}"
-            SelectedValue="{Binding OstNutsFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <ComboBox
-            x:Name="NutThreadCombo"
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="185"
-            Height="30"
-            Margin="0,40,5,0"
-            Padding="6"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            BorderThickness="10"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            IsEnabled="{Binding ChoeseNutsThreadComboboxIsEnabled}"
-            ItemsSource="{Binding ExtractNutsCollection}"
-            SelectedValue="{Binding ThreadNutsFromComboBox, Mode=TwoWay}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <CheckBox
-            x:Name="StandartThicknessWasher"
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="78"
-            Height="17"
-            Margin="103,105,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding StandartThicknessWasherCommand, Mode=OneWay}"
-            Content="Стандарт."
-            FontFamily="Calibri"
-            IsChecked="{Binding StandartThicknessWasherCheckboxChecked}"
-            IsEnabled="{Binding StandartThicknessWasherCheckboxIsEnabled}" />
-        <CheckBox
-            x:Name="StandartThicknessStripOval"
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="74"
-            Height="17"
-            Margin="244,105,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding StandartOvalGasketsCommand, Mode=OneWay}"
-            Content="Овал."
-            FontFamily="Calibri"
-            IsChecked="{Binding StandartOvalGasketsCheckboxChecked}"
-            IsEnabled="{Binding StandartOvalGasketsCheckboxIsEnabled}" />
-        <CheckBox
-            x:Name="NonStandartThicknessWasher"
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="88"
-            Height="17"
-            Margin="10,105,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding NonStandartThicknessWasherCommand, Mode=OneWay}"
-            Content="Нестандарт."
-            FontFamily="Calibri"
-            IsChecked="{Binding NonStandartThicknessWasherCheckboxChecked}"
-            IsEnabled="{Binding NonStandartThicknessWasherCheckboxIsEnabled}" />
-        <CheckBox
-            x:Name="StandartThicknessStripOrtag"
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="89"
-            Height="17"
-            Margin="325,105,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding StandartOctahedralGasketsCommand, Mode=OneWay}"
-            Content="Восьмиг."
-            FontFamily="Calibri"
-            IsChecked="{Binding StandartOctahedralGasketsCheckboxChecked}"
-            IsEnabled="{Binding StandartOctahedralGasketsCheckboxIsEnabled}" />
-
-        <Border
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="80"
-            Height="24"
-            Margin="43,127,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="WasherText"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonThicknessWasherTextboxIsEnabled, Mode=TwoWay}"
-                    IsEnabledChanged="WasherText_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding ThicknessWasherTextRead, Mode=TwoWay}" />
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Border
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="80"
-            Height="24"
-            Margin="284,127,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="StripText"
-                    Width="56"
-                    BorderBrush="#FFEE8720"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
-                    IsEnabledChanged="StripText_IsEnabledChanged"
-                    PreviewTextInput="TextBoxPreviewTextInput"
-                    Text="{Binding ThicknessGasketTextRead, Mode=TwoWay}" />
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="мм."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <Label
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="170"
-            Height="30"
-            Margin="10,75,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Content="Толщина шайбы"
-            FontFamily="Calibri"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="170"
-            Height="30"
-            Margin="244,75,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Content="Тлощина прокладки"
-            FontFamily="Calibri"
-            FontSize="14" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="90"
-            Height="30"
-            Margin="177,154,157,0"
-            Padding="6"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Content="Шпильки"
-            FontFamily="Times New Roman"
-            FontSize="16"
-            FontWeight="Bold" />
-
-        <Border
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="80"
-            Height="24"
-            Margin="43,30,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderThickness="1">
-            <StackPanel Margin="0" Orientation="Horizontal">
-                <TextBox
-                    x:Name="NumberSudText"
-                    Width="56"
-                    BorderBrush="#FF4EEE35"
-                    BorderThickness="2"
-                    FontFamily="Calibri"
-                    IsEnabled="{Binding NumberOfNutsTextboxIsEnable}"
-                    IsEnabledChanged="NumberSudText_IsEnabledChanged"
-                    PreviewTextInput="TextBox_PreviewTextInputWhole"
-                    Text="{Binding SumStudTextRead, Mode=TwoWay}" />
-                <TextBlock
-                    Width="22"
-                    Margin="0,3"
-                    FontFamily="Calibri"
-                    Text="шт."
-                    TextAlignment="Center" />
-            </StackPanel>
-        </Border>
-
-        <ComboBox
-            x:Name="MaterialStud"
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="153"
-            Height="30"
-            Margin="0,27,0,0"
-            Padding="6"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding ExtractMaterialStud}"
-            RenderTransformOrigin="0.503,0.033"
-            SelectedValue="{Binding MaterialStudFromCombobox}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <ComboBox
-            x:Name="ExecutionStud"
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="60"
-            Height="30"
-            Margin="192,27,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            ItemsSource="{Binding ExtractExecutionStud}"
-            SelectedValue="{Binding ExecutionStudFromCombobox}">
-            <ComboBox.Effect>
-                <DropShadowEffect />
-            </ComboBox.Effect>
-        </ComboBox>
-
-        <Label
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="106"
-            Height="30"
-            Margin="26,0,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Кол-во шпилек"
-            FontFamily="Times New Roman"
-            FontSize="14" />
-
-        <Label
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="85"
-            Height="30"
-            Margin="177,0,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Исполнение"
-            FontFamily="Times New Roman"
-            FontSize="14"
-            RenderTransformOrigin="0.941,0.433" />
-
-        <Label
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="152"
-            Height="30"
-            Margin="272,0,0,0"
-            Padding="6"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            Content="Материал"
-            FontFamily="Times New Roman"
-            FontSize="14" />
-
         <TextBox
             x:Name="OutputResult"
             Grid.Row="2"
-            Grid.Column="1"
-            Margin="0,62,0,0"
+            Grid.Column="2"
+            Margin="0,67,0,0"
             Background="White"
             BorderBrush="#FF71DC60"
             BorderThickness="2"
@@ -932,9 +48,9 @@
         <Button
             x:Name="Calculate"
             Grid.Row="3"
-            Grid.Column="1"
+            Grid.Column="2"
             Height="33"
-            Margin="276,10,0,0"
+            Margin="266,10,10,0"
             VerticalAlignment="Top"
             BorderBrush="#FFCF4646"
             BorderThickness="3"
@@ -945,9 +61,9 @@
         <Button
             x:Name="ClearOutputResult"
             Grid.Row="3"
-            Grid.Column="1"
+            Grid.Column="2"
             Width="178"
-            Height="35"
+            Height="33"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -959,14 +75,888 @@
         <Button
             x:Name="AboutProgram"
             Grid.Row="3"
-            Grid.Column="0"
+            Grid.Column="1"
             Width="123"
             Height="33"
-            Margin="5,10,0,0"
+            Margin="0,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding ShowWindowAboutProgram}"
             Content="О программе"
             FontSize="14" />
+        <Grid
+            Name="GostsChoice"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Width="422"
+            Height="184"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Label
+                Width="157"
+                Height="30"
+                Margin="10,2,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите ГОСТ фланцев"
+                FontFamily="Calibri"
+                FontSize="14" />
+            <Label
+                Grid.Column="0"
+                Width="222"
+                Height="30"
+                Margin="10,37,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите тип для ГОСТ 33259-2015"
+                FontFamily="Calibri"
+                FontSize="14" />
+            <Label
+                Grid.Column="0"
+                Width="143"
+                Height="30"
+                Margin="10,72,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите давление"
+                FontFamily="Calibri"
+                FontSize="14" />
+            <Label
+                Grid.Column="0"
+                Width="157"
+                Height="30"
+                Margin="10,109,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите исполнение"
+                FontFamily="Calibri"
+                FontSize="14" />
+            <Label
+                Grid.Column="0"
+                Width="97"
+                Height="30"
+                Margin="10,144,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите DN"
+                FontFamily="Calibri"
+                FontSize="14"
+                RenderTransformOrigin="0.522,2.703" />
+
+            <ComboBox
+                x:Name="TypeGost33259Combo"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="234,37,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                IsEnabled="{Binding TypeFlangeGostIsEnabled}"
+                ItemsSource="{Binding ExecutionType}"
+                RenderTransformOrigin="0.705,0.522"
+                SelectedValue="{Binding TypeSelectedFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="ExecutionPnCombo"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="234,72,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding ExecutionPn}"
+                RenderTransformOrigin="0.458,1.733"
+                SelectedValue="{Binding PnSelectedFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="ExecGost33259"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="234,109,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding ExecGost, Mode=TwoWay}"
+                SelectedValue="{Binding ExecutionFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="ExecutionDnCombo"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="234,144,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding ExecutionDn}"
+                SelectedValue="{Binding DnSelectedFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+            <ComboBox
+                x:Name="GosTall"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="234,2,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding AllGost, Mode=TwoWay}"
+                SelectedValue="{Binding SelectionGostFromCombobox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Width="422"
+            Height="78"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <TextBlock
+                Grid.Column="0"
+                Width="180"
+                Height="17"
+                Margin="107,5,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Calibri"
+                FontSize="14"
+                Text="Если фланецы нестандартные"
+                TextWrapping="Wrap" />
+            <CheckBox
+                x:Name="NonStandartFl"
+                Grid.Column="0"
+                Width="167"
+                Height="17"
+                Margin="10,27,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding NonStandartSameFlangeCommand, Mode=OneWay}"
+                Content="Нестандартный фланец"
+                FontFamily="Calibri"
+                FontSize="14"
+                IsChecked="{Binding NonStandartSameFlangeChecked}"
+                IsEnabled="{Binding NonStandartStandartSameFlangeCheckedIsEnabled}" />
+            <CheckBox
+                x:Name="NonStandartDablFl"
+                Grid.Column="0"
+                Width="178"
+                Height="17"
+                Margin="230,27,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding NonStandartDifferentFlangeCommand, Mode=OneWay}"
+                Content="Если разные тарелки"
+                FontFamily="Calibri"
+                FontSize="14"
+                IsChecked="{Binding NonStandartDifferentFlangeChecked}"
+                IsEnabled="{Binding NonStandartDifferentFlangeCheckedIsEnabled}" />
+            <Border
+                Grid.Column="0"
+                Width="80"
+                Height="24"
+                Margin="28,49,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="NonStandartFlText"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonStandartFlTextIsEnabled}"
+                        IsEnabledChanged="NonStandartFlText_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding NonStandartFlTextRead, Mode=TwoWay}">
+                        <TextBox.ToolTip>
+                            <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <Border
+                Grid.Column="0"
+                Width="80"
+                Height="24"
+                Margin="230,49,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="NonStandartDablFlTextFirst"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
+                        IsEnabledChanged="NonStandartDablFlTextFirst_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding NonStandartFirstFlangeTextRead, Mode=TwoWay}">
+                        <TextBox.ToolTip>
+                            <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <Border
+                Grid.Column="0"
+                Width="80"
+                Height="24"
+                Margin="328,49,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="NonStandartDablFlTextSec"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
+                        IsEnabledChanged="NonStandartDablFlTextSec_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding NonStandartSecondFlangeTextRead, Mode=TwoWay}">
+                        <TextBox.ToolTip>
+                            <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Width="422"
+            Height="79"
+            Margin="0,78,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <TextBlock
+                Grid.Column="0"
+                Width="242"
+                Height="17"
+                Margin="77,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Calibri"
+                FontSize="14"
+                Text="Если используется заглушка поворотная"
+                TextWrapping="Wrap" />
+            <CheckBox
+                x:Name="StandardRotaryPlug"
+                Grid.Column="0"
+                Width="178"
+                Height="17"
+                Margin="230,22,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding StandartRotaryPlugsCommand}"
+                Content="Стандартные"
+                FontFamily="Calibri"
+                FontSize="14"
+                IsChecked="{Binding StandartRotaryPlugsChecked}"
+                IsEnabled="{Binding StandartRotaryPlugsCheckboxIsEnabled}" />
+            <CheckBox
+                x:Name="NonStandardRotaryPlug"
+                Grid.Column="0"
+                Width="153"
+                Height="17"
+                Margin="10,22,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding NonStandartRotaryPlugsCommand}"
+                Content="Нестандартные"
+                FontFamily="Calibri"
+                FontSize="14"
+                IsChecked="{Binding NonStandartRotaryPlugsChecked}"
+                IsEnabled="{Binding NonStandartRotaryPlugsCheckboxIsEnabled}" />
+            <ComboBox
+                x:Name="StandardRotaryPlugCombo"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="230,44,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                IsEnabled="{Binding StandartRotaryPlugsComboboxIsEnabled}"
+                ItemsSource="{Binding ExecuteRotaryPlugsCollection}"
+                SelectedValue="{Binding StandartRotaryPlugFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+            <Border
+                Grid.Column="0"
+                Width="82"
+                Height="24"
+                Margin="28,50,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="StandardRotaryPlugText"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonStandartRotaryPlugsTextboxIsEnabled}"
+                        IsEnabledChanged="StandardRotaryPlugText_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding NonStandartRotaryPlugsTextRead, Mode=TwoWay}" />
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Width="422"
+            Height="143"
+            Margin="0,157,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <TextBlock
+                Grid.Column="0"
+                Width="242"
+                Height="18"
+                Margin="82,-1,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Calibri"
+                FontSize="14"
+                TextWrapping="Wrap"><Run Text="Если используется заглушка " /><Run Text="или крышка" /></TextBlock>
+            <CheckBox
+                x:Name="NonStandardPlug"
+                Grid.Column="0"
+                Width="153"
+                Height="18"
+                Margin="10,22,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding NonstandartPlugsCommand, Mode=OneWay}"
+                Content="Нестандартные"
+                FontFamily="Calibri"
+                FontSize="14"
+                IsChecked="{Binding NonStandartPlugsChecked}"
+                IsEnabled="{Binding NonStandartPlugsCheckboxIsEnabled}" />
+            <CheckBox
+                x:Name="StandardPlug"
+                Grid.Column="0"
+                Width="178"
+                Height="18"
+                Margin="230,22,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding StandartPlugsCommand, Mode=OneWay}"
+                Content="Стандартные"
+                FontFamily="Calibri"
+                FontSize="14"
+                IsChecked="{Binding StandartPlugsChecked}"
+                IsEnabled="{Binding StandartPlugsCheckboxIsEnabled}" />
+
+            <ComboBox
+                x:Name="StandardPlugCombo"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="230,45,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                IsEnabled="{Binding StandartPlugsComboboxIsEnabled}"
+                ItemsSource="{Binding AllCaps}"
+                SelectedValue="{Binding StandartPlugsFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="ExecutionStubsCombo"
+                Grid.Column="0"
+                Width="178"
+                Height="30"
+                Margin="230,103,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                IsEnabled="{Binding StandartPlugsExecutionComboboxIsEnabled}"
+                ItemsSource="{Binding ExecutePlugsCollection}"
+                SelectedValue="{Binding StandartPlugsExecutionFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <TextBlock
+                Grid.Column="0"
+                Width="178"
+                Height="18"
+                Margin="230,80,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Calibri"
+                FontSize="14"
+                Text="Исполнение загл. и крышек"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Grid.Column="0"
+                Width="113"
+                Height="18"
+                Margin="10,80,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Calibri"
+                FontSize="14"
+                Text="Кол-во фланцев"
+                TextWrapping="Wrap" />
+            <Border
+                Grid.Column="0"
+                Width="80"
+                Height="24"
+                Margin="28,103,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="NumberFlangesText"
+                        Width="56"
+                        BorderBrush="#FFEE8720"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        PreviewTextInput="TextBox_PreviewTextInputWhole"
+                        Text="{Binding SumFlangeTextRead, Mode=TwoWay}" />
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="шт."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <Border
+                Grid.Column="0"
+                Width="80"
+                Height="24"
+                Margin="28,45,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="NonStandardPlugText"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonStandartPlugsTextboxIsEnabled}"
+                        IsEnabledChanged="NonStandardPlugText_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding NonStandartPlugsTextRead, Mode=TwoWay}" />
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Width="424"
+            Height="75"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Label
+                Width="203"
+                Height="30"
+                Margin="10,5,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите ОСТ на гайки и шаг"
+                FontFamily="Times New Roman"
+                FontSize="14" />
+            <Label
+                Width="203"
+                Height="30"
+                Margin="10,40,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Выберите резьбу гайки"
+                FontFamily="Times New Roman"
+                FontSize="14" />
+
+            <ComboBox
+                x:Name="OstNutsCombo"
+                Width="185"
+                Height="30"
+                Margin="0,5,10,0"
+                Padding="6"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding OstNutsCollection}"
+                SelectedValue="{Binding OstNutsFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="NutThreadCombo"
+                Width="185"
+                Height="30"
+                Margin="0,40,10,0"
+                Padding="6"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                BorderThickness="10"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                IsEnabled="{Binding ChoeseNutsThreadComboboxIsEnabled}"
+                ItemsSource="{Binding ExtractNutsCollection}"
+                SelectedValue="{Binding ThreadNutsFromComboBox, Mode=TwoWay}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Width="424"
+            Height="81"
+            Margin="0,75,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <CheckBox
+                x:Name="StandartThicknessWasher"
+                Width="78"
+                Height="17"
+                Margin="103,30,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding StandartThicknessWasherCommand, Mode=OneWay}"
+                Content="Стандарт."
+                FontFamily="Calibri"
+                IsChecked="{Binding StandartThicknessWasherCheckboxChecked}"
+                IsEnabled="{Binding StandartThicknessWasherCheckboxIsEnabled}" />
+            <CheckBox
+                x:Name="StandartThicknessStripOval"
+                Width="74"
+                Height="17"
+                Margin="244,30,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding StandartOvalGasketsCommand, Mode=OneWay}"
+                Content="Овал."
+                FontFamily="Calibri"
+                IsChecked="{Binding StandartOvalGasketsCheckboxChecked}"
+                IsEnabled="{Binding StandartOvalGasketsCheckboxIsEnabled}" />
+            <CheckBox
+                x:Name="NonStandartThicknessWasher"
+                Width="88"
+                Height="17"
+                Margin="10,30,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding NonStandartThicknessWasherCommand, Mode=OneWay}"
+                Content="Нестандарт."
+                FontFamily="Calibri"
+                IsChecked="{Binding NonStandartThicknessWasherCheckboxChecked}"
+                IsEnabled="{Binding NonStandartThicknessWasherCheckboxIsEnabled}" />
+            <CheckBox
+                x:Name="StandartThicknessStripOrtag"
+                Width="89"
+                Height="17"
+                Margin="325,30,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding StandartOctahedralGasketsCommand, Mode=OneWay}"
+                Content="Восьмиг."
+                FontFamily="Calibri"
+                IsChecked="{Binding StandartOctahedralGasketsCheckboxChecked}"
+                IsEnabled="{Binding StandartOctahedralGasketsCheckboxIsEnabled}" />
+
+            <Label
+                Width="170"
+                Height="30"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Толщина шайбы"
+                FontFamily="Calibri"
+                FontSize="14" />
+            <Label
+                Width="170"
+                Height="30"
+                Margin="244,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Тлощина прокладки"
+                FontFamily="Calibri"
+                FontSize="14" />
+            <Border
+                Width="80"
+                Height="24"
+                Margin="40,52,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="WasherText"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonThicknessWasherTextboxIsEnabled, Mode=TwoWay}"
+                        IsEnabledChanged="WasherText_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding ThicknessWasherTextRead, Mode=TwoWay}" />
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <Border
+                Width="80"
+                Height="24"
+                Margin="275,52,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="StripText"
+                        Width="56"
+                        BorderBrush="#FFEE8720"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
+                        IsEnabledChanged="StripText_IsEnabledChanged"
+                        PreviewTextInput="TextBoxPreviewTextInput"
+                        Text="{Binding ThicknessGasketTextRead, Mode=TwoWay}" />
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="мм."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Width="424"
+            Height="90"
+            Margin="0,156,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Label
+                Width="90"
+                Height="30"
+                Margin="176,0,158,0"
+                Padding="6"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Content="Шпильки"
+                FontFamily="Times New Roman"
+                FontSize="16"
+                FontWeight="Bold" />
+
+            <ComboBox
+                x:Name="MaterialStud"
+                Width="153"
+                Height="30"
+                Margin="0,57,10,0"
+                Padding="6"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding ExtractMaterialStud}"
+                RenderTransformOrigin="0.503,0.033"
+                SelectedValue="{Binding MaterialStudFromCombobox}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="ExecutionStud"
+                Width="60"
+                Height="30"
+                Margin="184,57,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                ItemsSource="{Binding ExtractExecutionStud}"
+                SelectedValue="{Binding ExecutionStudFromCombobox}">
+                <ComboBox.Effect>
+                    <DropShadowEffect />
+                </ComboBox.Effect>
+            </ComboBox>
+
+            <Label
+                Width="106"
+                Height="30"
+                Margin="25,30,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Кол-во шпилек"
+                FontFamily="Times New Roman"
+                FontSize="14" />
+
+            <Label
+                Width="85"
+                Height="30"
+                Margin="172,30,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Исполнение"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                RenderTransformOrigin="0.941,0.433" />
+
+            <Label
+                Width="152"
+                Height="30"
+                Margin="262,30,0,0"
+                Padding="6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Content="Материал"
+                FontFamily="Times New Roman"
+                FontSize="14" />
+            <Border
+                Width="80"
+                Height="24"
+                Margin="40,63,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="1">
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBox
+                        x:Name="NumberSudText"
+                        Width="56"
+                        BorderBrush="#FF4EEE35"
+                        BorderThickness="2"
+                        FontFamily="Calibri"
+                        IsEnabled="{Binding NumberOfNutsTextboxIsEnable}"
+                        IsEnabledChanged="NumberSudText_IsEnabledChanged"
+                        PreviewTextInput="TextBox_PreviewTextInputWhole"
+                        Text="{Binding SumStudTextRead, Mode=TwoWay}" />
+                    <TextBlock
+                        Width="22"
+                        Margin="0,3"
+                        FontFamily="Calibri"
+                        Text="шт."
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

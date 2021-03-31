@@ -8,7 +8,7 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
     public class ResultInViewModel
     {
         private Dictionary<string, object> FromViewModel { get; }
-        private double FromResultGosts { get; set; }
+        private double FromResultGosts { get; }
         public string ReturnResultFromLotsman => ReturnFromLotsman();  
         private string DiametricStud { get; set; }
 
@@ -46,7 +46,6 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
                 string resultInMainWindows =
                     $"Шпилька {FromViewModel["ExecutionStudFromCombobox"]}-М{DiametricStud.Substring(1)}х{resultFromGosts}." +
                     $"{FromViewModel["MaterialStudFromCombobox"]}ОСТ 26-2040-96";
-
 
                 if (FromViewModel["ExecutionStudFromCombobox"] != null &&
                     FromViewModel["MaterialStudFromCombobox"] != null)

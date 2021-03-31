@@ -14,6 +14,6 @@ namespace StudCalculator.Data
         [StringLength(255)]
         public string PN { get; set; }
 
-        public double? c { get; set; }
+        public double c { get; set; }
     }
 }

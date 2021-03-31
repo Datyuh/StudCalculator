@@ -15,7 +15,7 @@ namespace StudCalculator.Data
         public string Exec_GOST33259 { get; set; }
 
         [StringLength(50)]
-        public string Exec_GOST28759_3 { get; set; }
+        public string? Exec_GOST28759_3 { get; set; }
 
         [StringLength(50)]
         public string Exec_GOST28759_4 { get; set; }

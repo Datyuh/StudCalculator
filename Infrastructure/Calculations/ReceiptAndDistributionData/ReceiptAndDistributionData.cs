@@ -339,18 +339,6 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
 
                 _ => double.NaN,
             };
-
-            //if (ReceiptAndDistributionOfDatas["OstNutsFromComboBox"].ToString() == "ОСТ 26-2041-96 Крупный")
-            //{
-            //    var pNuts = new DbNutsOst26_2041_96().ExtractThicknessPLarge(getPNuts);
-            //    return pNuts;
-            //}
-            //if (ReceiptAndDistributionOfDatas["OstNutsFromComboBox"].ToString() == "ОСТ 26-2041-96 Мелкий")
-            //{
-            //    var pNuts = new DbNutsOst26_2041_96().ExtractThicknessPSmall(getPNuts);
-            //    return pNuts;
-            //}
-
         }
     }
 }

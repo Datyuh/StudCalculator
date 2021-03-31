@@ -15,7 +15,7 @@ namespace StudCalculator.Data.DBWork
                     Convert.ToDouble(_db.OGK_StudCalculator_Oval_Gasket.Where(p => p.PN == pn && p.DN == dn).Select(p => p.c).First());
                 return executedOvalGasket;
             }
-            catch (Exception)
+            catch (InvalidOperationException)
             {
                 return double.NaN;
             }

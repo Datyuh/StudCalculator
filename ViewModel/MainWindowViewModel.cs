@@ -7,6 +7,8 @@ using System.Windows.Input;
 using StudCalculator.Data.DBWork;
 using StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData;
 using System.Windows.Media;
+using StudCalculator.Infrastructure.ChoiceUsersCheckBox;
+using StudCalculator.Infrastructure.EnterUsersData;
 using StudCalculator.Model;
 using StudCalculator.Views.Windows;
 
@@ -32,7 +34,7 @@ namespace StudCalculator.ViewModel
 
         #region Работа с основной базой ГОСТов
 
-        private ObservableCollection<string> _allGost = InitializationData.AllGost;
+        private ObservableCollection<string> _allGost = InitializationData.AllGost.DbGost33259();
         public ObservableCollection<string> AllGost { get => _allGost; set => Set(ref _allGost, value); }
 
         private string _selectionGostFromCombobox;
@@ -92,7 +94,7 @@ namespace StudCalculator.ViewModel
         #region Работа с базой гаек
 
         //Выборка из базы нормативной документации
-        private ObservableCollection<string> _ostNutsCollection = InitializationData.OstNutsCollection;
+        private ObservableCollection<string> _ostNutsCollection = InitializationData.OstNutsCollection.OstNutsCollection();
         public ObservableCollection<string> OstNutsCollection { get => _ostNutsCollection; set => Set(ref _ostNutsCollection, value); }
 
         //Выборка из базы резьб
@@ -104,11 +106,11 @@ namespace StudCalculator.ViewModel
         #region Работа с базой Шпилек по материалам и исполнения
 
         //Выборка из базы материала шпилек
-        private ObservableCollection<string> _extractMaterialStudCollection = InitializationData.ExtractMaterialStud;
+        private ObservableCollection<string> _extractMaterialStudCollection = InitializationData.ExtractMaterialAndExecutionStud.ExtractMaterialStud();
         public ObservableCollection<string> ExtractMaterialStud { get => _extractMaterialStudCollection; set => Set(ref _extractMaterialStudCollection, value); }
 
         //Выборка из базы исполнений шпилек
-        private ObservableCollection<string> _extractExecutionStudCollection = InitializationData.ExtractExecutionStud;
+        private ObservableCollection<string> _extractExecutionStudCollection = InitializationData.ExtractMaterialAndExecutionStud.ExecutionStud();
         public ObservableCollection<string> ExtractExecutionStud { get => _extractExecutionStudCollection; set => Set(ref _extractExecutionStudCollection, value); }
 
         #endregion
@@ -264,40 +266,40 @@ namespace StudCalculator.ViewModel
         #region Считывание текста с текстбоксов
 
         //Текстбокс для одинаковых нестандартных фланцев
-        private double _nonStandartFlTextRead;
-        public double NonStandartFlTextRead { get => _nonStandartFlTextRead; set => Set(ref _nonStandartFlTextRead, value); }
+        private double? _nonStandartFlTextRead;
+        public double? NonStandartFlTextRead { get => _nonStandartFlTextRead; set => Set(ref _nonStandartFlTextRead, value); }
 
         //Текстбокс для не одинаковых нестандартных фланцев 1 фланец
-        private double _nonStandartFirstFlangeTextRead;
-        public double NonStandartFirstFlangeTextRead { get => _nonStandartFirstFlangeTextRead; set => Set(ref _nonStandartFirstFlangeTextRead, value); }
+        private double? _nonStandartFirstFlangeTextRead;
+        public double? NonStandartFirstFlangeTextRead { get => _nonStandartFirstFlangeTextRead; set => Set(ref _nonStandartFirstFlangeTextRead, value); }
 
         //Текстбокс для не одинаковых нестандартных фланцев 2 фланец
-        private double _nonStandartSecondFlangeTextRead;
-        public double NonStandartSecondFlangeTextRead { get => _nonStandartSecondFlangeTextRead; set => Set(ref _nonStandartSecondFlangeTextRead, value); }
+        private double? _nonStandartSecondFlangeTextRead;
+        public double? NonStandartSecondFlangeTextRead { get => _nonStandartSecondFlangeTextRead; set => Set(ref _nonStandartSecondFlangeTextRead, value); }
 
         //Текстбокс для нестандартных заглушек и крышек
-        private double _nonStandartPlugsTextRead; 
-        public double NonStandartPlugsTextRead { get => _nonStandartPlugsTextRead; set => Set(ref _nonStandartPlugsTextRead, value); }
+        private double? _nonStandartPlugsTextRead; 
+        public double? NonStandartPlugsTextRead { get => _nonStandartPlugsTextRead; set => Set(ref _nonStandartPlugsTextRead, value); }
 
         //Текстбокс для нестандартных заглушек поворотных
-        private double _nonStandartRotaryPlugsTextRead;
-        public double NonStandartRotaryPlugsTextRead { get => _nonStandartRotaryPlugsTextRead; set => Set(ref _nonStandartRotaryPlugsTextRead, value); }
+        private double? _nonStandartRotaryPlugsTextRead;
+        public double? NonStandartRotaryPlugsTextRead { get => _nonStandartRotaryPlugsTextRead; set => Set(ref _nonStandartRotaryPlugsTextRead, value); }
 
         //Текстбокс для кол-ва фланцев
-        private double _sumFlangeTextRead = 0;
-        public double SumFlangeTextRead { get => _sumFlangeTextRead; set => Set(ref _sumFlangeTextRead, value); }
+        private double? _sumFlangeTextRead;
+        public double? SumFlangeTextRead { get => _sumFlangeTextRead; set => Set(ref _sumFlangeTextRead, value); }
 
         //Текстбокс для толщины шайб
-        private double _thicknessWasherTextRead;
-        public double ThicknessWasherTextRead { get => _thicknessWasherTextRead; set => Set(ref _thicknessWasherTextRead, value); }
+        private double? _thicknessWasherTextRead;
+        public double? ThicknessWasherTextRead { get => _thicknessWasherTextRead; set => Set(ref _thicknessWasherTextRead, value); }
 
         //Текстбокс для для толщины прокладок
-        private double _thicknessGasketTextRead = 0;
-        public double ThicknessGasketTextRead { get => _thicknessGasketTextRead; set => Set(ref _thicknessGasketTextRead, value); }
+        private double? _thicknessGasketTextRead;
+        public double? ThicknessGasketTextRead { get => _thicknessGasketTextRead; set => Set(ref _thicknessGasketTextRead, value); }
 
         //Текстбокс для кол-ва шпилек
-        private double _sumStudTextRead;
-        public double SumStudTextRead { get => _sumStudTextRead; set => Set(ref _sumStudTextRead, value); }
+        private double? _sumStudTextRead;
+        public double? SumStudTextRead { get => _sumStudTextRead; set => Set(ref _sumStudTextRead, value); }
 
         #endregion
 
@@ -396,9 +398,9 @@ namespace StudCalculator.ViewModel
                 NumberOfNutsTextboxIsEnable = true;
                 NonStandartDifferentFlangeCheckedIsEnabled = false;
                 ExtractNutsCollection = new DbNutsOst26_2041_96().ExtractOst26_2041_96();
-                NonStandartFlTextRead = 0;
-                SumStudTextRead = 0;
-                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).FirstOrDefault()!;
+                NonStandartFlTextRead = null;
+                SumStudTextRead = null;
+                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).First();
 
             }
             else
@@ -408,8 +410,8 @@ namespace StudCalculator.ViewModel
                 ChoeseNutsThreadComboboxIsEnabled = false;
                 NumberOfNutsTextboxIsEnable = false;
                 ExtractNutsCollection.Clear();
-                NonStandartFlTextRead = 0;
-                SumStudTextRead = 0;
+                NonStandartFlTextRead = null;
+                SumStudTextRead = null;
             }
         }
 
@@ -437,22 +439,12 @@ namespace StudCalculator.ViewModel
                 ExtractNutsCollection = new DbNutsOst26_2041_96().ExtractOst26_2041_96();
                 AllCaps.Clear();
                 ExecutePlugsCollection.Clear();
-                NonStandartFirstFlangeTextRead = 0;
-                NonStandartSecondFlangeTextRead = 0;
-                SumStudTextRead = 0;
-                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).FirstOrDefault()!;
-                switch (StandartRotaryPlugsChecked)
-                {
-                    case true:
-                        NonStandartRotaryPlugsCheckboxIsEnabled = false;
-                        break;
-                }
-                switch (NonStandartRotaryPlugsChecked)
-                {
-                    case true:
-                        StandartRotaryPlugsCheckboxIsEnabled = false;
-                        break;
-                }
+                NonStandartFirstFlangeTextRead = null;
+                NonStandartSecondFlangeTextRead = null;
+                SumStudTextRead = null;
+                ThreadNutsFromComboBox = ExtractNutsCollection.Select(e => e).First();
+                if (StandartRotaryPlugsChecked) NonStandartRotaryPlugsCheckboxIsEnabled = false;
+                if (NonStandartRotaryPlugsChecked) StandartRotaryPlugsCheckboxIsEnabled = false;
             }
             else
             {
@@ -463,23 +455,19 @@ namespace StudCalculator.ViewModel
                 NumberOfNutsTextboxIsEnable = false;
                 NonStandartDifferentFlangeTexboxIsEnabled = false;
                 ExtractNutsCollection.Clear();
-                NonStandartFirstFlangeTextRead = 0;
-                NonStandartSecondFlangeTextRead = 0;
-                SumStudTextRead = 0;
-                switch (StandartRotaryPlugsChecked)
+                NonStandartFirstFlangeTextRead = null;
+                NonStandartSecondFlangeTextRead = null;
+                SumStudTextRead = null;
+                if (StandartRotaryPlugsChecked)
                 {
-                    case true:
-                        StandartPlugsCheckboxIsEnabled = false;
-                        NonStandartPlugsCheckboxIsEnabled = false;
-                        break;
+                    StandartPlugsCheckboxIsEnabled = false;
+                    NonStandartPlugsCheckboxIsEnabled = false;
                 }
 
-                switch (NonStandartRotaryPlugsChecked)
+                if (NonStandartRotaryPlugsChecked)
                 {
-                    case true:
-                        StandartPlugsCheckboxIsEnabled = false;
-                        NonStandartPlugsCheckboxIsEnabled = false;
-                        break;
+                    StandartPlugsCheckboxIsEnabled = false;
+                    NonStandartPlugsCheckboxIsEnabled = false;
                 }
             }
         }
@@ -506,13 +494,13 @@ namespace StudCalculator.ViewModel
                 ExecuteRotaryPlugsCollection.Clear();
                 StandartRotaryPlugsComboboxIsEnabled = false;
                 AllCaps = new DbCapsAtk242000290().DbCapsCollection();
-                StandartPlugsFromComboBox = AllCaps.Select(s => s).FirstOrDefault()!;
-                StandartPlugsExecutionFromComboBox = ExecutePlugsCollection.Select(s => s).FirstOrDefault()!;
+                StandartPlugsFromComboBox = AllCaps.Select(s => s).First();
+                StandartPlugsExecutionFromComboBox = ExecutePlugsCollection.Select(s => s).First();
                 if (SelectionGostFromCombobox == "АТК-26-18-13-96")
                 {
                     ExecGost.Clear();
                     ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollectionForPlug());
-                    ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
+                    ExecutionFromComboBox = ExecGost.Select(e => e).First();
                 }
             }
             else
@@ -528,7 +516,7 @@ namespace StudCalculator.ViewModel
                 {
                     ExecGost.Clear();
                     ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection());
-                    ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
+                    ExecutionFromComboBox = ExecGost.Select(e => e).First();
                 }
             }
         }
@@ -544,14 +532,14 @@ namespace StudCalculator.ViewModel
                 NonStandartPlugsTextboxIsEnabled = true;
                 StandartRotaryPlugsCheckboxIsEnabled = false;
                 NonStandartRotaryPlugsCheckboxIsEnabled = false;
-                NonStandartPlugsTextRead = 0;
+                NonStandartPlugsTextRead = null;
                 ExecuteRotaryPlugsCollection.Clear();
                 StandartRotaryPlugsChecked = false;
                 StandartRotaryPlugsComboboxIsEnabled = false;
                 if (SelectionGostFromCombobox != "АТК-26-18-13-96") return;
                 ExecGost.Clear();
                 ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollectionForPlug());
-                ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
+                ExecutionFromComboBox = ExecGost.Select(e => e).First();
             }
             else
             {
@@ -559,11 +547,11 @@ namespace StudCalculator.ViewModel
                 NonStandartPlugsTextboxIsEnabled = false;
                 StandartRotaryPlugsCheckboxIsEnabled = true;
                 NonStandartRotaryPlugsCheckboxIsEnabled = true;
-                NonStandartPlugsTextRead = 0;
+                NonStandartPlugsTextRead = null;
                 if (SelectionGostFromCombobox != "АТК-26-18-13-96") return;
                 ExecGost.Clear();
                 ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection());
-                ExecutionFromComboBox = ExecGost.Select(e => e).FirstOrDefault()!;
+                ExecutionFromComboBox = ExecGost.Select(e => e).First();
             }
         }
 
@@ -584,7 +572,7 @@ namespace StudCalculator.ViewModel
                 StandartRotaryPlugsComboboxIsEnabled = true;
                 ExecuteRotaryPlugsCollection =
                     new ObservableCollection<string>(new DbRotarPylugATK_26_18_5_93().ExecuteAtk_26_18_5_93());
-                StandartRotaryPlugFromComboBox = ExecuteRotaryPlugsCollection.Select(s => s).FirstOrDefault()!;
+                StandartRotaryPlugFromComboBox = ExecuteRotaryPlugsCollection.Select(s => s).First();
             }
 
             else
@@ -611,13 +599,13 @@ namespace StudCalculator.ViewModel
                 StandartPlugsCheckboxIsEnabled = false;
                 StandartRotaryPlugsCheckboxIsEnabled = false;
                 NonStandartRotaryPlugsTextboxIsEnabled = true;
-                NonStandartRotaryPlugsTextRead = 0;
+                NonStandartRotaryPlugsTextRead = null;
             }
             else
             {
                 StandartRotaryPlugsCheckboxIsEnabled = true;
                 NonStandartRotaryPlugsTextboxIsEnabled = false;
-                NonStandartRotaryPlugsTextRead = 0;
+                NonStandartRotaryPlugsTextRead = null;
                 StandartPlugsCheckboxIsEnabled = true;
                 NonStandartPlugsCheckboxIsEnabled = true;
                 if (NonStandartDifferentFlangeChecked is true)
@@ -650,13 +638,13 @@ namespace StudCalculator.ViewModel
             {
                 StandartThicknessWasherCheckboxIsEnabled = false;
                 NonThicknessWasherTextboxIsEnabled = true;
-                ThicknessWasherTextRead = 0;
+                ThicknessWasherTextRead = null;
             }
             else
             {
                 StandartThicknessWasherCheckboxIsEnabled = true;
                 NonThicknessWasherTextboxIsEnabled = false;
-                ThicknessWasherTextRead = 0;
+                ThicknessWasherTextRead = null;
             }
         }
 
@@ -673,16 +661,16 @@ namespace StudCalculator.ViewModel
             {
                 StandartOctahedralGasketsCheckboxIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = false;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
             }
             else
             {
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = true;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
                 if (SelectionGostFromCombobox != "ГОСТ 28759.4-90" && ExecutionFromComboBox != "Исполнение J") return;
                 NonStandartGasketsTextboxIsEnabled = false;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
 
             }
         }
@@ -696,16 +684,16 @@ namespace StudCalculator.ViewModel
             {
                 StandartOvalGasketsCheckboxIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = false;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
             }
             else
             {
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 NonStandartGasketsTextboxIsEnabled = true;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
                 if (SelectionGostFromCombobox != "ГОСТ 28759.4-90" && ExecutionFromComboBox != "Исполнение J") return;
                 NonStandartGasketsTextboxIsEnabled = false;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
             }
         }
 
@@ -730,6 +718,46 @@ namespace StudCalculator.ViewModel
 
         private void OnOutputValuesFromControlCommandExecuted(object p)
         {
+            #region Choice user data for the calculation
+
+            EnterUsersGostStandrt.GostNamber = SelectionGostFromCombobox;
+            EnterUsersGostStandrt.TapeGost33259 = TypeSelectedFromComboBox;
+            EnterUsersGostStandrt.Pn = PnSelectedFromComboBox;
+            EnterUsersGostStandrt.ExecutionGost = ExecutionFromComboBox;
+            EnterUsersGostStandrt.Dn = DnSelectedFromComboBox;
+            EnterUsersNonStFlData.SimilarFlangeNonSt = NonStandartFlTextRead;
+            EnterUsersNonStFlData.FirstFlangeNonSt = NonStandartFirstFlangeTextRead;
+            EnterUsersNonStFlData.SecondFlangeNonSt = NonStandartSecondFlangeTextRead;
+            EnterUsrsRotaryPlug.RotaryPlugNonSt = NonStandartRotaryPlugsTextRead;
+            EnterUsrsRotaryPlug.RotaryPlugSt = StandartRotaryPlugFromComboBox;
+            EnterUsersPlugAndCaps.PlugAndCapsNonSt = NonStandartPlugsTextRead;
+            EnterUsersPlugAndCaps.PlugAndCapsStAtkOrOst = StandartPlugsFromComboBox;
+            EnterUsersPlugAndCaps.PlugAndCapsStExecution = StandartPlugsExecutionFromComboBox;
+            EnterUsersWashersAndGaskets.WashersNonSt = ThicknessWasherTextRead;
+            EnterUsersWashersAndGaskets.GasketsNonSt = ThicknessGasketTextRead;
+            EnterUsersStud.StudCount = SumStudTextRead;
+            EnterUsersStud.StudExecution = ExecutionStudFromCombobox;
+            EnterUsersStud.StudMaterial = MaterialStudFromCombobox;
+            EnterUsersNuts.ChoiceNutsOst = OstNutsFromComboBox;
+            EnterUsersNuts.ChoiceNutsThread = ThreadNutsFromComboBox;
+
+            #endregion
+
+            #region Setting the additional variables checkbox by the user
+
+            ChoiceUsersStOrNotStFlang.ChoiceUsersSameNotStFlang = NonStandartSameFlangeChecked;
+            ChoiceUsersStOrNotStFlang.ChoiceUsersDiffNonStFlang = NonStandartDifferentFlangeChecked;
+            ChoiceUsersStOrNotStRotPlug.ChoiceUsersStRotPlug = StandartRotaryPlugsChecked;
+            ChoiceUsersStOrNotStRotPlug.ChoiceUsersNotStRotPlug = NonStandartRotaryPlugsChecked;
+            ChoiceUsersStNotStPlugAndCaps.ChoiceUsersStPulgAndCaps = StandartPlugsChecked;
+            ChoiceUsersStNotStPlugAndCaps.ChoiceUsersNotStPlagAndCaps = NonStandartPlugsChecked;
+            ChoiceUsersWashersAndGasket.ChoiceStWashers = StandartThicknessWasherCheckboxChecked;
+            ChoiceUsersWashersAndGasket.ChoiceNotStWashers = NonStandartThicknessWasherCheckboxChecked;
+            ChoiceUsersWashersAndGasket.ChoiceOvalGasket = StandartOvalGasketsCheckboxChecked;
+            ChoiceUsersWashersAndGasket.ChoiceOctaGasket = StandartOctahedralGasketsCheckboxChecked;
+
+            #endregion
+
             var receiptAndDistributionOfDatas = new Dictionary<string, object>
             {
                 {"SelectionGostFromCombobox", SelectionGostFromCombobox},
@@ -818,14 +846,14 @@ namespace StudCalculator.ViewModel
         {
             #region Чтобы не были пустые комбобоксы
 
-            SelectionGostFromCombobox = InitializationData.InitializationDataGost;
-            TypeSelectedFromComboBox = ExecutionType.Select(p => p).FirstOrDefault()!;
-            PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
-            ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
-            DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
-            OstNutsFromComboBox = InitializationData.InitializationDataOstNuts;
-            ExecutionStudFromCombobox = InitializationData.InitializationDataExecutionStud;
-            MaterialStudFromCombobox = InitializationData.InitializationDataMaterialStud;
+            SelectionGostFromCombobox = AllGost.First();
+            TypeSelectedFromComboBox = ExecutionType.First();
+            PnSelectedFromComboBox = ExecutionPn.First();
+            ExecutionFromComboBox = ExecGost.First();
+            DnSelectedFromComboBox = ExecutionDn.First();
+            OstNutsFromComboBox = OstNutsCollection.First();
+            ExecutionStudFromCombobox = ExtractExecutionStud.First();
+            MaterialStudFromCombobox = ExtractMaterialStud.First();
 
             #endregion
 
@@ -896,11 +924,11 @@ namespace StudCalculator.ViewModel
                     ExecutionPn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionPn33259());
                     ExecutionDn = new ObservableCollection<string>(new DbWorkGost33259().ExecutionDn33259());
                     ExecutionType = new ObservableCollection<string>(new DbWorkGost33259().ExecutionType33259());
-                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
-                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
-                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
-                    TypeSelectedFromComboBox = ExecutionType.Select(p => p).FirstOrDefault()!;
-                    ThicknessGasketTextRead = 0;
+                    PnSelectedFromComboBox = ExecutionPn.First();
+                    ExecutionFromComboBox = ExecGost.First();
+                    DnSelectedFromComboBox = ExecutionDn.First();
+                    TypeSelectedFromComboBox = ExecutionType.First();
+                    ThicknessGasketTextRead = null;
                     StandartOvalGasketsCheckboxChecked = false;
                     StandartOctahedralGasketsCheckboxChecked = false;
                     TypeFlangeGostIsEnabled = true;
@@ -921,10 +949,10 @@ namespace StudCalculator.ViewModel
                     ExecGost = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteExecutionsCollection());
                     ExecutionPn = new ObservableCollection<string>(new DbGost28759_3_90().ExecutePnCollection());
                     ExecutionDn = new ObservableCollection<string>(new DbGost28759_3_90().ExecuteDnCollection());
-                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
-                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
-                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
-                    ThicknessGasketTextRead = 0;
+                    PnSelectedFromComboBox = ExecutionPn.First();
+                    ExecutionFromComboBox = ExecGost.First();
+                    DnSelectedFromComboBox = ExecutionDn.First();
+                    ThicknessGasketTextRead = null;
                     StandartOvalGasketsCheckboxChecked = false;
                     StandartOctahedralGasketsCheckboxChecked = false;
                     TypeFlangeGostIsEnabled = false;
@@ -945,10 +973,10 @@ namespace StudCalculator.ViewModel
                     ExecGost = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteExecutionsCollection());
                     ExecutionPn = new ObservableCollection<string>(new DbGost28759_4_90().ExecutePnCollection());
                     ExecutionDn = new ObservableCollection<string>(new DbGost28759_4_90().ExecuteDnCollection());
-                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
-                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
-                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
-                    ThicknessGasketTextRead = 0;
+                    PnSelectedFromComboBox = ExecutionPn.First();
+                    ExecutionFromComboBox = ExecGost.First();
+                    DnSelectedFromComboBox = ExecutionDn.First();
+                    ThicknessGasketTextRead = null;
                     StandartOvalGasketsCheckboxChecked = false;
                     StandartOctahedralGasketsCheckboxChecked = false;
                     TypeFlangeGostIsEnabled = false;
@@ -969,10 +997,10 @@ namespace StudCalculator.ViewModel
                     ExecutionPn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecutePnCollection());
                     ExecutionDn = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteDnCollection());
                     ExecGost = new ObservableCollection<string>(new DbAtk26_18_13_96().ExecuteExecutionsCollection());
-                    PnSelectedFromComboBox = ExecutionPn.Select(p => p).FirstOrDefault()!;
-                    ExecutionFromComboBox = ExecGost.Select(p => p).FirstOrDefault()!;
-                    DnSelectedFromComboBox = ExecutionDn.Select(p => p).FirstOrDefault()!;
-                    ThicknessGasketTextRead = 0;
+                    PnSelectedFromComboBox = ExecutionPn.First();
+                    ExecutionFromComboBox = ExecGost.First();
+                    DnSelectedFromComboBox = ExecutionDn.First();
+                    ThicknessGasketTextRead = null;
                     StandartOvalGasketsCheckboxChecked = false;
                     StandartOctahedralGasketsCheckboxChecked = false;
                     TypeFlangeGostIsEnabled = false;
@@ -995,7 +1023,7 @@ namespace StudCalculator.ViewModel
         {
             if (typeFlange == "Исполнение J")
             {
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
                 StandartOvalGasketsCheckboxChecked = false;
                 StandartOctahedralGasketsCheckboxChecked = false;
                 StandartOvalGasketsCheckboxIsEnabled = true;
@@ -1009,7 +1037,7 @@ namespace StudCalculator.ViewModel
                 NonStandartGasketsTextboxIsEnabled = true;
                 StandartOvalGasketsCheckboxIsEnabled = true;
                 StandartOctahedralGasketsCheckboxIsEnabled = true;
-                ThicknessGasketTextRead = 0;
+                ThicknessGasketTextRead = null;
             }
         }
 
