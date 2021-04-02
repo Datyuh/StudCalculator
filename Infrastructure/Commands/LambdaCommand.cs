@@ -1,5 +1,5 @@
-﻿using StudCalculator.Infrastucture.Commands.Base;
-using System;
+﻿using System;
+using StudCalculator.Infrastructure.Commands.Base;
 
 namespace StudCalculator.Infrastructure.Commands
 {

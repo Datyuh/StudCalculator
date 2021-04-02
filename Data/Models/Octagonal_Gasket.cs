@@ -1,7 +1,7 @@
-namespace StudCalculator
-{
-    using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
+namespace StudCalculator.Data.Models
+{
     public class Octagonal_Gasket
     {
         public int id { get; set; }

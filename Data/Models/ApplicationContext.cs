@@ -1,7 +1,7 @@
-namespace StudCalculator
-{
-    using System.Data.Entity;
+using System.Data.Entity;
 
+namespace StudCalculator.Data.Models
+{
     public class ApplicationContext : DbContext
     {
         public ApplicationContext()

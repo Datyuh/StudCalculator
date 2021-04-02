@@ -1,7 +1,7 @@
-namespace StudCalculator
-{
-    using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
+namespace StudCalculator.Data.Models
+{
     public class OST26_2042_96
     {
         public int id { get; set; }

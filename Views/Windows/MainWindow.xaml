@@ -1,10 +1,9 @@
 ﻿<Window
-    x:Class="StudCalculator.MainWindow"
+    x:Class="StudCalculator.Views.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:StudCalculator.ViewModel"
     Title="{Binding Title}"
     Width="860"
     Height="580"
@@ -85,7 +84,7 @@
             Content="О программе"
             FontSize="14" />
         <Grid
-            Name="GostsChoice"
+            Name="GostsChoiceGrid"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -129,7 +128,7 @@
                 Grid.Column="0"
                 Width="157"
                 Height="30"
-                Margin="10,109,0,0"
+                Margin="10,107,0,0"
                 Padding="6"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -193,7 +192,7 @@
                 Grid.Column="0"
                 Width="178"
                 Height="30"
-                Margin="234,109,0,0"
+                Margin="234,107,0,0"
                 Padding="6"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -242,6 +241,7 @@
             </ComboBox>
         </Grid>
         <Grid
+            Name="NotStFlangeGrid"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -385,6 +385,7 @@
             </Border>
         </Grid>
         <Grid
+            Name="RotarPlugGrid"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -479,6 +480,7 @@
             </Border>
         </Grid>
         <Grid
+            Name="PlugAndCapsGrid"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -642,6 +644,7 @@
             </Border>
         </Grid>
         <Grid
+            Name="NutsGrid"
             Grid.Row="1"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -707,6 +710,7 @@
             </ComboBox>
         </Grid>
         <Grid
+            Name="WashersGrid"
             Grid.Row="1"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -841,6 +845,7 @@
             </Border>
         </Grid>
         <Grid
+            Name="StudGrid"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="2"

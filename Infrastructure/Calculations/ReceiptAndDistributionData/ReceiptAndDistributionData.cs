@@ -35,19 +35,16 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
         #endregion
 
 
-        public ReceiptAndDistributionData(Dictionary<string, object> data, Dictionary<string, bool> dataCheckBox)
+        public ReceiptAndDistributionData()
         {
-            ReceiptAndDistributionOfDatas = data;
-            ReceiptAndDistributionOfDataCheckBox = dataCheckBox;
-
             #region Получения значений для всех ГОСТов
 
-            SelectedPn = data["PnSelectedFromComboBox"].ToString();  //Получения значения PN            
-            SelectedDn = data["DnSelectedFromComboBox"].ToString();  //Получение значения DN            
-            SelectedExecutionFlange = data["ExecutionFromComboBox"].ToString();  //Получение исполнений ГОСТов и тд. введенных пользователем
-            StandartPlugsChecked = dataCheckBox["StandartPlugsChecked"];  //Получение включен ли чекбокс на стандартные крышки
-            NonStandartPlugsChecked = dataCheckBox["NonStandartPlugsChecked"];  //Получение включен ли чекбокс на нестандартные крышки
-            SelectedFromCombobox = data["SelectionGostFromCombobox"].ToString();
+            SelectedPn = ReceiptAndDistributionOfDatas["PnSelectedFromComboBox"].ToString();  //Получения значения PN            
+            SelectedDn = ReceiptAndDistributionOfDatas["DnSelectedFromComboBox"].ToString();  //Получение значения DN            
+            SelectedExecutionFlange = ReceiptAndDistributionOfDatas["ExecutionFromComboBox"].ToString();  //Получение исполнений ГОСТов и тд. введенных пользователем
+            StandartPlugsChecked = ReceiptAndDistributionOfDataCheckBox["StandartPlugsChecked"];  //Получение включен ли чекбокс на стандартные крышки
+            NonStandartPlugsChecked = ReceiptAndDistributionOfDataCheckBox["NonStandartPlugsChecked"];  //Получение включен ли чекбокс на нестандартные крышки
+            SelectedFromCombobox = ReceiptAndDistributionOfDatas["SelectionGostFromCombobox"].ToString();
 
             #endregion
         }

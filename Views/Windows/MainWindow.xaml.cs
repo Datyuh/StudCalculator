@@ -5,18 +5,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using StudCalculator.ViewModel;
 
-namespace StudCalculator
+namespace StudCalculator.Views.Windows
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+            GostsChoiceGrid.DataContext = new GostsWindowViewModel();
+            NotStFlangeGrid.DataContext = new NotStFlangeWindowViewModel();
+            RotarPlugGrid.DataContext = new RotarPlugWindowViewModel();
+            PlugAndCapsGrid.DataContext = new PlugAndCapsWindowViewModel();
+            NutsGrid.DataContext = new NutsWindowViewModel();
+            WashersGrid.DataContext = new WashAndGasWindowViewModel();
+            StudGrid.DataContext = new StudWindowViewModel();
         }
 
         //Подсчёт числа вхождений десятичного разделителя для проверки его

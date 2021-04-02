@@ -1,8 +1,8 @@
-namespace StudCalculator.Data
-{
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace StudCalculator.Data.DbModelFromVnmData
+{
     public class OGK_StudCalculator_ATK_26_18_13_96
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
