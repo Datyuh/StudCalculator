@@ -1,23 +1,36 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using StudCalculator.Data.DBWork;
+using StudCalculator.Infrastructure.ChoiceUsersCheckBox;
 using StudCalculator.Infrastructure.Commands;
+using StudCalculator.Infrastructure.EnterUsersData;
 using StudCalculator.ViewModel.Base;
 
 namespace StudCalculator.ViewModel
 {
     internal class PlugAndCapsWindowViewModel : BaseViewModel
     {
+        private EnterUsersPlugAndCaps EnterDataInComboBox = new();
         #region Функции проверки установки флага в Чекбоксах
 
         //Чекбокс для стандартных заглушек
         private bool _standartPlugsChecked;
-        public bool StandartPlugsChecked { get => _standartPlugsChecked; set => Set(ref _standartPlugsChecked, value); }
+
+        public bool StandartPlugsChecked { get => _standartPlugsChecked; set
+            {
+                Set(ref _standartPlugsChecked, value);
+                ChoiceUsersStNotStPlugAndCaps.ChoiceUsersStPulgAndCaps = StandartPlugsChecked;
+            }
+        }
 
         //Чекбокс для нестандартных заглушек
         private bool _nonStandartPlugsChecked;
-        public bool NonStandartPlugsChecked { get => _nonStandartPlugsChecked; set => Set(ref _nonStandartPlugsChecked, value); }
+        public bool NonStandartPlugsChecked { get => _nonStandartPlugsChecked; set
+            {
+                Set(ref _nonStandartPlugsChecked, value);
+                ChoiceUsersStNotStPlugAndCaps.ChoiceUsersNotStPlagAndCaps = NonStandartPlugsChecked;
+            }
+        }
 
         #endregion
 
@@ -49,11 +62,17 @@ namespace StudCalculator.ViewModel
 
         //Выборка из базы норматива
         private ObservableCollection<string> _allCaps = new();
+
         public ObservableCollection<string> AllCaps { get => _allCaps; set => Set(ref _allCaps, value); }
 
         //Выборка из нормативов исполнений
         private ObservableCollection<string> _executePlugsCollection = new();
-        public ObservableCollection<string> ExecutePlugsCollection { get => _executePlugsCollection; set => Set(ref _executePlugsCollection, value); }
+        public ObservableCollection<string> ExecutePlugsCollection { get => _executePlugsCollection; set
+            {
+                Set(ref _executePlugsCollection, value);
+                StandartPlugsExecutionFromComboBox = ExecutePlugsCollection.FirstOrDefault();
+            }
+        }
 
         #endregion
 
@@ -61,11 +80,22 @@ namespace StudCalculator.ViewModel
 
         //Получение значений для заглушек и крышек
         private string _standartPlugsFromComboBox;
-        public string StandartPlugsFromComboBox { get => _standartPlugsFromComboBox; set => Set(ref _standartPlugsFromComboBox, value); }
+        public string StandartPlugsFromComboBox { get => _standartPlugsFromComboBox; set
+            {
+                Set(ref _standartPlugsFromComboBox, value);
+                EnterUsersPlugAndCaps.PlugAndCapsStAtkOrOst = StandartPlugsFromComboBox;
+                ExecutePlugsCollection = EnterDataInComboBox.ExecutePlugsCollections();
+            }
+        }
 
         //Получение значений исполнения для заглушек и крышек
         private string _standartPlugsExecutionFromComboBox;
-        public string StandartPlugsExecutionFromComboBox { get => _standartPlugsExecutionFromComboBox; set => Set(ref _standartPlugsExecutionFromComboBox, value); }
+        public string StandartPlugsExecutionFromComboBox { get => _standartPlugsExecutionFromComboBox; set
+            {
+                Set(ref _standartPlugsExecutionFromComboBox, value);
+                EnterUsersPlugAndCaps.PlugAndCapsStExecution = StandartPlugsExecutionFromComboBox;
+            }
+        }
 
         #endregion
 
@@ -73,15 +103,28 @@ namespace StudCalculator.ViewModel
 
         //Текстбокс для нестандартных заглушек
         private bool _nonStandartPlugsTextboxEsInEnabled;
-        public bool NonStandartPlugsTextboxIsEnabled { get => _nonStandartPlugsTextboxEsInEnabled; set => Set(ref _nonStandartPlugsTextboxEsInEnabled, value); }
+        public bool NonStandartPlugsTextboxIsEnabled { get => _nonStandartPlugsTextboxEsInEnabled;
+            set => Set(ref _nonStandartPlugsTextboxEsInEnabled, value);
+        }
 
         //Текстбокс для нестандартных заглушек и крышек
         private double? _nonStandartPlugsTextRead;
-        public double? NonStandartPlugsTextRead { get => _nonStandartPlugsTextRead; set => Set(ref _nonStandartPlugsTextRead, value); }
+        public double? NonStandartPlugsTextRead { get => _nonStandartPlugsTextRead; set
+            {
+                Set(ref _nonStandartPlugsTextRead, value);
+                EnterUsersPlugAndCaps.PlugAndCapsNonSt = NonStandartPlugsTextRead;
+            }
+        }
 
         //Текстбокс для кол-ва фланцев
         private double? _sumFlangeTextRead;
-        public double? SumFlangeTextRead { get => _sumFlangeTextRead; set => Set(ref _sumFlangeTextRead, value); }
+
+        public double? SumFlangeTextRead { get => _sumFlangeTextRead; set
+            {
+                Set(ref _sumFlangeTextRead, value);
+                EnterUsersPlugAndCaps.SumFlangeTextRead = SumFlangeTextRead;
+            }
+        }
 
         #endregion
 
@@ -92,6 +135,12 @@ namespace StudCalculator.ViewModel
 
         private void OnStandartPlugsCommandExecuted(object p)
         {
+            new ChoiceUsersStNotStPlugAndCaps().ChoicesUsersStPulgAndCaps();
+            AllCaps = EnterDataInComboBox.AllCapsCollection();
+            StandartPlugsFromComboBox = AllCaps.FirstOrDefault();
+            NonStandartPlugsCheckboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.NonStandartPlugsCheckboxIsEnabled;
+            StandartPlugsComboboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.StandartPlugsComboboxIsEnabled;
+            StandartPlugsExecutionComboboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.StandartPlugsExecutionComboboxIsEnabled;
         }
 
         public ICommand NonstandartPlugsCommand { get; }
@@ -99,6 +148,8 @@ namespace StudCalculator.ViewModel
 
         private void OnNonstandartPlugsCommandExecuted(object p)
         {
+            NonStandartPlugsTextboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.NonStandartPlugsTextboxIsEnabled;
+            StandartPlugsCheckboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.StandartPlugsCheckboxIsEnabled;
         }
 
         #endregion

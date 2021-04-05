@@ -2,7 +2,6 @@
 using System.Linq;
 using StudCalculator.Data.DBWork;
 using StudCalculator.Infrastructure.EnterUsersData;
-using StudCalculator.Model;
 using StudCalculator.ViewModel.Base;
 
 namespace StudCalculator.ViewModel
@@ -36,12 +35,13 @@ namespace StudCalculator.ViewModel
 
         private string _selectionGostFromCombobox;
         public string SelectionGostFromCombobox { get => _selectionGostFromCombobox;
-            set 
+            set
             {
                 Set(ref _selectionGostFromCombobox, value);
+                var enterUsersGostStandrt = new EnterUsersGostStandrt();
                 EnterUsersGostStandrt.GostNamber = SelectionGostFromCombobox;
-                EnterUsersGostStandrt.EnterUsersGostStandrts();
-                ExecutionType = EnterUsersGostStandrt.TapeGost();
+                enterUsersGostStandrt.EnterUsersGostStandrts();
+                ExecutionType = enterUsersGostStandrt.TapeGost();
                 TypeSelectedFromComboBox = ExecutionType.FirstOrDefault();
                 ExecGost = EnterUsersGostStandrt.ExecutionGostData;
                 ExecutionFromComboBox = ExecGost.FirstOrDefault();
@@ -49,7 +49,7 @@ namespace StudCalculator.ViewModel
                 DnSelectedFromComboBox = ExecutionDn.FirstOrDefault();
                 ExecutionPn = EnterUsersGostStandrt.ExecutionPnData;
                 PnSelectedFromComboBox = ExecutionPn.FirstOrDefault();
-                TypeFlangeGostIsEnabled = EnterUsersGostStandrt.TypeFlangesIsEnabled();
+                TypeFlangeGostIsEnabled = enterUsersGostStandrt.TypeFlangesIsEnabled();
             }
         }
 

@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using StudCalculator.Infrastructure.Commands;
+﻿using StudCalculator.Infrastructure.Commands;
 using StudCalculator.ViewModel.Base;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
-using StudCalculator.Data.DBWork;
 using StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData;
 using System.Windows.Media;
 using StudCalculator.Views.Windows;
@@ -60,46 +57,6 @@ namespace StudCalculator.ViewModel
 
         private void OnOutputValuesFromControlCommandExecuted(object p)
         {
-            //#region Choice user data for the calculation
-
-            //EnterUsersGostStandrt.GostNamber = SelectionGostFromCombobox;
-            //EnterUsersGostStandrt.TapeGost33259 = TypeSelectedFromComboBox;
-            //EnterUsersGostStandrt.Pn = PnSelectedFromComboBox;
-            //EnterUsersGostStandrt.ExecutionGost = ExecutionFromComboBox;
-            //EnterUsersGostStandrt.Dn = DnSelectedFromComboBox;
-            //EnterUsersNonStFlData.SimilarFlangeNonSt = NonStandartFlTextRead;
-            //EnterUsersNonStFlData.FirstFlangeNonSt = NonStandartFirstFlangeTextRead;
-            //EnterUsersNonStFlData.SecondFlangeNonSt = NonStandartSecondFlangeTextRead;
-            //EnterUsrsRotaryPlug.RotaryPlugNonSt = NonStandartRotaryPlugsTextRead;
-            //EnterUsrsRotaryPlug.RotaryPlugSt = StandartRotaryPlugFromComboBox;
-            //EnterUsersPlugAndCaps.PlugAndCapsNonSt = NonStandartPlugsTextRead;
-            //EnterUsersPlugAndCaps.PlugAndCapsStAtkOrOst = StandartPlugsFromComboBox;
-            //EnterUsersPlugAndCaps.PlugAndCapsStExecution = StandartPlugsExecutionFromComboBox;
-            //EnterUsersWashersAndGaskets.WashersNonSt = ThicknessWasherTextRead;
-            //EnterUsersWashersAndGaskets.GasketsNonSt = ThicknessGasketTextRead;
-            //EnterUsersStud.StudCount = SumStudTextRead;
-            //EnterUsersStud.StudExecution = ExecutionStudFromCombobox;
-            //EnterUsersStud.StudMaterial = MaterialStudFromCombobox;
-            //EnterUsersNuts.ChoiceNutsOst = OstNutsFromComboBox;
-            //EnterUsersNuts.ChoiceNutsThread = ThreadNutsFromComboBox;
-
-            //#endregion
-
-            //#region Setting the additional variables checkbox by the user
-
-            //ChoiceUsersStOrNotStFlang.ChoiceUsersSameNotStFlang = NonStandartSameFlangeChecked;
-            //ChoiceUsersStOrNotStFlang.ChoiceUsersDiffNonStFlang = NonStandartDifferentFlangeChecked;
-            //ChoiceUsersStOrNotStRotPlug.ChoiceUsersStRotPlug = StandartRotaryPlugsChecked;
-            //ChoiceUsersStOrNotStRotPlug.ChoiceUsersNotStRotPlug = NonStandartRotaryPlugsChecked;
-            //ChoiceUsersStNotStPlugAndCaps.ChoiceUsersStPulgAndCaps = StandartPlugsChecked;
-            //ChoiceUsersStNotStPlugAndCaps.ChoiceUsersNotStPlagAndCaps = NonStandartPlugsChecked;
-            //ChoiceUsersWashersAndGasket.ChoiceStWashers = StandartThicknessWasherCheckboxChecked;
-            //ChoiceUsersWashersAndGasket.ChoiceNotStWashers = NonStandartThicknessWasherCheckboxChecked;
-            //ChoiceUsersWashersAndGasket.ChoiceOvalGasket = StandartOvalGasketsCheckboxChecked;
-            //ChoiceUsersWashersAndGasket.ChoiceOctaGasket = StandartOctahedralGasketsCheckboxChecked;
-
-            //#endregion
-
             var resultTextEnter = new ReceiptAndDistributionData()
                 .ResultAllGostAndNonGosts;
 

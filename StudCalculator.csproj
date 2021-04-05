@@ -175,7 +175,7 @@
     <Compile Include="Infrastructure\Calculations\StandartGost28759_4_90.cs" />
     <Compile Include="Infrastructure\Calculations\StandartGost33259.cs" />
     <Compile Include="Infrastructure\ChoiceUsersCheckBox\ChoiceUsersStNotStPlugAndCaps.cs" />
-    <Compile Include="Infrastructure\ChoiceUsersCheckBox\ChoiceUsersStOrNotStFlang.cs" />
+    <Compile Include="Infrastructure\ChoiceUsersCheckBox\ChoiceUsersNotStFlang.cs" />
     <Compile Include="Infrastructure\ChoiceUsersCheckBox\ChoiceUsersStOrNotStRotPlug.cs" />
     <Compile Include="Infrastructure\ChoiceUsersCheckBox\ChoiceUsersWashersAndGasket.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
@@ -202,7 +202,7 @@
     <Compile Include="Data\Models\GOST_28759_3_90.cs" />
     <Compile Include="Data\Models\GOST_28759_4_90.cs" />
     <Compile Include="Infrastructure\EnterUsersData\EnterUsersGostStandrt.cs" />
-    <Compile Include="Infrastructure\EnterUsersData\EnterUsersNonStFlData.cs" />
+    <Compile Include="Infrastructure\EnterUsersData\EnterUsersNonStFlange.cs" />
     <Compile Include="Infrastructure\EnterUsersData\EnterUsersNuts.cs" />
     <Compile Include="Infrastructure\EnterUsersData\EnterUsersStud.cs" />
     <Compile Include="Infrastructure\EnterUsersData\EnterUsersPlugAndCaps.cs" />

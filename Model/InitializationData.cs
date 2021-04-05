@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using StudCalculator.Data.DBWork;
+﻿using StudCalculator.Data.DBWork;
 
 namespace StudCalculator.Model
 {

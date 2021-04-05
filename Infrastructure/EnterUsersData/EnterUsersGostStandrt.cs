@@ -3,7 +3,7 @@ using StudCalculator.Data.DBWork;
 
 namespace StudCalculator.Infrastructure.EnterUsersData
 {
-    public static class EnterUsersGostStandrt
+    public class EnterUsersGostStandrt
     {
         private static readonly DbWorkGost33259 DbWorkGost33259 = new();
         private static readonly DbGost28759_3_90 DbGost28759390 = new();
@@ -19,7 +19,7 @@ namespace StudCalculator.Infrastructure.EnterUsersData
         public static ObservableCollection<string> ExecutionDnData { get; set; }
         public static ObservableCollection<string> ExecutionPnData { get; set; }
 
-        public static void EnterUsersGostStandrts()
+        public virtual void EnterUsersGostStandrts()
         {
             switch (GostNamber)
             {
@@ -54,7 +54,7 @@ namespace StudCalculator.Infrastructure.EnterUsersData
             }
         }
 
-        public static ObservableCollection<string> TapeGost()
+        public virtual ObservableCollection<string> TapeGost()
         {
             if (GostNamber.Equals("ГОСТ 33259-2015 Ряд 1"))
             {
@@ -63,7 +63,7 @@ namespace StudCalculator.Infrastructure.EnterUsersData
             return new();
         }
 
-        public static bool TypeFlangesIsEnabled()
+        public virtual bool TypeFlangesIsEnabled()
         {
             if (GostNamber.Equals("ГОСТ 33259-2015 Ряд 1"))
             {
