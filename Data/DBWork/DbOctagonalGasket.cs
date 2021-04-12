@@ -9,10 +9,17 @@ namespace StudCalculator.Data.DBWork
 
         public double ExecutedOctogonalGasket(string pn, string dn)
         {
-            var executedOctogonalGasket =
+            try
+            {
+                var executedOctogonalGasket =
                 Convert.ToDouble(_db.OGK_StudCalculator_Octagonal_Gasket.Where(p => p.PN == pn && p.DN == dn)
                     .Select(p => p.c).First());
-            return executedOctogonalGasket;
+                return executedOctogonalGasket;
+            }
+            catch (Exception)
+            {
+                return double.NaN;
+            }
         }
     }
 }

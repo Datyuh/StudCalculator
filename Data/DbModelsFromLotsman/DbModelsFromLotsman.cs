@@ -37,6 +37,8 @@ namespace StudCalculator.Data.DbModelsFromLotsman
             }
             catch (InvalidOperationException)
             {
+                MessageBox.Show("А кто это у нас не смотрит в ГОСТы?", "Упс! Ошибочка", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 return "Вывод результатов...";
             }
         }
