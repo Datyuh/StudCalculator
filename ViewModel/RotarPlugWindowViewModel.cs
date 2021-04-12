@@ -10,6 +10,9 @@ namespace StudCalculator.ViewModel
 {
     class RotarPlugWindowViewModel : BaseViewModel
     {
+        internal static bool StRotPlugCheckIsEnabled { get; set; }
+        internal static bool NonStRotPlugCheckIsEnabled { get; set; }
+
         //Получение значений для заглушек поворотных
         private string _standartRotaryPlugFromComboBox;
         public string StandartRotaryPlugFromComboBox { get => _standartRotaryPlugFromComboBox; set

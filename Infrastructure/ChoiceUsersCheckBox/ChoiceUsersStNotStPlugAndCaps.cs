@@ -1,4 +1,6 @@
-﻿namespace StudCalculator.Infrastructure.ChoiceUsersCheckBox
+﻿using StudCalculator.ViewModel;
+
+namespace StudCalculator.Infrastructure.ChoiceUsersCheckBox
 {
     internal class ChoiceUsersStNotStPlugAndCaps
     {
@@ -26,6 +28,25 @@
                     NonStandartPlugsCheckboxIsEnabled = true;
                     StandartPlugsComboboxIsEnabled = false;
                     StandartPlugsExecutionComboboxIsEnabled = false;
+                    break;
+                }
+            }
+        }
+
+        internal virtual void ChoicesUsersNotStPulgAndCaps()
+        {
+            switch (ChoiceUsersNotStPlagAndCaps)
+            {
+                case true:
+                {
+                    StandartPlugsCheckboxIsEnabled = false;
+                    NonStandartPlugsTextboxIsEnabled = true;
+                    break;
+                }
+                case false:
+                {
+                    StandartPlugsCheckboxIsEnabled = true;
+                    NonStandartPlugsTextboxIsEnabled = false;
                     break;
                 }
             }

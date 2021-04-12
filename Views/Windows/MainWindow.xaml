@@ -418,7 +418,7 @@
                 FontFamily="Calibri"
                 FontSize="14"
                 IsChecked="{Binding StandartRotaryPlugsChecked}"
-                IsEnabled="{Binding StandartRotaryPlugsCheckboxIsEnabled}" />
+                IsEnabled="{Binding StandartRotaryPlugsCheckboxIsEnabled, Mode=TwoWay}" />
             <CheckBox
                 x:Name="NonStandardRotaryPlug"
                 Grid.Column="0"
@@ -432,7 +432,7 @@
                 FontFamily="Calibri"
                 FontSize="14"
                 IsChecked="{Binding NonStandartRotaryPlugsChecked}"
-                IsEnabled="{Binding NonStandartRotaryPlugsCheckboxIsEnabled}" />
+                IsEnabled="{Binding NonStandartRotaryPlugsCheckboxIsEnabled, Mode=TwoWay}" />
             <ComboBox
                 x:Name="StandardRotaryPlugCombo"
                 Grid.Column="0"

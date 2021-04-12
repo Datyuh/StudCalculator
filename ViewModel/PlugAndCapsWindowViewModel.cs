@@ -10,7 +10,8 @@ namespace StudCalculator.ViewModel
 {
     internal class PlugAndCapsWindowViewModel : BaseViewModel
     {
-        private EnterUsersPlugAndCaps EnterDataInComboBox = new();
+        private EnterUsersPlugAndCaps _enterDataInComboBox = new();
+
         #region Функции проверки установки флага в Чекбоксах
 
         //Чекбокс для стандартных заглушек
@@ -84,7 +85,7 @@ namespace StudCalculator.ViewModel
             {
                 Set(ref _standartPlugsFromComboBox, value);
                 EnterUsersPlugAndCaps.PlugAndCapsStAtkOrOst = StandartPlugsFromComboBox;
-                ExecutePlugsCollection = EnterDataInComboBox.ExecutePlugsCollections();
+                ExecutePlugsCollection = _enterDataInComboBox.ExecutePlugsCollections();
             }
         }
 
@@ -136,7 +137,7 @@ namespace StudCalculator.ViewModel
         private void OnStandartPlugsCommandExecuted(object p)
         {
             new ChoiceUsersStNotStPlugAndCaps().ChoicesUsersStPulgAndCaps();
-            AllCaps = EnterDataInComboBox.AllCapsCollection();
+            AllCaps = _enterDataInComboBox.AllCapsCollection();
             StandartPlugsFromComboBox = AllCaps.FirstOrDefault();
             NonStandartPlugsCheckboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.NonStandartPlugsCheckboxIsEnabled;
             StandartPlugsComboboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.StandartPlugsComboboxIsEnabled;
@@ -148,6 +149,7 @@ namespace StudCalculator.ViewModel
 
         private void OnNonstandartPlugsCommandExecuted(object p)
         {
+            new ChoiceUsersStNotStPlugAndCaps().ChoicesUsersNotStPulgAndCaps();
             NonStandartPlugsTextboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.NonStandartPlugsTextboxIsEnabled;
             StandartPlugsCheckboxIsEnabled = ChoiceUsersStNotStPlugAndCaps.StandartPlugsCheckboxIsEnabled;
         }
