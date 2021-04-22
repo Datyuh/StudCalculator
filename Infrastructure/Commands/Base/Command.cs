@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace StudCalculator.Infrastucture.Commands.Base
+namespace StudCalculator.Infrastructure.Commands.Base
 {
     internal abstract class Command : ICommand
     {

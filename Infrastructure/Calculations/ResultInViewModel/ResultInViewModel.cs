@@ -53,7 +53,7 @@ namespace StudCalculator.Infrastructure.Calculations.ResultInViewModel
                 {
                     string resultInMainWindow = new DbModelsFromLotsman(resultChoese).ResultFromGost;
 
-                    return resultInMainWindow == string.Empty ? resultInMainWindows : resultInMainWindow;
+                    return resultInMainWindow == "Вывод результатов..." ? resultInMainWindows : resultInMainWindow;
                 }
 
                 MessageBox.Show("Не все данные были введены", "Упс! Ошибочка", MessageBoxButton.OK,

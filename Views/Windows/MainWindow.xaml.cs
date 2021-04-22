@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using StudCalculator.ViewModel;
 
-namespace StudCalculator
+namespace StudCalculator.Views.Windows
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

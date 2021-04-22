@@ -307,8 +307,6 @@ namespace StudCalculator.Infrastructure.Calculations.ReceiptAndDistributionData
                 {
                     { "NonStandartFirstFlangeTextRead", ReceiptAndDistributionOfDatas["NonStandartFirstFlangeTextRead"] },
                     { "NonStandartSecondFlangeTextRead", ReceiptAndDistributionOfDatas["NonStandartSecondFlangeTextRead"] },
-                    { "StandartPlugsChecked", StandartPlugsChecked},
-                    { "NonStandartPlugsChecked", NonStandartPlugsChecked},
                 };
 
                 double resultInMainWindow = new NonStandartFlangeDifferent(nonStandartSameFalange).B;

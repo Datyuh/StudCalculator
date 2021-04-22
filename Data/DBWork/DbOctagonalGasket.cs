@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace StudCalculator.Data.DBWork
@@ -20,6 +21,12 @@ namespace StudCalculator.Data.DBWork
             {
                 return double.NaN;
             }
+        }
+
+        public ObservableCollection<object> OctagonalGasketsCollection()
+        {
+            var octagonalGasketsCollection = new ObservableCollection<object>(_db.OGK_StudCalculator_Octagonal_Gasket.Select(p => p).Where(p => p != null));
+            return octagonalGasketsCollection;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace StudCalculator.Infrastructure.Calculations
         {
             var b = 
                 Convert.ToDouble(DataFromReceiptAndDistribution["NonStandartFirstFlangeTextRead"]) + 
-                Convert.ToDouble(DataFromReceiptAndDistribution["NonStandartFirstFlangeTextRead"]);
+                Convert.ToDouble(DataFromReceiptAndDistribution["NonStandartSecondFlangeTextRead"]);
             return b;
         }
     }

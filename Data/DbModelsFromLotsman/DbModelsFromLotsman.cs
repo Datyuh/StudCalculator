@@ -37,8 +37,9 @@ namespace StudCalculator.Data.DbModelsFromLotsman
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("А кто это у нас не смотрит в ГОСТы?", "Упс! Ошибочка", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                MessageBox.Show(
+                    "Проверте корректность введенных вами данных!\nЕсли данные были введены правильно, возможно," +
+                    "\nчто стандартной шпильки с такими параметрами нет в Лоцман.", "Ошибочк", MessageBoxButton.OK, MessageBoxImage.Information);
                 return "Вывод результатов...";
             }
         }
