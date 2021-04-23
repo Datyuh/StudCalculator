@@ -18,7 +18,7 @@
             AutoGenerateColumns="False"
             Background="White"
             BorderThickness="2"
-            FontFamily="Calibri"
+            FontFamily="Times New Roman"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
             ItemsSource="{Binding OvalOrOctagGasket, Mode=TwoWay}"

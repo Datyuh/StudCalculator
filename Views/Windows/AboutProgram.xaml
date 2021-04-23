@@ -6,36 +6,47 @@
     xmlns:local="clr-namespace:StudCalculator.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="О программе"
-    Width="544"
-    Height="350"
+    Width="540"
+    Height="300"
+    AllowsTransparency="True"
     Icon="Stud_Calculator.ico"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="ToolWindow"
-    mc:Ignorable="d">
-    <Grid Background="#FFCFCFCF">
-        <TextBlock
-            Margin="250,10,10,60"
-            Padding="3"
-            Background="White"
-            TextWrapping="Wrap"><Span><Run Text="Название: Калькулятор монтажных проушин" />
-            </Span><LineBreak /><Run Text="Версия v2.0.1" />
-            <LineBreak /><LineBreak /><Span><Run Text="Автор:" />
-            </Span><LineBreak /><Span><Run Text="     Учаев Алексей Владимирович" />
-            </Span><LineBreak /><LineBreak /><Span><Run Text="Телефон: " /></Span>
-            <LineBreak /><Run Text="      73-19 " /><LineBreak /><LineBreak />
-            <Span><Run Text="ВАЖНО!!!" /></Span><LineBreak /><Span><Run Text="Программа находится в тестовом режиме." />
-            </Span><LineBreak /><Span><Run Text="Если возникнут вопросы или предложения " />
-            </Span><LineBreak /><Span><Run Text="обращаться по телефону указанному выше." />
-            </Span></TextBlock>
-        <Image Margin="10,10,291,60" Source="Agent_007.png" />
-        <Button
-            Margin="385,272,10,10"
-            Click="Button_Click"
-            Content="Выход"
-            FontFamily="Calibri"
-            FontSize="14"
-            RenderTransformOrigin="0.559,0.465" />
-
+    WindowStyle="None"
+    mc:Ignorable="d" Background="{x:Null}">
+    <Grid>
+        <Border CornerRadius="10">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.3" Color="#FF515D6D" />
+                    <GradientStop Offset="0.6" Color="#FF3E4249" />
+                    <GradientStop Offset="1" Color="#FF282C34" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+            <TextBlock
+                Margin="260,20,10,60"
+                Padding="3"
+                Background="Transparent"
+                TextWrapping="Wrap" Foreground="White"><Span><Run Text="Название: Калькулятор монтажных проушин" />
+                </Span><LineBreak /><Run Text="Версия v2.0.1" />
+                <LineBreak /><LineBreak /><Span><Run Text="Автор:" />
+                </Span><LineBreak /><Span><Run Text="     Учаев Алексей Владимирович" />
+                </Span><LineBreak /><LineBreak /><Span><Run Text="Телефон: " /></Span>
+                <LineBreak /><Run Text="      73-19 " /><LineBreak /><LineBreak />
+                <Span><Run Text="ВАЖНО!!!" /></Span><LineBreak /><Span><Run Text="Программа находится в тестовом режиме." />
+                </Span><LineBreak /><Span><Run Text="Если возникнут вопросы или предложения " />
+                </Span><LineBreak /><Span><Run Text="обращаться по телефону указанному выше." />
+                </Span></TextBlock>
+            <Image Margin="10,20,290,40" Source="Agent_007.png" />
+            <Button
+                Margin="385,260,10,10"
+                Click="Button_Click"
+                Content="Выход"
+                FontFamily="Times New Roman"
+                FontSize="14"
+                RenderTransformOrigin="0.559,0.465" />
+            </Grid>
+        </Border>
     </Grid>
 </Window>

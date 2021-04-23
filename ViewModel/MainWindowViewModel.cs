@@ -391,8 +391,6 @@ namespace StudCalculator.ViewModel
         {
             if (NonStandartSameFlangeChecked is true)
             {
-                NoStFalangeInfo noStFalangeInfo = new NoStFalangeInfo();
-                noStFalangeInfo.ShowDialog();
                 NonStandartFlTextIsEnabled = true;
                 ChoeseNutsThreadComboboxIsEnabled = true;
                 NumberOfNutsTextboxIsEnable = true;
@@ -423,8 +421,6 @@ namespace StudCalculator.ViewModel
         {
             if (NonStandartDifferentFlangeChecked is true)
             {
-                NoStFalangeInfo noStFalangeInfo = new NoStFalangeInfo();
-                noStFalangeInfo.ShowDialog();
                 ChoeseNutsThreadComboboxIsEnabled = true;
                 NumberOfNutsTextboxIsEnable = true;
                 NonStandartDifferentFlangeTexboxIsEnabled = true;
@@ -675,6 +671,11 @@ namespace StudCalculator.ViewModel
         {
             if (StandartOvalGasketsCheckboxChecked is true)
             {
+                if (NonStandartSameFlangeChecked is true || NonStandartDifferentFlangeChecked is true)
+                {
+                    NoStFalangeInfo noStFalangeInfo = new NoStFalangeInfo();
+                    noStFalangeInfo.ShowDialog();
+                }
                 StandartOctahedralGasketsCheckboxIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = false;
                 ThicknessGasketTextRead = 0;
@@ -698,6 +699,11 @@ namespace StudCalculator.ViewModel
         {
             if (StandartOctahedralGasketsCheckboxChecked is true)
             {
+                if (NonStandartSameFlangeChecked is true || NonStandartDifferentFlangeChecked is true)
+                {
+                    NoStFalangeInfo noStFalangeInfo = new NoStFalangeInfo();
+                    noStFalangeInfo.ShowDialog();
+                }
                 StandartOvalGasketsCheckboxIsEnabled = false;
                 NonStandartGasketsTextboxIsEnabled = false;
                 ThicknessGasketTextRead = 0;

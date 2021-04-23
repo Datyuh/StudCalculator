@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using StudCalculator.Infrastructure.Commands;
 using StudCalculator.ViewModel.Base;
 using StudCalculator.Views.Windows;
@@ -7,6 +8,14 @@ namespace StudCalculator.ViewModel
 {
     class InfoNotStFlange : BaseViewModel
     {
+        public Action CloseAction { get; set; }
+
+        public ICommand ExitCommand { get; }
+        private bool CanExitCommandExecute(object p) => true;
+        private void OnExitCommandExecuted(object p)
+        {
+            CloseAction();
+        }
 
         public ICommand OvalGasketCommand { get; }
         private bool CanOvalGasketCommandExecute(object p) => true;
@@ -31,6 +40,7 @@ namespace StudCalculator.ViewModel
             OvalGasketCommand = new LambdaCommand(OnOvalGasketCommandExecuted, CanOvalGasketCommandExecute);
             OctagonalGasketCommand =
                 new LambdaCommand(OnOctagonalGasketCommandExecuted, CanOctagonalGasketCommandExecute);
+            ExitCommand = new LambdaCommand(OnExitCommandExecuted, CanExitCommandExecute);
         }
     }
 }

@@ -23,7 +23,10 @@ namespace StudCalculator.Views.Windows
         public NoStFalangeInfo()
         {
             InitializeComponent();
-            DataContext = new InfoNotStFlange();
+            InfoNotStFlange infoNotStFlange = new InfoNotStFlange();
+            DataContext = infoNotStFlange;
+            infoNotStFlange.CloseAction = Close;
+
         }
     }
 }

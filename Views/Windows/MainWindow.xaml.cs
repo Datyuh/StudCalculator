@@ -79,5 +79,19 @@ namespace StudCalculator.Views.Windows
             StripText.BorderBrush = StripText.IsEnabled == false ? Brushes.Gray : new SolidColorBrush(Color.FromRgb(238, 135, 32));
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           WindowState = WindowState.Minimized;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Border_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
