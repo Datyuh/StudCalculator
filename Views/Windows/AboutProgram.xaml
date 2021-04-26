@@ -9,13 +9,17 @@
     Width="540"
     Height="300"
     AllowsTransparency="True"
+    Background="{x:Null}"
     Icon="Stud_Calculator.ico"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d" Background="{x:Null}">
+    mc:Ignorable="d">
     <Grid>
-        <Border CornerRadius="10">
+        <Border
+            BorderBrush="#FF1BFD04"
+            BorderThickness="2"
+            CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Offset="0.3" Color="#FF515D6D" />
@@ -24,28 +28,31 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
-            <TextBlock
-                Margin="260,20,10,60"
-                Padding="3"
-                Background="Transparent"
-                TextWrapping="Wrap" Foreground="White"><Span><Run Text="Название: Калькулятор монтажных проушин" />
-                </Span><LineBreak /><Run Text="Версия v2.0.1" />
-                <LineBreak /><LineBreak /><Span><Run Text="Автор:" />
-                </Span><LineBreak /><Span><Run Text="     Учаев Алексей Владимирович" />
-                </Span><LineBreak /><LineBreak /><Span><Run Text="Телефон: " /></Span>
-                <LineBreak /><Run Text="      73-19 " /><LineBreak /><LineBreak />
-                <Span><Run Text="ВАЖНО!!!" /></Span><LineBreak /><Span><Run Text="Программа находится в тестовом режиме." />
-                </Span><LineBreak /><Span><Run Text="Если возникнут вопросы или предложения " />
-                </Span><LineBreak /><Span><Run Text="обращаться по телефону указанному выше." />
-                </Span></TextBlock>
-            <Image Margin="10,20,290,40" Source="Agent_007.png" />
-            <Button
-                Margin="385,260,10,10"
-                Click="Button_Click"
-                Content="Выход"
-                FontFamily="Times New Roman"
-                FontSize="14"
-                RenderTransformOrigin="0.559,0.465" />
+                <TextBlock
+                    Margin="260,20,10,60"
+                    Padding="3"
+                    Background="Transparent"
+                    FontFamily="Calibri"
+                    Foreground="White"
+                    TextWrapping="Wrap"><Span><Run Text="Название: Калькулятор монтажных проушин" />
+                    </Span><LineBreak /><Run Text="Версия v2.0.1" />
+                    <LineBreak /><LineBreak /><Span><Run Text="Автор:" />
+                    </Span><LineBreak /><Span><Run Text="     Учаев Алексей Владимирович" />
+                    </Span><LineBreak /><LineBreak /><Span><Run Text="Телефон: " /></Span>
+                    <LineBreak /><Run Text="      73-19 " /><LineBreak /><LineBreak />
+                    <Span><Run Text="ВАЖНО!!!" /></Span><LineBreak /><Span><Run Text="Программа находится в тестовом режиме." />
+                    </Span><LineBreak /><Span><Run Text="Если возникнут вопросы или предложения " />
+                    </Span><LineBreak /><Span><Run Text="обращаться по телефону указанному выше." />
+                    </Span></TextBlock>
+                <Image Margin="10,20,290,40" Source="Agent_007.png" />
+                <Button
+                    Margin="446,260,10,10"
+                    Click="Button_Click"
+                    Content="Ok"
+                    FontFamily="Calibri"
+                    FontSize="14"
+                    RenderTransformOrigin="0.559,0.465"
+                    IsDefault="True"/>
             </Grid>
         </Border>
     </Grid>

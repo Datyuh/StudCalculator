@@ -17,7 +17,10 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
-        <Border CornerRadius="10">
+        <Border
+            BorderBrush="Red"
+            BorderThickness="3"
+            CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Offset="0.3" Color="#FF515D6D" />
@@ -48,6 +51,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Margin="10,5,0,0"
+                    FontFamily="Calibri"
                     FontSize="12"
                     Foreground="White"
                     TextWrapping="Wrap"><Run Text="Для работы с нестандартными фланцами под овальную или восьмигранную прокладку необходимо:" /><LineBreak /><Run /><LineBreak /><Run Text="1. Если DN и PN выходит за диапазон табличных данных (чтобы их посмотреть нажми соответствующую кнопку), то прокладку необходимо указывать как нестандартную. " /><Run Text="Р" /><Run Text="азмер указывать" /><Run Text=" как на" /><Run Text=" рисунк" /><Run Text="е" /><Run Text="." /><LineBreak /><Run /><LineBreak /><Run Text="2. Если прокладка входит в табличный диапазон, то необходимо выбрать ГОСТ, DN и PN из выпадающего меню стандартных фланцев." /><Run Text=" (См. раздел ст. фланцев)" /></TextBlock>
@@ -61,7 +65,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{Binding OvalGasketCommand}"
-                        Content="Овальные прокладки">
+                        Content="Овальные прокладки"
+                        FontFamily="Calibri">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Foreground" Value="White" />
@@ -92,7 +97,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{Binding OctagonalGasketCommand}"
-                        Content="Восьмигранные прокладки">
+                        Content="Восьмигранные прокладки"
+                        FontFamily="Calibri">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Foreground" Value="White" />
@@ -122,14 +128,15 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     Height="30"
-                    Margin="10,25,10,50"
+                    Margin="10,15,10,50"
                     Content="Таблица с даными по прокладкам в зависимости от DN и PN"
-                    Foreground="White" />
+                    FontFamily="Calibri"
+                    Foreground="#FF17FF00" />
                 <Image
                     Grid.Row="0"
                     Grid.RowSpan="3"
                     Grid.Column="1"
-                    Margin="10,10,10,61"
+                    Margin="10,10,10,60"
                     Source="/StudCalculator;component/Resources/FlangeJ.jpg" />
                 <Button
                     Grid.Row="2"
@@ -138,7 +145,9 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Command="{Binding ExitCommand}"
-                    Content="Ok">
+                    Content="Ok"
+                    FontFamily="Calibri"
+                    IsDefault="True">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Foreground" Value="White" />
@@ -154,10 +163,10 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border
-                                Width="50"
+                                Width="60"
                                 Height="25"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="10">
+                                CornerRadius="8">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
