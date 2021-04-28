@@ -372,7 +372,7 @@ namespace StudCalculator.ViewModel
 
         #region Цвет вывода результатов
 
-        private Brush _colorTextBoxResult = Brushes.Gray;
+        private Brush _colorTextBoxResult = new SolidColorBrush(Color.FromRgb(218,218,218));
         public Brush ColorTextBoxResult { get => _colorTextBoxResult; set => Set(ref _colorTextBoxResult, value); }
 
         #endregion
@@ -391,6 +391,11 @@ namespace StudCalculator.ViewModel
         {
             if (NonStandartSameFlangeChecked is true)
             {
+                if (StandartOvalGasketsCheckboxChecked is true || StandartOctahedralGasketsCheckboxChecked is true)
+                {
+                    NoStFalangeInfo noStFalangeInfo = new NoStFalangeInfo();
+                    noStFalangeInfo.ShowDialog();
+                }
                 NonStandartFlTextIsEnabled = true;
                 ChoeseNutsThreadComboboxIsEnabled = true;
                 NumberOfNutsTextboxIsEnable = true;
@@ -421,6 +426,11 @@ namespace StudCalculator.ViewModel
         {
             if (NonStandartDifferentFlangeChecked is true)
             {
+                if (StandartOvalGasketsCheckboxChecked is true || StandartOctahedralGasketsCheckboxChecked is true)
+                {
+                    NoStFalangeInfo noStFalangeInfo = new NoStFalangeInfo();
+                    noStFalangeInfo.ShowDialog();
+                }
                 ChoeseNutsThreadComboboxIsEnabled = true;
                 NumberOfNutsTextboxIsEnable = true;
                 NonStandartDifferentFlangeTexboxIsEnabled = true;
@@ -790,12 +800,12 @@ namespace StudCalculator.ViewModel
                 else
                 {
                     ResultTextEnter = resultTextEnter;
-                    ColorTextBoxResult = Brushes.Gray;
+                    ColorTextBoxResult = new SolidColorBrush(Color.FromRgb(218, 218, 218));
                 }
             }
             else
             {
-                ColorTextBoxResult = Brushes.Black;
+                ColorTextBoxResult = Brushes.White;
                 if (ResultTextEnter == "Вывод результатов...")
                 {
                     ResultTextEnter = resultTextEnter;
@@ -816,7 +826,7 @@ namespace StudCalculator.ViewModel
 
         private void OnClearTextBoxResultCommandExecuted(object p)
         {
-            ColorTextBoxResult = Brushes.Gray;
+            ColorTextBoxResult = new SolidColorBrush(Color.FromRgb(218, 218, 218));
             ResultTextEnter = "Вывод результатов...";
         }
 

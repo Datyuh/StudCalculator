@@ -6,7 +6,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:StudCalculator.ViewModel"
-    Width="860"
+    Width="900"
     Height="600"
     AllowsTransparency="True"
     Background="{x:Null}"
@@ -23,9 +23,32 @@
                     <DoubleAnimation
                         FillBehavior="HoldEnd"
                         Storyboard.TargetProperty="Opacity"
-                        From="0"
+                        From="0.5"
                         To="1"
                         Duration="0:0:1" />
+                    <DoubleAnimation
+                        AutoReverse="True"
+                        BeginTime="0:0:1"
+                        Storyboard.TargetName="GradientStopWhite"
+                        Storyboard.TargetProperty="Offset"
+                        From="0.25"
+                        To="0.75"
+                        Duration="0:0:4" />
+                    <DoubleAnimation
+                        BeginTime="0:0:5"
+                        Storyboard.TargetName="ImageLogo"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0"
+                        To="0.4"
+                        Duration="0:0:4" />
+                    <DoubleAnimation
+                        BeginTime="0:0:9"
+                        Storyboard.TargetName="GradientStopWhite"
+                        Storyboard.TargetProperty="Offset"
+                        From="0.25"
+                        To="0.5"
+                        Duration="0:0:2.5" />
+
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -37,16 +60,18 @@
             BorderThickness="4"
             CornerRadius="12">
             <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop Offset="0.3" Color="#FF515D6D" />
-                    <GradientStop Offset="0.6" Color="#FF3E4249" />
-                    <GradientStop Offset="1" Color="#FF282C34" />
+                <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.8,0.2" EndPoint="0.2,0.7">
+                    <GradientStop Offset="0" Color="#FF3E4249" />
+                    <GradientStop Offset="0.25" Color="#FF82A7E9" />
+                    <GradientStop x:Name="GradientStopWhite" Offset="0.25" Color="#FFC0D7FF" />
+                    <GradientStop Offset="0.75" Color="#FF82A7E9" />
+                    <GradientStop Offset="0.96" Color="#FF3E4249" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="420*" />
-                    <ColumnDefinition Width="419*" />
+                    <ColumnDefinition Width="430*" />
+                    <ColumnDefinition Width="410*" />
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
@@ -58,10 +83,11 @@
                 </Grid.RowDefinitions>
 
                 <Image
+                    x:Name="ImageLogo"
                     Grid.RowSpan="4"
                     Grid.ColumnSpan="4"
                     Margin="0,45,0,5"
-                    Opacity="0.38"
+                    Opacity="0"
                     Source="/Resources/LogoVNM2011_deep2.png" />
 
                 <GroupBox
@@ -88,7 +114,7 @@
                                 x:Name="GosTall"
                                 Width="178"
                                 Height="30"
-                                Margin="71,0,0,0"
+                                Margin="70,0,0,0"
                                 Padding="6"
                                 FontFamily="Calibri"
                                 FontSize="14"
@@ -116,14 +142,13 @@
                                 x:Name="TypeGost33259Combo"
                                 Width="178"
                                 Height="30"
-                                Margin="6,0,0,0"
+                                Margin="5,0,0,0"
                                 Padding="6"
                                 FontFamily="Calibri"
                                 FontSize="14"
                                 Foreground="Black"
                                 IsEnabled="{Binding TypeFlangeGostIsEnabled}"
                                 ItemsSource="{Binding ExecutionType}"
-                                RenderTransformOrigin="0.705,0.522"
                                 SelectedValue="{Binding TypeSelectedFromComboBox, Mode=TwoWay}">
                                 <ComboBox.Effect>
                                     <DropShadowEffect />
@@ -146,7 +171,7 @@
                                 x:Name="ExecutionPnCombo"
                                 Width="178"
                                 Height="30"
-                                Margin="85,0,0,0"
+                                Margin="84,0,0,0"
                                 Padding="6"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
@@ -154,7 +179,6 @@
                                 FontSize="14"
                                 Foreground="Black"
                                 ItemsSource="{Binding ExecutionPn}"
-                                RenderTransformOrigin="0.458,1.733"
                                 SelectedValue="{Binding PnSelectedFromComboBox, Mode=TwoWay}">
                                 <ComboBox.Effect>
                                     <DropShadowEffect />
@@ -177,7 +201,7 @@
                                 x:Name="ExecGost33259"
                                 Width="178"
                                 Height="30"
-                                Margin="71,0,0,0"
+                                Margin="70,0,0,0"
                                 Padding="6"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
@@ -202,8 +226,7 @@
                                 Content="Выберите DN"
                                 FontFamily="Calibri Light"
                                 FontSize="14"
-                                Foreground="White"
-                                RenderTransformOrigin="0.522,2.703" />
+                                Foreground="White" />
                             <ComboBox
                                 x:Name="ExecutionDnCombo"
                                 Width="178"
@@ -260,13 +283,13 @@
 
                     <Button
                         Grid.Column="2"
-                        Margin="0,0,0,10"
+                        Margin="0,0,0,20"
                         Click="Button_Click_1"
                         FontFamily="Calibri"
                         FontSize="16">
                         <iconPacks:PackIconMaterial
-                            Width="15"
-                            Height="15"
+                            Width="10"
+                            Height="10"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Kind="WindowClose" />
@@ -297,14 +320,14 @@
                     </Button>
                     <Button
                         Grid.Column="1"
-                        Margin="0,0,0,10"
+                        Margin="0,0,0,20"
                         Click="Button_Click"
                         FontFamily="Calibri"
                         FontSize="16"
                         FontWeight="Bold">
                         <iconPacks:PackIconMaterial
-                            Width="15"
-                            Height="15"
+                            Width="10"
+                            Height="10"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Kind="WindowMinimize" />
@@ -363,7 +386,8 @@
                     FontSize="14"
                     Foreground="White"
                     IsChecked="{Binding NonStandartSameFlangeChecked}"
-                    IsEnabled="{Binding NonStandartStandartSameFlangeCheckedIsEnabled}" />
+                    IsEnabled="{Binding NonStandartStandartSameFlangeCheckedIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
                 <CheckBox
                     x:Name="NonStandartDablFl"
                     Grid.Row="2"
@@ -379,7 +403,8 @@
                     FontSize="14"
                     Foreground="White"
                     IsChecked="{Binding NonStandartDifferentFlangeChecked}"
-                    IsEnabled="{Binding NonStandartDifferentFlangeCheckedIsEnabled}" />
+                    IsEnabled="{Binding NonStandartDifferentFlangeCheckedIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
 
                 <TextBlock
                     Grid.Row="2"
@@ -405,11 +430,12 @@
                     VerticalAlignment="Top"
                     Command="{Binding StandartRotaryPlugsCommand}"
                     Content="Стандартные"
-                    FontFamily="Tahoma"
+                    FontFamily="Calibri Light"
                     FontSize="14"
                     Foreground="White"
                     IsChecked="{Binding StandartRotaryPlugsChecked}"
-                    IsEnabled="{Binding StandartRotaryPlugsCheckboxIsEnabled}" />
+                    IsEnabled="{Binding StandartRotaryPlugsCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
                 <CheckBox
                     x:Name="NonStandardRotaryPlug"
                     Grid.Row="2"
@@ -425,7 +451,8 @@
                     FontSize="14"
                     Foreground="White"
                     IsChecked="{Binding NonStandartRotaryPlugsChecked}"
-                    IsEnabled="{Binding NonStandartRotaryPlugsCheckboxIsEnabled}" />
+                    IsEnabled="{Binding NonStandartRotaryPlugsCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
 
                 <TextBlock
                     Grid.Row="2"
@@ -454,7 +481,8 @@
                     FontSize="14"
                     Foreground="White"
                     IsChecked="{Binding NonStandartPlugsChecked}"
-                    IsEnabled="{Binding NonStandartPlugsCheckboxIsEnabled}" />
+                    IsEnabled="{Binding NonStandartPlugsCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
                 <CheckBox
                     x:Name="StandardPlug"
                     Grid.Row="2"
@@ -470,7 +498,8 @@
                     FontSize="14"
                     Foreground="White"
                     IsChecked="{Binding StandartPlugsChecked}"
-                    IsEnabled="{Binding StandartPlugsCheckboxIsEnabled}" />
+                    IsEnabled="{Binding StandartPlugsCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
 
                 <ComboBox
                     x:Name="StandardRotaryPlugCombo"
@@ -510,23 +539,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             PreviewTextInput="TextBox_PreviewTextInputWhole"
-                            Text="{Binding SumFlangeTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FFEE8720" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            Style="{StaticResource TextBoxStyle2}"
+                            Text="{Binding SumFlangeTextRead, Mode=TwoWay}" />
                         <TextBlock
                             Width="22"
                             Margin="0,3"
@@ -624,23 +638,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NonStandartPlugsTextboxIsEnabled}"
-                            Text="{Binding NonStandartPlugsTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            Style="{StaticResource TextBoxStyle}"
+                            Text="{Binding NonStandartPlugsTextRead, Mode=TwoWay}" />
                         <TextBlock
                             Width="22"
                             Margin="0,3"
@@ -668,23 +667,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NonStandartRotaryPlugsTextboxIsEnabled}"
-                            Text="{Binding NonStandartRotaryPlugsTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            Style="{StaticResource TextBoxStyle}"
+                            Text="{Binding NonStandartRotaryPlugsTextRead, Mode=TwoWay}" />
                         <TextBlock
                             Width="22"
                             Margin="0,3"
@@ -712,25 +696,11 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NonStandartFlTextIsEnabled}"
+                            Style="{StaticResource TextBoxStyle}"
                             Text="{Binding NonStandartFlTextRead, Mode=TwoWay}">
                             <TextBox.ToolTip>
                                 <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                             </TextBox.ToolTip>
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#FF007EFC" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
                         </TextBox>
                         <TextBlock
                             Width="22"
@@ -759,22 +729,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
+                            Style="{StaticResource TextBoxStyle}"
                             Text="{Binding NonStandartFirstFlangeTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
                             <TextBox.ToolTip>
                                 <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                             </TextBox.ToolTip>
@@ -806,22 +762,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NonStandartDifferentFlangeTexboxIsEnabled}"
+                            Style="{StaticResource TextBoxStyle}"
                             Text="{Binding NonStandartSecondFlangeTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
                             <TextBox.ToolTip>
                                 <TextBlock><Run Text="Указывать высоту тарелки до прокладки кроме овальных" /></TextBlock>
                             </TextBox.ToolTip>
@@ -919,7 +861,8 @@
                     FontFamily="Calibri Light"
                     Foreground="White"
                     IsChecked="{Binding StandartThicknessWasherCheckboxChecked}"
-                    IsEnabled="{Binding StandartThicknessWasherCheckboxIsEnabled}" />
+                    IsEnabled="{Binding StandartThicknessWasherCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
                 <CheckBox
                     x:Name="StandartThicknessStripOval"
                     Grid.Row="1"
@@ -934,7 +877,8 @@
                     FontFamily="Calibri Light"
                     Foreground="White"
                     IsChecked="{Binding StandartOvalGasketsCheckboxChecked}"
-                    IsEnabled="{Binding StandartOvalGasketsCheckboxIsEnabled}" />
+                    IsEnabled="{Binding StandartOvalGasketsCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
                 <CheckBox
                     x:Name="NonStandartThicknessWasher"
                     Grid.Row="1"
@@ -949,7 +893,8 @@
                     FontFamily="Calibri Light"
                     Foreground="White"
                     IsChecked="{Binding NonStandartThicknessWasherCheckboxChecked}"
-                    IsEnabled="{Binding NonStandartThicknessWasherCheckboxIsEnabled}" />
+                    IsEnabled="{Binding NonStandartThicknessWasherCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
                 <CheckBox
                     x:Name="StandartThicknessStripOrtag"
                     Grid.Row="1"
@@ -964,7 +909,8 @@
                     FontFamily="Calibri Light"
                     Foreground="White"
                     IsChecked="{Binding StandartOctahedralGasketsCheckboxChecked}"
-                    IsEnabled="{Binding StandartOctahedralGasketsCheckboxIsEnabled}" />
+                    IsEnabled="{Binding StandartOctahedralGasketsCheckboxIsEnabled}"
+                    Style="{StaticResource CheckBoxStyle1}" />
 
                 <Border
                     Grid.Row="1"
@@ -983,23 +929,8 @@
                             FontFamily="Times New Roman"
                             Foreground="Black"
                             IsEnabled="{Binding NonThicknessWasherTextboxIsEnabled, Mode=TwoWay}"
-                            Text="{Binding ThicknessWasherTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            Style="{StaticResource TextBoxStyle}"
+                            Text="{Binding ThicknessWasherTextRead, Mode=TwoWay}" />
                         <TextBlock
                             Width="22"
                             Margin="0,3"
@@ -1027,23 +958,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NonStandartGasketsTextboxIsEnabled}"
-                            Text="{Binding ThicknessGasketTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FFEE8720" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            Style="{StaticResource TextBoxStyle2}"
+                            Text="{Binding ThicknessGasketTextRead, Mode=TwoWay}" />
                         <TextBlock
                             Width="22"
                             Margin="0,3"
@@ -1112,23 +1028,8 @@
                             FontFamily="Calibri"
                             Foreground="Black"
                             IsEnabled="{Binding NumberOfNutsTextboxIsEnable}"
-                            Text="{Binding SumStudTextRead, Mode=TwoWay}">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="False">
-                                            <Setter Property="BorderBrush" Value="#FF4EEE35" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="BorderBrush" Value="#0000ff" />
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="BorderBrush" Value="Gray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            Style="{StaticResource TextBoxStyle}"
+                            Text="{Binding SumStudTextRead, Mode=TwoWay}" />
                         <TextBlock
                             Width="22"
                             Margin="0,3"
@@ -1230,9 +1131,10 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Margin="0,62,0,0"
-                    Background="White"
-                    BorderBrush="#FF71DC60"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
                     BorderThickness="2"
+                    Cursor="Arrow"
                     FontFamily="Calibri"
                     FontSize="14"
                     Foreground="{Binding ColorTextBoxResult, Mode=TwoWay}"
@@ -1254,7 +1156,7 @@
                     Content="Расчитать"
                     FontFamily="Calibri"
                     FontSize="14"
-                    Foreground="Black" 
+                    Foreground="Black"
                     IsDefault="True" />
 
                 <Button

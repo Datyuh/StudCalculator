@@ -18,14 +18,15 @@
     mc:Ignorable="d">
     <Grid>
         <Border
-            BorderBrush="Red"
+            BorderBrush="#FF82A7E9"
             BorderThickness="3"
             CornerRadius="20">
             <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop Offset="0.3" Color="#FF515D6D" />
-                    <GradientStop Offset="0.6" Color="#FF3E4249" />
-                    <GradientStop Offset="1" Color="#FF282C34" />
+                <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.8,0.2" EndPoint="0.2,0.8">
+                    <GradientStop Offset="0" Color="#FF3E4249" />
+                    <GradientStop Offset="0.25" Color="#FF82A7E9" />
+                    <GradientStop Offset="0.75" Color="#FF82A7E9" />
+                    <GradientStop Offset="0.98" Color="#FF3E4249" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
@@ -53,7 +54,7 @@
                     Margin="10,5,0,0"
                     FontFamily="Calibri"
                     FontSize="12"
-                    Foreground="White"
+                    Foreground="Black"
                     TextWrapping="Wrap"><Run Text="Для работы с нестандартными фланцами под овальную или восьмигранную прокладку необходимо:" /><LineBreak /><Run /><LineBreak /><Run Text="1. Если DN и PN выходит за диапазон табличных данных (чтобы их посмотреть нажми соответствующую кнопку), то прокладку необходимо указывать как нестандартную. " /><Run Text="Р" /><Run Text="азмер указывать" /><Run Text=" как на" /><Run Text=" рисунк" /><Run Text="е" /><Run Text="." /><LineBreak /><Run /><LineBreak /><Run Text="2. Если прокладка входит в табличный диапазон, то необходимо выбрать ГОСТ, DN и PN из выпадающего меню стандартных фланцев." /><Run Text=" (См. раздел ст. фланцев)" /></TextBlock>
 
                 <StackPanel
